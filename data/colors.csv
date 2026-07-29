@@ -59,3 +59,24 @@ No,Product Type,Primary (Hex),Secondary (Hex),CTA (Hex),Background (Hex),Text (H
 58,Art Gallery,#18181B,#27272A,#EAB308,#09090B,#FAFAFA,#27272A,Dark gallery + gold highlight
 59,Travel Agency,#0EA5E9,#38BDF8,#F97316,#F0F9FF,#0C4A6E,#BAE6FD,Sky blue + adventure orange
 60,Real Estate Agent,#1E40AF,#3B82F6,#D97706,#EFF6FF,#1E3A8A,#BFDBFE,Trust blue + warm amber
+61,Real Estate Agent,#1E40AF,#3B82F6,#D97706,#EFF6FF,#1E3A8A,#BFDBFE,Trust blue + warm amber
+62,Mental Health App,#8B5CF6,#A78BFA,#10B981,#F5F3FF,#4C1D95,#DDD6FE,Calm lavender + healing green
+63,Dating App,#EC4899,#F472B6,#FB7185,#FDF2F8,#831843,#FBCFE8,Romantic pink + coral passion
+64,Weather App,#0EA5E9,#38BDF8,#0284C7,#F0F9FF,#0C4A6E,#BAE6FD,Sky blue + gradient depth
+65,News Platform,#1E3A5F,#334155,#2563EB,#F8FAFC,#0F172A,#E2E8F0,Trust navy + clean editorial
+66,Podcast Platform,#1E1B4B,#312E81,#F59E0B,#0F0A1A,#F8FAFC,#2E1065,Dark immersive + gold accent
+67,Job Board,#0D9488,#14B8A6,#2563EB,#F0FDFA,#134E4A,#CCFBF1,Professional teal + blue CTA
+68,Construction,#EA580C,#F97316,#2563EB,#FFF7ED,#431407,#FED7AA,Industrial orange + steel blue trust
+69,Pet Care,#F59E0B,#FBBF24,#059669,#FFFBEB,#78350F,#FDE68A,Warm orange + natural green care
+70,Logistics,#EAB308,#FACC15,#1E40AF,#FEFCE8,#422006,#FEF08A,Safety yellow + reliable dark blue
+71,E-Sports,#A855F7,#8B5CF6,#06B6D4,#0F0A1A,#F8FAFC,#2E1065,Neon purple + electric blue energy
+72,Recipe App,#DC2626,#EF4444,#F97316,#FEF3C7,#7F1D1D,#FECACA,Appetizing red + warm cream
+73,Plant App,#16A34A,#22C55E,#92400E,#F0FDF4,#14532D,#BBF7D0,Living green + earth brown organic
+74,Car Rental,#171717,#262626,#DC2626,#FAFAFA,#0A0A0A,#E5E5E5,Premium black + red accent
+75,Co-working,#F59E0B,#FBBF24,#27272A,#FFFBEB,#1F2937,#FDE68A,Creative yellow + charcoal professional
+76,Insurance,#2563EB,#3B82F6,#059669,#EFF6FF,#1E3A8A,#BFDBFE,Trust blue + secure green stability
+77,Event Ticketing,#7C3AED,#A78BFA,#CA8A04,#FAF5FF,#4C1D95,#DDD6FE,Celebration purple + gold premium
+78,Charity,#E11D48,#FB7185,#F59E0B,#FFF1F2,#881337,#FECDD3,Warm heart red + soft cream
+79,Smart Home,#06B6D4,#22D3EE,#0F172A,#ECFEFF,#164E63,#A5F3FC,Tech cyan + dark navy
+80,Aviation,#38BDF8,#7DD3FC,#64748B,#F0F9FF,#0C4A6E,#BAE6FD,Sky blue + silver metallic
+81,RTL/Persian App,#1D4ED8,#2563EB,#CA8A04,#EFF6FF,#1E3A8A,#BFDBFE,Persian blue + gold accent luxury
