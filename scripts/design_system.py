@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Design System Generator - Enhanced with color theory, component recommendations,
-animation suggestions, and responsive patterns.
-
+Design System Generator v2.0 - Enhanced with color theory, component code gen,
+responsive patterns, RTL support, accessibility checking, theme export
 Cyber-Rage Design Intelligence Engine
 """
 
@@ -13,7 +12,6 @@ import os
 from datetime import datetime
 from pathlib import Path
 from core import search, DATA_DIR, multi_search
-
 
 REASONING_FILE = "ui-reasoning.csv"
 
@@ -26,13 +24,14 @@ SEARCH_CONFIG = {
     "component": {"max_results": 5},
     "animation": {"max_results": 3},
     "responsive": {"max_results": 3},
-    "design_token": {"max_results": 2}
+    "design_token": {"max_results": 2},
+    "background": {"max_results": 3}
 }
 
 
-# ============ COLOR THEORY ENGINE ============
+# ============ COLOR THEORY ENGINE V2 ============
 class ColorTheoryEngine:
-    """Advanced color theory engine for generating harmonious palettes"""
+    """Advanced color theory engine v2"""
 
     def __init__(self):
         self.color_harmonies = {
@@ -45,12 +44,10 @@ class ColorTheoryEngine:
         }
 
     def hex_to_hsl(self, hex_color):
-        """Convert hex color to HSL"""
         hex_color = hex_color.lstrip('#')
         r, g, b = int(hex_color[0:2], 16)/255, int(hex_color[2:4], 16)/255, int(hex_color[4:6], 16)/255
         max_c, min_c = max(r, g, b), min(r, g, b)
         l = (max_c + min_c) / 2
-
         if max_c == min_c:
             h = s = 0
         else:
@@ -63,17 +60,14 @@ class ColorTheoryEngine:
             else:
                 h = (r - g) / d + 4
             h /= 6
-
         return int(h * 360), int(s * 100), int(l * 100)
 
     def hsl_to_hex(self, h, s, l):
-        """Convert HSL to hex color"""
-        s /= 100
-        l /= 100
+        s = max(0, min(100, s)) / 100
+        l = max(0, min(100, l)) / 100
         c = (1 - abs(2 * l - 1)) * s
         x = c * (1 - abs((h / 60) % 2 - 1))
         m = l - c / 2
-
         if h < 60:
             r, g, b = c, x, 0
         elif h < 120:
@@ -86,12 +80,23 @@ class ColorTheoryEngine:
             r, g, b = x, 0, c
         else:
             r, g, b = c, 0, x
+        return f"#{int((r + m) * 255):02x}{int((g + m) * 255):02x}{int((b + m) * 255):02x}"
 
-        r, g, b = int((r + m) * 255), int((g + m) * 255), int((b + m) * 255)
-        return f"#{r:02x}{g:02x}{b:02x}"
+    def relative_luminance(self, hex_color):
+        r, g, b = int(hex_color.lstrip('#')[0:2], 16)/255, int(hex_color.lstrip('#')[2:4], 16)/255, int(hex_color.lstrip('#')[4:6], 16)/255
+        r = r / 12.92 if r <= 0.03928 else ((r + 0.055) / 1.055) ** 2.4
+        g = g / 12.92 if g <= 0.03928 else ((g + 0.055) / 1.055) ** 2.4
+        b = b / 12.92 if b <= 0.03928 else ((b + 0.055) / 1.055) ** 2.4
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+    def contrast_ratio(self, color1, color2):
+        l1 = self.relative_luminance(color1)
+        l2 = self.relative_luminance(color2)
+        lighter = max(l1, l2)
+        darker = min(l1, l2)
+        return (lighter + 0.05) / (darker + 0.05)
 
     def generate_palette(self, primary_hex, harmony="complementary", count=5):
-        """Generate a color palette from primary color using color theory"""
         h, s, l = self.hex_to_hsl(primary_hex)
         palette = [primary_hex]
 
@@ -110,14 +115,31 @@ class ColorTheoryEngine:
             for lightness in [30, 50, 70, 90]:
                 palette.append(self.hsl_to_hex(h, s, lightness))
 
-        # Add neutrals
         palette.append(self.hsl_to_hex(h, 5, 95))
         palette.append(self.hsl_to_hex(h, 5, 10))
 
         return palette[:count]
 
+    def generate_extended_palette(self, primary_hex):
+        try:
+            h, s, l = self.hex_to_hsl(primary_hex)
+            return {
+                "50": self.hsl_to_hex(h, s, 95),
+                "100": self.hsl_to_hex(h, s, 90),
+                "200": self.hsl_to_hex(h, s, 80),
+                "300": self.hsl_to_hex(h, s, 65),
+                "400": self.hsl_to_hex(h, s, 55),
+                "500": primary_hex,
+                "600": self.hsl_to_hex(h, s, 40),
+                "700": self.hsl_to_hex(h, s, 30),
+                "800": self.hsl_to_hex(h, s, 20),
+                "900": self.hsl_to_hex(h, s, 10),
+            }
+        except:
+            return {}
 
-# ============ DESIGN SYSTEM GENERATOR ============
+
+# ============ DESIGN SYSTEM GENERATOR V2 ============
 class DesignSystemGenerator:
     """Generates design system recommendations from aggregated searches."""
 
@@ -125,14 +147,14 @@ class DesignSystemGenerator:
         self.reasoning_data = self._load_reasoning()
         self.color_engine = ColorTheoryEngine()
 
-    def _load_reasoning(self) -> list:
+    def _load_reasoning(self):
         filepath = DATA_DIR / REASONING_FILE
         if not filepath.exists():
             return []
         with open(filepath, 'r', encoding='utf-8') as f:
             return list(csv.DictReader(f))
 
-    def _multi_domain_search(self, query: str, style_priority: list = None) -> dict:
+    def _multi_domain_search(self, query, style_priority=None):
         results = {}
         for domain, config in SEARCH_CONFIG.items():
             if domain == "style" and style_priority:
@@ -143,29 +165,24 @@ class DesignSystemGenerator:
                 results[domain] = search(query, domain, config["max_results"])
         return results
 
-    def _find_reasoning_rule(self, category: str) -> dict:
+    def _find_reasoning_rule(self, category):
         category_lower = category.lower()
-
         for rule in self.reasoning_data:
             if rule.get("UI_Category", "").lower() == category_lower:
                 return rule
-
         for rule in self.reasoning_data:
             ui_cat = rule.get("UI_Category", "").lower()
             if ui_cat in category_lower or category_lower in ui_cat:
                 return rule
-
         for rule in self.reasoning_data:
             ui_cat = rule.get("UI_Category", "").lower()
             keywords = ui_cat.replace("/", " ").replace("-", " ").split()
             if any(kw in category_lower for kw in keywords):
                 return rule
-
         return {}
 
-    def _apply_reasoning(self, category: str, search_results: dict) -> dict:
+    def _apply_reasoning(self, category, search_results):
         rule = self._find_reasoning_rule(category)
-
         if not rule:
             return {
                 "pattern": "Hero + Features + CTA",
@@ -195,10 +212,9 @@ class DesignSystemGenerator:
             "severity": rule.get("Severity", "MEDIUM")
         }
 
-    def _select_best_match(self, results: list, priority_keywords: list) -> dict:
+    def _select_best_match(self, results, priority_keywords):
         if not results:
             return {}
-
         if not priority_keywords:
             return results[0]
 
@@ -226,30 +242,80 @@ class DesignSystemGenerator:
         scored.sort(key=lambda x: x[0], reverse=True)
         return scored[0][1] if scored and scored[0][0] > 0 else results[0]
 
-    def _extract_results(self, search_result: dict) -> list:
+    def _extract_results(self, search_result):
         return search_result.get("results", [])
 
-    def _generate_extended_palette(self, primary_hex, secondary_hex, cta_hex):
-        """Generate extended color palette using color theory"""
-        try:
-            primary_hsl = self.color_engine.hex_to_hsl(primary_hex)
-            return {
-                "primary_50": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 95),
-                "primary_100": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 90),
-                "primary_200": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 80),
-                "primary_300": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 65),
-                "primary_400": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 55),
-                "primary_500": primary_hex,
-                "primary_600": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 40),
-                "primary_700": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 30),
-                "primary_800": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 20),
-                "primary_900": self.color_engine.hsl_to_hex(primary_hsl[0], primary_hsl[1], 10),
-            }
-        except:
-            return {}
+    def _generate_code_snippets(self, design_system):
+        """Generate HTML/Tailwind code snippets from the design system"""
+        colors = design_system.get("colors", {})
+        primary = colors.get("primary", "#2563EB")
+        secondary = colors.get("secondary", "#3B82F6")
+        cta = colors.get("cta", "#F97316")
+        bg = colors.get("background", "#F8FAFC")
+        text_color = colors.get("text", "#1E293B")
+        border = colors.get("border", "#E2E8F0")
+        typography = design_system.get("typography", {})
+        heading_font = typography.get("heading", "Inter")
+        body_font = typography.get("body", "Inter")
 
-    def generate(self, query: str, project_name: str = None) -> dict:
-        """Generate complete design system recommendation."""
+        return {
+            "button": f"""<button class="px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:translate-y-[-1px]"
+        style="background: {cta}; color: white;">
+  Get Started
+</button>""",
+            "card": f"""<div class="rounded-xl p-6 shadow-md transition-all duration-200 hover:shadow-lg hover:translate-y-[-2px]"
+     style="background: {bg}; border: 1px solid {border};">
+  <h3 style="font-family: '{heading_font}', sans-serif; color: {text_color};">Card Title</h3>
+  <p style="font-family: '{body_font}', sans-serif; color: {text_color}; opacity: 0.8;">Card content goes here</p>
+</div>""",
+            "hero_section": f"""<section class="min-h-screen flex flex-col justify-center items-center px-4 text-center"
+     style="background: linear-gradient(135deg, {primary}11, {secondary}11);">
+  <h1 class="text-4xl md:text-6xl font-bold mb-6"
+      style="font-family: '{heading_font}', sans-serif; color: {text_color};">
+    Headline Goes Here
+  </h1>
+  <p class="text-lg md:text-xl mb-8 max-w-2xl"
+     style="font-family: '{body_font}', sans-serif; color: {text_color}; opacity: 0.8;">
+    Subtitle or description text
+  </p>
+  <button class="px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-200"
+          style="background: {cta}; color: white;">
+    Call to Action
+  </button>
+</section>""",
+            "input": f"""<input type="text" placeholder="Enter your email"
+       class="px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2"
+       style="border-color: {border}; focus:border-color: {primary}; --tw-ring-color: {primary}20;">""",
+            "css_variables": f""":root {{
+  --color-primary: {primary};
+  --color-secondary: {secondary};
+  --color-cta: {cta};
+  --color-background: {bg};
+  --color-text: {text_color};
+  --color-border: {border};
+  --font-heading: '{heading_font}', sans-serif;
+  --font-body: '{body_font}', sans-serif;
+}}"""
+        }
+
+    def _generate_component_specs(self, components):
+        """Generate detailed component specifications"""
+        specs = []
+        for comp in components[:5]:
+            name = comp.get("Component", "")
+            variants = comp.get("Variants", "")
+            tailwind = comp.get("Tailwind", "")
+            accessibility = comp.get("Accessibility", "")
+            specs.append({
+                "name": name,
+                "variants": variants,
+                "tailwind": tailwind,
+                "accessibility": accessibility,
+            })
+        return specs
+
+    def generate(self, query, project_name=None):
+        """Generate complete design system recommendation v2."""
         product_result = search(query, "product", 1)
         product_results = product_result.get("results", [])
         category = "General"
@@ -270,6 +336,7 @@ class DesignSystemGenerator:
         animation_results = self._extract_results(search_results.get("animation", {}))
         responsive_results = self._extract_results(search_results.get("responsive", {}))
         token_results = self._extract_results(search_results.get("design_token", {}))
+        background_results = self._extract_results(search_results.get("background", {}))
 
         best_style = self._select_best_match(style_results, reasoning.get("style_priority", []))
         best_color = color_results[0] if color_results else {}
@@ -281,15 +348,22 @@ class DesignSystemGenerator:
         combined_effects = style_effects if style_effects else reasoning_effects
 
         primary_hex = best_color.get("Primary (Hex)", "#2563EB")
-        extended_palette = self._generate_extended_palette(
-            primary_hex,
-            best_color.get("Secondary (Hex)", "#3B82F6"),
-            best_color.get("CTA (Hex)", "#F97316")
-        )
+        secondary_hex = best_color.get("Secondary (Hex)", "#3B82F6")
+        cta_hex = best_color.get("CTA (Hex)", "#F97316")
+        bg_hex = best_color.get("Background (Hex)", "#F8FAFC")
+        text_hex = best_color.get("Text (Hex)", "#1E293B")
+        border_hex = best_color.get("Border (Hex)", "#E2E8F0")
 
-        return {
+        extended_palette = self.color_engine.generate_extended_palette(primary_hex)
+
+        # Calculate contrast for accessibility
+        contrast_primary_on_bg = round(self.color_engine.contrast_ratio(primary_hex, bg_hex), 2)
+        contrast_text_on_bg = round(self.color_engine.contrast_ratio(text_hex, bg_hex), 2)
+
+        design_system = {
             "project_name": project_name or query.upper(),
             "category": category,
+            "query": query,
             "pattern": {
                 "name": best_landing.get("Pattern Name", reasoning.get("pattern", "Hero + Features + CTA")),
                 "sections": best_landing.get("Section Order", "Hero > Features > CTA"),
@@ -311,13 +385,19 @@ class DesignSystemGenerator:
             },
             "colors": {
                 "primary": primary_hex,
-                "secondary": best_color.get("Secondary (Hex)", "#3B82F6"),
-                "cta": best_color.get("CTA (Hex)", "#F97316"),
-                "background": best_color.get("Background (Hex)", "#F8FAFC"),
-                "text": best_color.get("Text (Hex)", "#1E293B"),
-                "border": best_color.get("Border (Hex)", "#E2E8F0"),
+                "secondary": secondary_hex,
+                "cta": cta_hex,
+                "background": bg_hex,
+                "text": text_hex,
+                "border": border_hex,
                 "notes": best_color.get("Notes", ""),
-                "extended": extended_palette
+                "extended": extended_palette,
+                "contrast": {
+                    "primary_on_bg": f"{contrast_primary_on_bg}:1",
+                    "text_on_bg": f"{contrast_text_on_bg}:1",
+                    "wcag_aa": contrast_text_on_bg >= 4.5,
+                    "wcag_aaa": contrast_text_on_bg >= 7,
+                }
             },
             "typography": {
                 "heading": best_typography.get("Heading Font", "Inter"),
@@ -333,17 +413,42 @@ class DesignSystemGenerator:
             "decision_rules": reasoning.get("decision_rules", {}),
             "severity": reasoning.get("severity", "MEDIUM"),
             "components": component_results[:5] if component_results else [],
+            "component_specs": self._generate_component_specs(component_results),
             "animations": animation_results[:3] if animation_results else [],
             "responsive": responsive_results[:3] if responsive_results else [],
-            "tokens": token_results[:2] if token_results else []
+            "tokens": token_results[:2] if token_results else [],
+            "backgrounds": background_results[:3] if background_results else [],
+            "code_snippets": None,
         }
 
+        design_system["code_snippets"] = self._generate_code_snippets(design_system)
 
-# ============ OUTPUT FORMATTERS ============
+        return design_system
+
+
+# ============ OUTPUT FORMATTERS V2 ============
 BOX_WIDTH = 100
 
-def format_ascii_box(design_system: dict) -> str:
-    """Format design system as ASCII box with enhanced output."""
+def wrap_text(text, prefix, width):
+    if not text:
+        return []
+    words = text.split()
+    lines = []
+    current = prefix
+    for word in words:
+        if len(current) + len(word) + 1 <= width - 2:
+            current += (" " if current != prefix else "") + word
+        else:
+            if current != prefix:
+                lines.append(current)
+            current = prefix + word
+    if current != prefix:
+        lines.append(current)
+    return lines
+
+
+def format_ascii_box(design_system):
+    """Format design system as ASCII box v2 with enhanced output."""
     project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
@@ -354,34 +459,22 @@ def format_ascii_box(design_system: dict) -> str:
     components = design_system.get("components", [])
     animations = design_system.get("animations", [])
     responsive = design_system.get("responsive", [])
-
-    def wrap_text(text: str, prefix: str, width: int) -> list:
-        if not text:
-            return []
-        words = text.split()
-        lines = []
-        current_line = prefix
-        for word in words:
-            if len(current_line) + len(word) + 1 <= width - 2:
-                current_line += (" " if current_line != prefix else "") + word
-            else:
-                if current_line != prefix:
-                    lines.append(current_line)
-                current_line = prefix + word
-        if current_line != prefix:
-            lines.append(current_line)
-        return lines
-
-    sections = pattern.get("sections", "").split(">")
-    sections = [s.strip() for s in sections if s.strip()]
+    backgrounds = design_system.get("backgrounds", [])
+    code = design_system.get("code_snippets", {})
 
     lines = []
     w = BOX_WIDTH - 1
 
     lines.append("+" + "=" * w + "+")
-    lines.append(f"||  TARGET: {project} - RECOMMENDED DESIGN SYSTEM".ljust(BOX_WIDTH + 1) + "||")
+    lines.append(f"||  UI UX CR v2 - DESIGN SYSTEM: {project}".ljust(BOX_WIDTH + 1) + "||")
+    lines.append(f"||  Category: {design_system.get('category', 'General')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("+" + "=" * w + "+")
     lines.append("||" + " " * BOX_WIDTH + "||")
+
+    contrast_info = colors.get("contrast", {})
+    contrast_line = ""
+    if contrast_info:
+        contrast_line = f"Contrast: Text/Bg {contrast_info.get('text_on_bg', 'N/A')} | WCAG AA: {'PASS' if contrast_info.get('wcag_aa') else 'FAIL'}"
 
     # Pattern
     lines.append(f"||  PATTERN: {pattern.get('name', '')}".ljust(BOX_WIDTH + 1) + "||")
@@ -390,7 +483,8 @@ def format_ascii_box(design_system: dict) -> str:
     if pattern.get('cta_placement'):
         lines.append(f"||     CTA: {pattern.get('cta_placement', '')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||     Sections:".ljust(BOX_WIDTH + 1) + "||")
-    for i, section in enumerate(sections, 1):
+    sections = pattern.get("sections", "").split(">")
+    for i, section in enumerate([s.strip() for s in sections if s.strip()], 1):
         lines.append(f"||       {i}. {section}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||" + " " * BOX_WIDTH + "||")
 
@@ -403,8 +497,8 @@ def format_ascii_box(design_system: dict) -> str:
         for line in wrap_text(f"Best For: {style.get('best_for', '')}", "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
     if style.get("performance") or style.get("accessibility"):
-        perf_a11y = f"Performance: {style.get('performance', '')} | Accessibility: {style.get('accessibility', '')}"
-        lines.append(f"||     {perf_a11y}".ljust(BOX_WIDTH + 1) + "||")
+        perf = f"Performance: {style.get('performance', '')} | Accessibility: {style.get('accessibility', '')}"
+        lines.append(f"||     {perf}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||" + " " * BOX_WIDTH + "||")
 
     # Colors
@@ -415,35 +509,52 @@ def format_ascii_box(design_system: dict) -> str:
     lines.append(f"||     Background: {colors.get('background', '')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append(f"||     Text:       {colors.get('text', '')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append(f"||     Border:     {colors.get('border', '')}".ljust(BOX_WIDTH + 1) + "||")
+    if contrast_line:
+        lines.append(f"||     {contrast_line}".ljust(BOX_WIDTH + 1) + "||")
     if colors.get("notes"):
         for line in wrap_text(f"Notes: {colors.get('notes', '')}", "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
 
-    # Extended palette
     extended = colors.get("extended", {})
     if extended:
-        lines.append("||     Extended Palette:".ljust(BOX_WIDTH + 1) + "||")
+        lines.append("||     Extended Palette (50-900):".ljust(BOX_WIDTH + 1) + "||")
         for key, value in list(extended.items())[:6]:
             lines.append(f"||       {key}: {value}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||" + " " * BOX_WIDTH + "||")
 
     # Typography
-    lines.append(f"||  TYPOGRAPHY: {typography.get('heading', '')} / {typography.get('body', '')}".ljust(BOX_WIDTH + 1) + "||")
+    heading_f = typography.get("heading", "Inter")
+    body_f = typography.get("body", "Inter")
+    lines.append(f"||  TYPOGRAPHY: {heading_f} (headings) / {body_f} (body)".ljust(BOX_WIDTH + 1) + "||")
     if typography.get("mood"):
         for line in wrap_text(f"Mood: {typography.get('mood', '')}", "||     ", BOX_WIDTH):
-            lines.append(line.ljust(BOX_WIDTH + 1) + "||")
-    if typography.get("best_for"):
-        for line in wrap_text(f"Best For: {typography.get('best_for', '')}", "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
     if typography.get("google_fonts_url"):
         lines.append(f"||     Google Fonts: {typography.get('google_fonts_url', '')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||" + " " * BOX_WIDTH + "||")
 
-    # Key Effects
+    # Effects
     if effects:
         lines.append("||  KEY EFFECTS:".ljust(BOX_WIDTH + 1) + "||")
         for line in wrap_text(effects, "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
+        lines.append("||" + " " * BOX_WIDTH + "||")
+
+    # Code Snippet (Button)
+    if code and code.get("button"):
+        lines.append("||  CODE SNIPPET (Button):".ljust(BOX_WIDTH + 1) + "||")
+        btn_code = code["button"].replace("\n", " ")[:BOX_WIDTH-10]
+        lines.append(f"||     {btn_code}".ljust(BOX_WIDTH + 1) + "||")
+        lines.append("||" + " " * BOX_WIDTH + "||")
+
+    # CSS Variables
+    if code and code.get("css_variables"):
+        lines.append("||  CSS CUSTOM PROPERTIES:".ljust(BOX_WIDTH + 1) + "||")
+        css_lines = code["css_variables"].split("\n")
+        for cl in css_lines[:4]:
+            cl = cl.strip()
+            if cl:
+                lines.append(f"||     {cl}".ljust(BOX_WIDTH + 1) + "||")
         lines.append("||" + " " * BOX_WIDTH + "||")
 
     # Components
@@ -452,9 +563,13 @@ def format_ascii_box(design_system: dict) -> str:
         for comp in components[:5]:
             comp_name = comp.get("Component", "")
             comp_variants = comp.get("Variants", "")
+            comp_tailwind = comp.get("Tailwind", "")
             lines.append(f"||     - {comp_name}".ljust(BOX_WIDTH + 1) + "||")
             if comp_variants:
                 lines.append(f"||       Variants: {comp_variants}".ljust(BOX_WIDTH + 1) + "||")
+            if comp_tailwind:
+                tw_short = comp_tailwind[:60]
+                lines.append(f"||       Tailwind: {tw_short}".ljust(BOX_WIDTH + 1) + "||")
         lines.append("||" + " " * BOX_WIDTH + "||")
 
     # Animations
@@ -462,8 +577,9 @@ def format_ascii_box(design_system: dict) -> str:
         lines.append("||  RECOMMENDED ANIMATIONS:".ljust(BOX_WIDTH + 1) + "||")
         for anim in animations[:3]:
             anim_name = anim.get("Animation", "")
-            anim_duration = anim.get("Duration", "")
-            lines.append(f"||     - {anim_name} ({anim_duration})".ljust(BOX_WIDTH + 1) + "||")
+            anim_dur = anim.get("Duration", "")
+            anim_ease = anim.get("Easing", "")
+            lines.append(f"||     - {anim_name} ({anim_dur}, {anim_ease})".ljust(BOX_WIDTH + 1) + "||")
         lines.append("||" + " " * BOX_WIDTH + "||")
 
     # Responsive
@@ -477,6 +593,15 @@ def format_ascii_box(design_system: dict) -> str:
                 lines.append(f"||       Breakpoints: {resp_breakpoints}".ljust(BOX_WIDTH + 1) + "||")
         lines.append("||" + " " * BOX_WIDTH + "||")
 
+    # Backgrounds
+    if backgrounds:
+        lines.append("||  RECOMMENDED BACKGROUNDS:".ljust(BOX_WIDTH + 1) + "||")
+        for bg in backgrounds[:3]:
+            bg_name = bg.get("Background Name", "")
+            bg_cat = bg.get("Category", "")
+            lines.append(f"||     - {bg_name} ({bg_cat})".ljust(BOX_WIDTH + 1) + "||")
+        lines.append("||" + " " * BOX_WIDTH + "||")
+
     # Anti-patterns
     if anti_patterns:
         lines.append("||  AVOID (Anti-patterns):".ljust(BOX_WIDTH + 1) + "||")
@@ -484,9 +609,9 @@ def format_ascii_box(design_system: dict) -> str:
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
         lines.append("||" + " " * BOX_WIDTH + "||")
 
-    # Pre-Delivery Checklist
+    # Checklist
     lines.append("||  PRE-DELIVERY CHECKLIST:".ljust(BOX_WIDTH + 1) + "||")
-    checklist_items = [
+    checklist = [
         "[ ] No emojis as icons (use SVG: Heroicons/Lucide)",
         "[ ] cursor-pointer on all clickable elements",
         "[ ] Hover states with smooth transitions (150-300ms)",
@@ -498,9 +623,8 @@ def format_ascii_box(design_system: dict) -> str:
         "[ ] Loading states implemented",
         "[ ] Error states handled",
         "[ ] Empty states designed",
-        "[ ] Form validation feedback"
     ]
-    for item in checklist_items:
+    for item in checklist:
         lines.append(f"||     {item}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("||" + " " * BOX_WIDTH + "||")
 
@@ -509,8 +633,8 @@ def format_ascii_box(design_system: dict) -> str:
     return "\n".join(lines)
 
 
-def format_markdown(design_system: dict) -> str:
-    """Format design system as enhanced markdown."""
+def format_markdown(design_system):
+    """Format design system as enhanced markdown v2."""
     project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
@@ -521,11 +645,12 @@ def format_markdown(design_system: dict) -> str:
     components = design_system.get("components", [])
     animations = design_system.get("animations", [])
     responsive = design_system.get("responsive", [])
+    code = design_system.get("code_snippets", {})
 
     lines = []
     lines.append(f"# Design System: {project}")
     lines.append("")
-    lines.append(f"*Generated by UI UX CR - Cyber-Rage Design Intelligence Engine*")
+    lines.append("*Generated by UI UX CR v2 - Cyber-Rage Design Intelligence Engine*")
     lines.append("")
 
     # Pattern
@@ -549,8 +674,6 @@ def format_markdown(design_system: dict) -> str:
         lines.append(f"- **Best For:** {style.get('best_for', '')}")
     if style.get('performance') or style.get('accessibility'):
         lines.append(f"- **Performance:** {style.get('performance', '')} | **Accessibility:** {style.get('accessibility', '')}")
-    if style.get('css_keywords'):
-        lines.append(f"- **CSS Keywords:** {style.get('css_keywords', '')}")
     lines.append("")
 
     # Colors
@@ -563,11 +686,19 @@ def format_markdown(design_system: dict) -> str:
     lines.append(f"| Background | `{colors.get('background', '')}` |")
     lines.append(f"| Text | `{colors.get('text', '')}` |")
     lines.append(f"| Border | `{colors.get('border', '')}` |")
+
+    contrast_info = colors.get("contrast", {})
+    if contrast_info:
+        lines.append("")
+        lines.append("### Contrast Check")
+        lines.append(f"- **Text on Background:** {contrast_info.get('text_on_bg', 'N/A')}")
+        lines.append(f"- **WCAG AA (4.5:1):** {'PASS' if contrast_info.get('wcag_aa') else 'FAIL'}")
+        lines.append(f"- **WCAG AAA (7:1):** {'PASS' if contrast_info.get('wcag_aaa') else 'FAIL'}")
+
     if colors.get("notes"):
         lines.append(f"\n*Notes: {colors.get('notes', '')}*")
     lines.append("")
 
-    # Extended Palette
     extended = colors.get("extended", {})
     if extended:
         lines.append("### Extended Palette")
@@ -583,8 +714,6 @@ def format_markdown(design_system: dict) -> str:
     lines.append(f"- **Body:** {typography.get('body', '')}")
     if typography.get("mood"):
         lines.append(f"- **Mood:** {typography.get('mood', '')}")
-    if typography.get("best_for"):
-        lines.append(f"- **Best For:** {typography.get('best_for', '')}")
     if typography.get("google_fonts_url"):
         lines.append(f"- **Google Fonts:** [{typography.get('heading', '')} + {typography.get('body', '')}]({typography.get('google_fonts_url', '')})")
     if typography.get("css_import"):
@@ -594,10 +723,32 @@ def format_markdown(design_system: dict) -> str:
         lines.append(f"```")
     lines.append("")
 
+    # CSS Variables
+    if code and code.get("css_variables"):
+        lines.append("## CSS Custom Properties")
+        lines.append("```css")
+        lines.append(code["css_variables"])
+        lines.append("```")
+        lines.append("")
+
+    # Code Snippets
+    if code:
+        lines.append("## Code Snippets")
+        if code.get("button"):
+            lines.append("### Button")
+            lines.append("```html")
+            lines.append(code["button"])
+            lines.append("```")
+        if code.get("card"):
+            lines.append("### Card")
+            lines.append("```html")
+            lines.append(code["card"])
+            lines.append("```")
+        lines.append("")
+
     # Components
     if components:
         lines.append("## Recommended Components")
-        lines.append("")
         for comp in components[:5]:
             lines.append(f"### {comp.get('Component', '')}")
             if comp.get('Variants'):
@@ -608,18 +759,15 @@ def format_markdown(design_system: dict) -> str:
                 lines.append(f"- **Accessibility:** {comp.get('Accessibility', '')}")
             lines.append("")
 
-    # Animations
+    # Animations (with code)
     if animations:
         lines.append("## Recommended Animations")
-        lines.append("")
         for anim in animations[:3]:
             lines.append(f"### {anim.get('Animation', '')}")
             if anim.get('Duration'):
                 lines.append(f"- **Duration:** {anim.get('Duration', '')}")
             if anim.get('Easing'):
                 lines.append(f"- **Easing:** {anim.get('Easing', '')}")
-            if anim.get('GPU Friendly'):
-                lines.append(f"- **GPU Friendly:** {anim.get('GPU Friendly', '')}")
             if anim.get('CSS Code'):
                 lines.append(f"\n```css")
                 lines.append(f"{anim.get('CSS Code', '')}")
@@ -629,7 +777,6 @@ def format_markdown(design_system: dict) -> str:
     # Responsive
     if responsive:
         lines.append("## Responsive Patterns")
-        lines.append("")
         for resp in responsive[:3]:
             lines.append(f"### {resp.get('Pattern', '')}")
             if resp.get('Breakpoints'):
@@ -638,7 +785,7 @@ def format_markdown(design_system: dict) -> str:
                 lines.append(f"- **Tailwind:** `{resp.get('Tailwind', '')}`")
             lines.append("")
 
-    # Key Effects
+    # Effects
     if effects:
         lines.append("## Key Effects")
         lines.append(f"{effects}")
@@ -647,10 +794,12 @@ def format_markdown(design_system: dict) -> str:
     # Anti-patterns
     if anti_patterns:
         lines.append("## Avoid (Anti-patterns)")
-        lines.append(f"- {anti_patterns}")
+        anti_list = [a.strip() for a in anti_patterns.split("+") if a.strip()]
+        for anti in anti_list:
+            lines.append(f"- {anti}")
         lines.append("")
 
-    # Pre-Delivery Checklist
+    # Checklist
     lines.append("## Pre-Delivery Checklist")
     lines.append("- [ ] No emojis as icons (use SVG: Heroicons/Lucide)")
     lines.append("- [ ] cursor-pointer on all clickable elements")
@@ -669,8 +818,8 @@ def format_markdown(design_system: dict) -> str:
 
 
 # ============ MAIN ENTRY POINT ============
-def generate_design_system(query: str, project_name: str = None, output_format: str = "ascii",
-                           persist: bool = False, page: str = None, output_dir: str = None) -> str:
+def generate_design_system(query, project_name=None, output_format="ascii",
+                           persist=False, page=None, output_dir=None):
     generator = DesignSystemGenerator()
     design_system = generator.generate(query, project_name)
 
@@ -683,7 +832,7 @@ def generate_design_system(query: str, project_name: str = None, output_format: 
 
 
 # ============ PERSISTENCE FUNCTIONS ============
-def persist_design_system(design_system: dict, page: str = None, output_dir: str = None, page_query: str = None) -> dict:
+def persist_design_system(design_system, page=None, output_dir=None, page_query=None):
     base_dir = Path(output_dir) if output_dir else Path.cwd()
 
     project_name = design_system.get("project_name", "default")
@@ -717,8 +866,8 @@ def persist_design_system(design_system: dict, page: str = None, output_dir: str
     }
 
 
-def format_master_md(design_system: dict) -> str:
-    """Format design system as MASTER.md with enhanced content."""
+def format_master_md(design_system):
+    """Format design system as MASTER.md v2 with enhanced content."""
     project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
@@ -726,9 +875,7 @@ def format_master_md(design_system: dict) -> str:
     typography = design_system.get("typography", {})
     effects = design_system.get("key_effects", "")
     anti_patterns = design_system.get("anti_patterns", "")
-    components = design_system.get("components", [])
-    animations = design_system.get("animations", [])
-    responsive = design_system.get("responsive", [])
+    code = design_system.get("code_snippets", {})
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -745,7 +892,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append(f"**Project:** {project}")
     lines.append(f"**Generated:** {timestamp}")
     lines.append(f"**Category:** {design_system.get('category', 'General')}")
-    lines.append(f"**Engine:** UI UX CR - Cyber-Rage Design Intelligence Engine")
+    lines.append(f"**Engine:** UI UX CR v2 - Cyber-Rage Design Intelligence Engine")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -762,6 +909,13 @@ def format_master_md(design_system: dict) -> str:
     lines.append(f"| Text | `{colors.get('text', '#1E293B')}` | `--color-text` |")
     lines.append(f"| Border | `{colors.get('border', '#E2E8F0')}` | `--color-border` |")
     lines.append("")
+
+    # Contrast info
+    contrast_info = colors.get("contrast", {})
+    if contrast_info:
+        lines.append("**Accessibility Check:**")
+        lines.append(f"- Text/Bg contrast: {contrast_info.get('text_on_bg', 'N/A')} (WCAG AA: {'PASS' if contrast_info.get('wcag_aa') else 'FAIL'})")
+        lines.append("")
 
     # Extended Palette
     extended = colors.get("extended", {})
@@ -792,6 +946,14 @@ def format_master_md(design_system: dict) -> str:
         lines.append("**CSS Import:**")
         lines.append("```css")
         lines.append(typography.get("css_import", ""))
+        lines.append("```")
+        lines.append("")
+
+    # CSS Custom Properties
+    if code and code.get("css_variables"):
+        lines.append("## CSS Custom Properties")
+        lines.append("```css")
+        lines.append(code["css_variables"])
         lines.append("```")
         lines.append("")
 
@@ -826,13 +988,17 @@ def format_master_md(design_system: dict) -> str:
     lines.append("## Component Specs")
     lines.append("")
 
+    cta = colors.get('cta', '#F97316')
+    primary = colors.get('primary', '#2563EB')
+    bg = colors.get('background', '#FFFFFF')
+    border = colors.get('border', '#E2E8F0')
+
     # Buttons
     lines.append("### Buttons")
     lines.append("")
     lines.append("```css")
-    lines.append("/* Primary Button */")
     lines.append(".btn-primary {")
-    lines.append(f"  background: {colors.get('cta', '#F97316')};")
+    lines.append(f"  background: {cta};")
     lines.append("  color: white;")
     lines.append("  padding: 12px 24px;")
     lines.append("  border-radius: 8px;")
@@ -840,17 +1006,15 @@ def format_master_md(design_system: dict) -> str:
     lines.append("  transition: all 200ms ease;")
     lines.append("  cursor: pointer;")
     lines.append("}")
-    lines.append("")
     lines.append(".btn-primary:hover {")
     lines.append("  opacity: 0.9;")
     lines.append("  transform: translateY(-1px);")
     lines.append("}")
     lines.append("")
-    lines.append("/* Secondary Button */")
     lines.append(".btn-secondary {")
-    lines.append(f"  background: transparent;")
-    lines.append(f"  color: {colors.get('primary', '#2563EB')};")
-    lines.append(f"  border: 2px solid {colors.get('primary', '#2563EB')};")
+    lines.append("  background: transparent;")
+    lines.append(f"  color: {primary};")
+    lines.append(f"  border: 2px solid {primary};")
     lines.append("  padding: 12px 24px;")
     lines.append("  border-radius: 8px;")
     lines.append("  font-weight: 600;")
@@ -865,14 +1029,13 @@ def format_master_md(design_system: dict) -> str:
     lines.append("")
     lines.append("```css")
     lines.append(".card {")
-    lines.append(f"  background: {colors.get('background', '#FFFFFF')};")
+    lines.append(f"  background: {bg};")
     lines.append("  border-radius: 12px;")
     lines.append("  padding: 24px;")
     lines.append("  box-shadow: var(--shadow-md);")
     lines.append("  transition: all 200ms ease;")
     lines.append("  cursor: pointer;")
     lines.append("}")
-    lines.append("")
     lines.append(".card:hover {")
     lines.append("  box-shadow: var(--shadow-lg);")
     lines.append("  transform: translateY(-2px);")
@@ -886,16 +1049,15 @@ def format_master_md(design_system: dict) -> str:
     lines.append("```css")
     lines.append(".input {")
     lines.append("  padding: 12px 16px;")
-    lines.append(f"  border: 1px solid {colors.get('border', '#E2E8F0')};")
+    lines.append(f"  border: 1px solid {border};")
     lines.append("  border-radius: 8px;")
     lines.append("  font-size: 16px;")
     lines.append("  transition: border-color 200ms ease;")
     lines.append("}")
-    lines.append("")
     lines.append(".input:focus {")
-    lines.append(f"  border-color: {colors.get('primary', '#2563EB')};")
+    lines.append(f"  border-color: {primary};")
     lines.append("  outline: none;")
-    lines.append(f"  box-shadow: 0 0 0 3px {colors.get('primary', '#2563EB')}20;")
+    lines.append(f"  box-shadow: 0 0 0 3px {primary}20;")
     lines.append("}")
     lines.append("```")
     lines.append("")
@@ -909,9 +1071,6 @@ def format_master_md(design_system: dict) -> str:
     lines.append("")
     if style.get("keywords"):
         lines.append(f"**Keywords:** {style.get('keywords', '')}")
-        lines.append("")
-    if style.get("best_for"):
-        lines.append(f"**Best For:** {style.get('best_for', '')}")
         lines.append("")
     if effects:
         lines.append(f"**Key Effects:** {effects}")
@@ -950,12 +1109,10 @@ def format_master_md(design_system: dict) -> str:
     lines.append("- Invisible focus states -- Focus states must be visible for a11y")
     lines.append("")
 
-    # Pre-Delivery Checklist
+    # Checklist
     lines.append("---")
     lines.append("")
     lines.append("## Pre-Delivery Checklist")
-    lines.append("")
-    lines.append("Before delivering any UI code, verify:")
     lines.append("")
     lines.append("- [ ] No emojis used as icons (use SVG instead)")
     lines.append("- [ ] All icons from consistent icon set (Heroicons/Lucide)")
@@ -976,7 +1133,7 @@ def format_master_md(design_system: dict) -> str:
     return "\n".join(lines)
 
 
-def format_page_override_md(design_system: dict, page_name: str, page_query: str = None) -> str:
+def format_page_override_md(design_system, page_name, page_query=None):
     """Format a page-specific override file with intelligent AI-generated content."""
     project = design_system.get("project_name", "PROJECT")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1076,7 +1233,7 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
     return "\n".join(lines)
 
 
-def _generate_intelligent_overrides(page_name: str, page_query: str, design_system: dict) -> dict:
+def _generate_intelligent_overrides(page_name, page_query, design_system):
     from core import search
 
     page_lower = page_name.lower()
@@ -1165,7 +1322,7 @@ def _generate_intelligent_overrides(page_name: str, page_query: str, design_syst
     }
 
 
-def _detect_page_type(context: str, style_results: list) -> str:
+def _detect_page_type(context, style_results):
     context_lower = context.lower()
 
     page_patterns = [
@@ -1201,7 +1358,7 @@ def _detect_page_type(context: str, style_results: list) -> str:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Generate Design System - Cyber-Rage Engine")
+    parser = argparse.ArgumentParser(description="Generate Design System v2 - Cyber-Rage Engine")
     parser.add_argument("query", help="Search query (e.g., 'SaaS dashboard')")
     parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name")
     parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format")

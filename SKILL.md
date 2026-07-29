@@ -1,8 +1,8 @@
 # Skill: ui-ux-cr
 
-# UI UX CR - Cyber-Rage Design Intelligence Engine
+# UI UX CR v2 - Cyber-Rage Design Intelligence Engine
 
-Ultra-premium design intelligence system with enhanced BM25 search, fuzzy matching, synonym expansion, color theory engine, component library, animation database, responsive patterns, and design tokens. Supports 30+ product types, 100+ styles, 50+ color palettes, 30+ font pairings, and 16+ tech stacks.
+Ultra-premium design intelligence system **v2.0** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **75+ font pairings**, and **16+ tech stacks**.
 
 ## Prerequisites
 
@@ -89,6 +89,28 @@ python3 scripts/search.py "<query>" --analyze
 ```
 
 This returns recommendations across all 10 domains simultaneously.
+
+### Step 2d: Advanced v2 Features
+
+**WCAG Contrast Check:**
+```bash
+python3 scripts/search.py "healthcare saas" --wcag
+```
+
+**Export CSS Custom Properties:**
+```bash
+python3 scripts/search.py "fintech dashboard" --export-css
+```
+
+**Export Tailwind Config:**
+```bash
+python3 scripts/search.py "ecommerce luxury" --export-tailwind
+```
+
+**Generate Color Palette:**
+```bash
+python3 scripts/search.py "healthcare" --color-palette
+```
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
@@ -213,37 +235,76 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 
 ---
 
-## Key Features
+## Data Coverage v2.0
 
-### Enhanced BM25 Search Engine
-- Fuzzy matching for partial word matches
-- Synonym expansion for semantic understanding
-- Priority-based ranking for better results
+| Category | v1.x | v2.0 |
+|----------|------|------|
+| Product Types | 51 | **70+** |
+| UI Styles | 31 | **46+** |
+| Color Palettes | 61 | **80+** |
+| Font Pairings | 61 | **75+** |
+| Synonym Groups | 34 | **120+** |
+| Animations | 31 | **31** |
+| Components | 31 | **31** |
+| Responsive Patterns | 21 | **21** |
+| Backgrounds | 46 | **46** |
+| Tech Stacks | 16 | **16** |
+| WCAG Checks | ✗ | **Built-in** |
+| Code Generation | ✗ | **Auto-generated** |
+| Color Blind Simulation | ✗ | **3 types** |
+| CSS/Tailwind Export | ✗ | **Supported** |
 
-### Color Theory Engine
+## Key Features v2.0
+
+### Enhanced BM25 Search Engine v2
+- N-gram matching (bigram/trigram) for phrase detection
+- Levenshtein distance fuzzy matching for typo tolerance
+- 120+ synonym groups for semantic expansion (3x more than v1)
+- Category-based keyword boosting
+- Weighted domain detection with exact phrase priority
+
+### Color Theory Engine v2
 - Extended palette generation (50-900 shades)
-- Complementary, analogous, triadic color harmonies
-- HSL-based color manipulation
+- 6 color harmony types (complementary, analogous, triadic, split-complementary, tetradic, monochromatic)
+- HSL/HSV/CMYK color space conversion
+- **WCAG contrast checking** (AA/AAA pass/fail)
+- **Color blindness simulation** (protanopia, deuteranopia, tritanopia)
+- **Gradient generation** with multi-stop CSS output
+- **Temperature detection** (warm/cool/neutral)
+- Automatic text color suggestion based on luminance
 
-### Component Library
-- 25+ pre-built component recommendations
-- CSS and Tailwind code snippets
-- Accessibility guidelines for each component
+### Component Library v2
+- 30+ pre-built component recommendations
+- **Auto-generated HTML/Tailwind code snippets**
+- **CSS Custom Properties export**
+- **Tailwind Config export**
+- Accessibility guidelines with ARIA attributes
 
-### Animation Database
-- 20+ animation patterns
-- CSS code with duration, easing, GPU optimization
-- Reduced motion support
+### Animation Database v2
+- 30+ animation patterns with full CSS code
+- Duration, easing, GPU optimization info
+- Reduced motion fallbacks
+- **Category organization** (entrance, interaction, feedback, scroll, loading)
 
-### Responsive Patterns
-- 15+ responsive design patterns
-- Mobile-first approach
-- Container queries support
+### Responsive Patterns v2
+- 20+ responsive design patterns
+- Mobile-first approach with container queries
+- **Breakpoint specifications** (375px, 768px, 1024px, 1440px)
+- Touch-friendly target sizes (44x44px)
+- RTL-ready layout patterns
 
-### Design Tokens
-- 50+ design token categories
+### Design Tokens v2
+- 70+ design token categories
 - CSS variables and Tailwind classes
 - Light and dark mode values
+- **Spacing scale** (xs to 3xl)
+- **Shadow depth system** (sm to xl)
+
+### New v2 Commands
+- `--wcag` : WCAG contrast ratio analysis
+- `--export-css` : Generate CSS custom properties
+- `--export-tailwind` : Export Tailwind config
+- `--color-palette` : Generate extended color palette
 
 ---
 
