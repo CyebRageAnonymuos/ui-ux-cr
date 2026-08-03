@@ -120,20 +120,31 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 |------|---------|---------|
 | `svg_generator.py` | SVG icons, patterns, logos | `python3 scripts/svg_generator.py --icon search --size 24` |
 | `css_generator.py` | Shadows, gradients, glass, glow, UI kit, neumorphism | `python3 scripts/css_generator.py --ui-kit --primary #2563EB` |
+| `palette_generator.py` | Harmony palettes, shade scales, WCAG report | `python3 scripts/palette_generator.py "#2563EB" --harmony triadic --check-wcag` |
+| `typography_generator.py` | Modular type scales + font pairings from DB | `python3 scripts/typography_generator.py --scale golden-ratio` |
 | `theme_exporter.py` | Export theme to CSS/Tailwind/SCSS/JSON | `python3 scripts/theme_exporter.py "#2563EB" --format all` |
 | `layout_generator.py` | Grid systems, containers, spacing, breakpoints, layout templates | `python3 scripts/layout_generator.py --layout dashboard` |
 | `component_generator.py` | Ready HTML/Tailwind components from database | `python3 scripts/component_generator.py --component navbar --product "SaaS (General)"` |
+| `page_builder.py` | Compose full HTML page from components | `python3 scripts/page_builder.py --product "SaaS (General)" --sections navbar,hero,features,cta,footer --out landing.html` |
 | `animation_generator.py` | CSS animations with parameters + full animation kit | `python3 scripts/animation_generator.py --type bounce --duration 0.6` |
-| `mockup_generator.py` | ASCII wireframes (desktop, dashboard, mobile, landing, login) | `python3 scripts/mockup_generator.py --type dashboard` |
 | `chart_generator.py` | Chart.js & Recharts configs (line, bar, pie, area, radar...) | `python3 scripts/chart_generator.py --chart bar --labels "Q1,Q2" --data "25,40"` |
+| `pattern_generator.py` | CSS background patterns (dots, grid, checkerboard, waves...) | `python3 scripts/pattern_generator.py checkerboard --color #2563EB` |
+| `favicon_generator.py` | Favicon SVG, HTML head, PWA manifest, size cheat sheet | `python3 scripts/favicon_generator.py --text CR --bg #2563EB` |
+| `copy_generator.py` | UI copy: headlines, CTAs, placeholders, errors, A/B variants | `python3 scripts/copy_generator.py --headline saas --count 3` |
+| `mockup_generator.py` | ASCII wireframes (desktop, dashboard, mobile, landing, login) | `python3 scripts/mockup_generator.py --type dashboard` |
+| `social_specs.py` | Social media dimension cheat sheets (10 platforms) | `python3 scripts/social_specs.py --platform instagram` |
+| `banner_generator.py` | ASCII art banners for terminal | `python3 scripts/banner_generator.py --text "UI UX CR" --style block` |
 | `accessibility_audit.py` | WCAG audit of HTML files (contrast, alt, labels, headings) | `python3 scripts/accessibility_audit.py index.html` |
 
 **Toolbox Workflow:**
-1. `component_generator.py --component hero --product "SaaS (General)"` → get HTML + CSS variables
-2. `svg_generator.py --icon check` → get SVG icon to replace emoji placeholders
-3. `css_generator.py --ui-kit` → get complete button/card/input/badge CSS kit
-4. `animation_generator.py --kit` → get transitions, micro-interactions, loaders
-5. `accessibility_audit.py` → verify the final HTML passes WCAG checks
+1. `page_builder.py --product "SaaS (General)"` → get a complete HTML landing page
+2. `component_generator.py --component hero` → get individual components with CSS variables
+3. `svg_generator.py --icon check` → get SVG icon to replace emoji placeholders
+4. `css_generator.py --ui-kit` → get complete button/card/input/badge CSS kit
+5. `palette_generator.py "#2563EB" --harmony triadic` → get harmony palette with WCAG report
+6. `animation_generator.py --kit` → get transitions, micro-interactions, loaders
+7. `favicon_generator.py --text CR` → get favicon + HTML head + manifest
+8. `accessibility_audit.py` → verify the final HTML passes WCAG checks
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
@@ -278,11 +289,19 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 | CSS/Tailwind Export | ✗ | **Supported** |
 | SVG Icon/Pattern Generator | ✗ | **New tool** |
 | CSS Utility Generator | ✗ | **New tool** |
+| Palette Generator | ✗ | **New tool** |
+| Typography Generator | ✗ | **New tool** |
 | Component Code Generator | ✗ | **12 components** |
+| Page Builder | ✗ | **Full HTML pages** |
 | Layout/Grid Generator | ✗ | **5 templates** |
 | Animation Generator | ✗ | **12 animations + kit** |
+| Pattern Generator | ✗ | **12 CSS patterns** |
+| Favicon Generator | ✗ | **SVG + manifest** |
+| Copy Generator | ✗ | **UI microcopy** |
 | ASCII Mockup Generator | ✗ | **5 layouts** |
 | Chart Config Generator | ✗ | **Chart.js + Recharts** |
+| Social Media Specs | ✗ | **10 platforms** |
+| ASCII Banner Generator | ✗ | **2 fonts + rainbow** |
 | Accessibility Auditor | ✗ | **WCAG audit tool** |
 
 ## Key Features v2.0

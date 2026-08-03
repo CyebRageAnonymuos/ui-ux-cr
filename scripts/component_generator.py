@@ -109,7 +109,7 @@ def component_navbar(colors, typo):
     <button class="px-4 py-2 text-sm font-semibold text-white rounded-lg hover:opacity-90 transition-opacity" style="background:var(--cta)">Get Started</button>
   </div>
 </nav>
-<button class="md:hidden fixed bottom-6 right-6 p-3 rounded-full text-white shadow-lg" style="background:var(--primary)">☰</button>"""
+<button class="md:hidden fixed bottom-6 right-6 p-3 rounded-full text-white shadow-lg cursor-pointer" style="background:var(--primary)" aria-label="Open menu">☰</button>"""
 
 
 def component_hero(colors, typo):
@@ -228,7 +228,7 @@ def component_footer(colors, typo):
       <p class="text-sm">Building the future of design, one pixel at a time.</p>
     </div>
     <div>
-      <h4 class="text-white font-semibold text-sm mb-4">Product</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Product</h4>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
@@ -236,7 +236,7 @@ def component_footer(colors, typo):
       </ul>
     </div>
     <div>
-      <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Company</h4>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">About</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
@@ -244,7 +244,7 @@ def component_footer(colors, typo):
       </ul>
     </div>
     <div>
-      <h4 class="text-white font-semibold text-sm mb-4">Legal</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Legal</h4>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
