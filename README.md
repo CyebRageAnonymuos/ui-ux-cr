@@ -1,499 +1,567 @@
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     ██████╗ ██╗   ██╗███████╗██████╗ ██████╗ ██╗████████╗
-     ██╔══██╗██║   ██║██╔════╝██╔══██╗██╔══██╗██║╚══██╔══╝
-     ██████╔╝██║   ██║█████╗  ██████╔╝██████╔╝██║   ██║
-     ██╔══██╗██║   ██║██╔══╝  ██╔══██╗██╔══██╗██║   ██║
-     ██████╔╝╚██████╔╝███████╗██████╔╝██║  ██║██║   ██║
-     ╚═════╝  ╚═════╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝
-═══════════════════════════════════════════════════════════════════════════════ -->
+<div align="center">
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" style="display:block;margin:0;padding:0;">
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    CYBER-RAGE ANIMATED HEADER                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<svg width="100%" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Cyberpunk Grid Pattern -->
-    <pattern id="cyberGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#22D3EE" stroke-width="0.3" stroke-opacity="0.3"/>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1a0b2e"/>
+    </linearGradient>
+
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f5ff"/>
+      <stop offset="50%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#00f5ff"/>
+    </linearGradient>
+
+    <linearGradient id="neonPink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff00ff"/>
+      <stop offset="50%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+
+    <linearGradient id="neonOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="3" result="coloredBlur2"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,245,255,0.08)" stroke-width="0.5"/>
     </pattern>
-    
-    <!-- Animated gradient for title -->
-    <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF006E">
-        <animate attributeName="stop-color" values="#FF006E;#22D3EE;#A78BFA;#FF006E" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="33%" stop-color="#22D3EE">
-        <animate attributeName="stop-color" values="#22D3EE;#A78BFA;#FF006E;#22D3EE" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="66%" stop-color="#A78BFA">
-        <animate attributeName="stop-color" values="#A78BFA;#FF006E;#22D3EE;#A78BFA" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="100%" stop-color="#F97316">
-        <animate attributeName="stop-color" values="#F97316;#22D3EE;#FF006E;#F97316" dur="4s" repeatCount="indefinite"/>
-      </stop>
-    </linearGradient>
-    
-    <!-- Neon glow filter -->
-    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="blur1"/>
-      <feGaussianBlur stdDeviation="8" result="blur2"/>
-      <feGaussianBlur stdDeviation="12" result="blur3"/>
-      <feMerge>
-        <feMergeNode in="blur3"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <!-- Scan line -->
-    <linearGradient id="scanLine" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#22D3EE" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
-    </linearGradient>
-    
-    <!-- Radial glow -->
-    <radialGradient id="pinkOrb" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FF006E" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#FF006E" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cyanOrb" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="purpleOrb" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
-    </radialGradient>
+
+    <mask id="textMask">
+      <rect x="0" y="0" width="1200" height="300" fill="white"/>
+    </mask>
   </defs>
-  
+
   <!-- Background -->
-  <rect width="1200" height="700" fill="#0A0A0F"/>
-  
-  <!-- Animated grid -->
-  <rect width="1200" height="700" fill="url(#cyberGrid)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;-40,-40;0,0" dur="20s" repeatCount="indefinite"/>
-  </rect>
-  
-  <!-- Floating orbs -->
-  <circle r="120" fill="url(#pinkOrb)">
-    <animate attributeName="cx" values="150;1100;150" dur="20s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="200;500;200" dur="15s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/>
-  </circle>
-  <circle r="90" fill="url(#cyanOrb)">
-    <animate attributeName="cx" values="1050;200;1050" dur="18s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="500;150;500" dur="22s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5s" repeatCount="indefinite"/>
-  </circle>
-  <circle r="100" fill="url(#purpleOrb)">
-    <animate attributeName="cx" values="600;300;900;600" dur="25s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="350;600;100;350" dur="19s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite"/>
-  </circle>
-  
-  <!-- Title with glitch -->
-  <g filter="url(#neonGlow)">
-    <text x="600" y="180" text-anchor="middle" font-family="Courier New, monospace" font-size="72" font-weight="900" fill="url(#cyberGradient)" letter-spacing="8">
-      UI UX CR
-      <animate attributeName="opacity" values="1;0.8;1;0.9;1" dur="3s" repeatCount="indefinite"/>
-    </text>
-    <!-- Glitch layer 1 -->
-    <text x="597" y="180" text-anchor="middle" font-family="Courier New, monospace" font-size="72" font-weight="900" fill="#FF006E" letter-spacing="8" opacity="0">
-      UI UX CR
-      <animate attributeName="opacity" values="0;0;0.7;0;0;0;0;0.5;0" dur="4s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="translate" values="0,0;-3,0;3,0;0,0" dur="4s" repeatCount="indefinite"/>
-    </text>
-    <!-- Glitch layer 2 -->
-    <text x="603" y="180" text-anchor="middle" font-family="Courier New, monospace" font-size="72" font-weight="900" fill="#22D3EE" letter-spacing="8" opacity="0">
-      UI UX CR
-      <animate attributeName="opacity" values="0;0.5;0;0;0;0.7;0;0" dur="4s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="translate" values="0,0;3,0;-3,0;0,0" dur="4s" repeatCount="indefinite"/>
-    </text>
+  <rect width="1200" height="300" fill="url(#bgGrad)"/>
+  <rect width="1200" height="300" fill="url(#grid)"/>
+
+  <!-- Animated circuit lines -->
+  <g opacity="0.3">
+    <path d="M0,150 L200,150 L250,100 L400,100" fill="none" stroke="#00f5ff" stroke-width="1.5" stroke-dasharray="10,5">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M1200,200 L1000,200 L950,250 L800,250" fill="none" stroke="#ff00ff" stroke-width="1.5" stroke-dasharray="10,5">
+      <animate attributeName="stroke-dashoffset" values="0;-30" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100,300 L100,250 L150,220 L150,150" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="8,4">
+      <animate attributeName="stroke-dashoffset" values="0;-24" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M1100,0 L1100,50 L1050,80 L1050,150" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="8,4">
+      <animate attributeName="stroke-dashoffset" values="0;-24" dur="2.2s" repeatCount="indefinite"/>
+    </path>
   </g>
-  
-  <!-- Subtitle -->
-  <text x="600" y="240" text-anchor="middle" font-family="Courier New, monospace" font-size="20" fill="#22D3EE" letter-spacing="12" opacity="0.9">
-    CYBER-RAGE DESIGN INTELLIGENCE ENGINE
-    <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+
+  <!-- Floating particles -->
+  <g>
+    <circle cx="150" cy="80" r="2" fill="#00f5ff" opacity="0.8">
+      <animate attributeName="cy" values="80;60;80" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1050" cy="220" r="2" fill="#ff00ff" opacity="0.6">
+      <animate attributeName="cy" values="220;200;220" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.1;0.6" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="40" r="1.5" fill="#f97316" opacity="0.7">
+      <animate attributeName="cy" values="40;30;40" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0.1;0.7" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="260" r="2" fill="#22d3ee" opacity="0.5">
+      <animate attributeName="cy" values="260;240;260" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="70" r="1.5" fill="#00f5ff" opacity="0.6">
+      <animate attributeName="cy" values="70;55;70" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Hexagon decorations -->
+  <g opacity="0.15" stroke="#00f5ff" fill="none" stroke-width="1">
+    <polygon points="100,150 115,141 115,123 100,114 85,123 85,141">
+      <animateTransform attributeName="transform" type="rotate" values="0 100 132;360 100 132" dur="20s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="1100,150 1115,141 1115,123 1100,114 1085,123 1085,141">
+      <animateTransform attributeName="transform" type="rotate" values="360 1100 132;0 1100 132" dur="25s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+
+  <!-- Main Title -->
+  <text x="600" y="115" text-anchor="middle" font-family="monospace, Courier New, sans-serif" font-size="52" font-weight="900" fill="url(#neonCyan)" filter="url(#strongGlow)" letter-spacing="8">
+    UI UX CR
+    <animate attributeName="opacity" values="1;0.85;1" dur="3s" repeatCount="indefinite"/>
   </text>
-  
-  <!-- Terminal mockup -->
-  <g>
-    <rect x="300" y="290" width="600" height="200" rx="8" fill="#0F172A" stroke="#1E293B" stroke-width="2"/>
-    <rect x="300" y="290" width="600" height="35" rx="8" fill="#1E293B"/>
-    <circle cx="320" cy="308" r="6" fill="#EF4444"/>
-    <circle cx="340" cy="308" r="6" fill="#F59E0B"/>
-    <circle cx="360" cy="308" r="6" fill="#10B981"/>
-    <text x="600" y="312" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#64748B">cyber-rage@design:~$</text>
-    
-    <!-- Command line with typing animation -->
-    <text x="320" y="360" font-family="Courier New, monospace" font-size="14" fill="#22D3EE">$ python3 scripts/search.py</text>
-    <text x="320" y="390" font-family="Courier New, monospace" font-size="14" fill="#F97316" textLength="560">  "SaaS landing page" --design-system
-      <animate attributeName="textLength" values="0;560" dur="2s" repeatCount="1" begin="0.5s" fill="freeze"/>
-    </text>
-    
-    <!-- Blinking cursor -->
-    <rect x="320" y="420" width="10" height="18" fill="#22D3EE">
-      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
-    </rect>
-  </g>
-  
-  <!-- Stats boxes -->
-  <g>
-    <rect x="150" y="540" width="200" height="100" rx="10" fill="#0F172A" stroke="#FF006E" stroke-width="2">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
-    </rect>
-    <text x="250" y="580" text-anchor="middle" font-family="Courier New, monospace" font-size="32" font-weight="900" fill="#FF006E">70+</text>
-    <text x="250" y="610" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#94A3B8">PRODUCT TYPES</text>
-    
-    <rect x="380" y="540" width="200" height="100" rx="10" fill="#0F172A" stroke="#22D3EE" stroke-width="2">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.8s" repeatCount="indefinite"/>
-    </rect>
-    <text x="480" y="580" text-anchor="middle" font-family="Courier New, monospace" font-size="32" font-weight="900" fill="#22D3EE">17</text>
-    <text x="480" y="610" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#94A3B8">TOOLBOX SCRIPTS</text>
-    
-    <rect x="610" y="540" width="200" height="100" rx="10" fill="#0F172A" stroke="#A78BFA" stroke-width="2">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="710" y="580" text-anchor="middle" font-family="Courier New, monospace" font-size="32" font-weight="900" fill="#A78BFA">120+</text>
-    <text x="710" y="610" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#94A3B8">SYNONYMS</text>
-    
-    <rect x="840" y="540" width="200" height="100" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="2">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.6s" repeatCount="indefinite"/>
-    </rect>
-    <text x="940" y="580" text-anchor="middle" font-family="Courier New, monospace" font-size="32" font-weight="900" fill="#10B981">MIT</text>
-    <text x="940" y="610" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#94A3B8">LICENSE</text>
-  </g>
-  
-  <!-- Scan line effect -->
-  <rect x="0" width="1200" height="40" fill="url(#scanLine)">
-    <animate attributeName="y" values="-40;700;-40" dur="6s" repeatCount="indefinite"/>
+
+  <!-- Subtitle with typing effect -->
+  <text x="600" y="155" text-anchor="middle" font-family="monospace, Courier New, sans-serif" font-size="18" fill="#94a3b8" letter-spacing="6">
+    CYBER-RAGE DESIGN INTELLIGENCE ENGINE
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Animated underline -->
+  <line x1="350" y1="175" x2="850" y2="175" stroke="url(#neonPink)" stroke-width="2" filter="url(#glow)">
+    <animate attributeName="x1" values="350;450;350" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="850;750;850" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="stroke-width" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Version Badge -->
+  <rect x="555" y="195" width="90" height="28" rx="14" fill="none" stroke="url(#neonOrange)" stroke-width="1.5" filter="url(#glow)">
+    <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
   </rect>
-</svg>
+  <text x="600" y="214" text-anchor="middle" font-family="monospace, Courier New, sans-serif" font-size="13" fill="#f97316" font-weight="700" letter-spacing="2">
+    v2.1
+  </text>
 
-<div align="center">
+  <!-- Stats pills -->
+  <g transform="translate(0, 245)">
+    <rect x="390" y="0" width="150" height="34" rx="17" fill="none" stroke="#f97316" stroke-width="1.2" stroke-opacity="0.6">
+      <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="3.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="465" y="22" text-anchor="middle" font-family="monospace, sans-serif" font-size="12" fill="#fdba74" font-weight="600">17 TOOLS</text>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-FF006E?style=for-the-badge&logo=python&logoColor=white&labelColor=0A0A0F" alt="Python"/>
-  <img src="https://img.shields.io/badge/Version-2.1-22D3EE?style=for-the-badge&logo=git&logoColor=white&labelColor=0A0A0F" alt="Version"/>
-  <img src="https://img.shields.io/badge/License-MIT-A78BFA?style=for-the-badge&logo=opensourceinitiative&logoColor=white&labelColor=0A0A0F" alt="License"/>
-  <img src="https://img.shields.io/badge/Status-STABLE-10B981?style=for-the-badge&logo=statuspage&logoColor=white&labelColor=0A0A0F" alt="Status"/>
-</p>
+    <rect x="570" y="0" width="150" height="34" rx="17" fill="none" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.6">
+      <animate attributeName="stroke-opacity" values="1;0.6;1" dur="2.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="645" y="22" text-anchor="middle" font-family="monospace, sans-serif" font-size="12" fill="#67e8f9" font-weight="600">100% PYTHON</text>
+  </g>
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-toolbox">Toolbox</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#-usage">Usage</a> •
-  <a href="#-examples">Examples</a> •
-  <a href="#-contributing">Contributing</a>
-</p>
-
-</div>
-
----
-
-<div align="center">
-
-### 🌐 Not just recommendations. **Generation.** 🌐
-
-</div>
-
-<div align="center">
-
-> **UI UX CR** is an ultra-premium design intelligence system built for AI assistants and power users. It **generates** complete design systems, **builds** full HTML/Tailwind pages, **exports** production-ready themes, and **audits** accessibility — all from your terminal.
-
-</div>
-
----
-
-## ⚡ FEATURES
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 150" width="100%">
-  <defs>
-    <linearGradient id="featureGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF006E"/>
-      <stop offset="50%" stop-color="#22D3EE"/>
-      <stop offset="100%" stop-color="#A78BFA"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="150" fill="#0A0A0F" rx="10"/>
-  <g font-family="Courier New, monospace">
-    <text x="150" y="60" text-anchor="middle" font-size="36" fill="#FF006E">⚡</text>
-    <text x="150" y="90" text-anchor="middle" font-size="14" fill="#94A3B8">ENHANCED</text>
-    <text x="150" y="110" text-anchor="middle" font-size="14" fill="#94A3B8">BM25 SEARCH</text>
-    
-    <text x="350" y="60" text-anchor="middle" font-size="36" fill="#22D3EE">🎨</text>
-    <text x="350" y="90" text-anchor="middle" font-size="14" fill="#94A3B8">COLOR THEORY</text>
-    <text x="350" y="110" text-anchor="middle" font-size="14" fill="#94A3B8">ENGINE</text>
-    
-    <text x="550" y="60" text-anchor="middle" font-size="36" fill="#A78BFA">🧰</text>
-    <text x="550" y="90" text-anchor="middle" font-size="14" fill="#94A3B8">17 TOOLBOX</text>
-    <text x="550" y="110" text-anchor="middle" font-size="14" fill="#94A3B8">SCRIPTS</text>
-    
-    <text x="750" y="60" text-anchor="middle" font-size="36" fill="#F97316">🏗️</text>
-    <text x="750" y="90" text-anchor="middle" font-size="14" fill="#94A3B8">PAGE</text>
-    <text x="750" y="110" text-anchor="middle" font-size="14" fill="#94A3B8">BUILDER</text>
-    
-    <text x="950" y="60" text-anchor="middle" font-size="36" fill="#10B981">♿</text>
-    <text x="950" y="90" text-anchor="middle" font-size="14" fill="#94A3B8">WCAG</text>
-    <text x="950" y="110" text-anchor="middle" font-size="14" fill="#94A3B8">AUDITOR</text>
+  <!-- Corner brackets -->
+  <g stroke="#00f5ff" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M20,20 L50,20 L50,30 M20,20 L20,50 L30,50">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M1180,20 L1150,20 L1150,30 M1180,20 L1180,50 L1170,50">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M20,280 L50,280 L50,270 M20,280 L20,250 L30,250">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="1s" repeatCount="indefinite"/>
+    </path>
+    <path d="M1180,280 L1150,280 L1150,270 M1180,280 L1180,250 L1170,250">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+    </path>
   </g>
 </svg>
 
-| Feature | What it actually does |
-|---------|----------------------|
-| **Enhanced BM25 Search** | Fuzzy matching + n-grams + 120+ synonym groups |
-| **Design System Generator** | 10 domains searched in parallel with reasoning engine |
-| **Color Theory Engine** | 6 harmony types · WCAG contrast · color-blind simulation |
-| **17 Toolbox Scripts** | Icons, CSS kits, components, animations, charts, pages… |
-| **Component Generator** | 12 production-ready components (navbar, hero, pricing…) |
-| **Page Builder** | Full HTML landing page in a single command |
-| **Accessibility Auditor** | Real WCAG checks: contrast, alt, labels, heading order |
-| **Animation Database** | 30+ patterns + full kit with `prefers-reduced-motion` |
-| **Design Tokens** | 70+ categories → CSS variables & Tailwind config |
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    BADGE STRIP - ANIMATED                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
----
+<img src="https://img.shields.io/badge/Engine-v2.1-ff6b35?style=for-the-badge&logo=python&logoColor=white&labelColor=0a0a0f">
+<img src="https://img.shields.io/badge/Python-3.8%2B-22d3ee?style=for-the-badge&logo=python&logoColor=white&labelColor=0a0a0f">
+<img src="https://img.shields.io/badge/Tools-17-00f5ff?style=for-the-badge&logo=tool&logoColor=white&labelColor=0a0a0f">
+<img src="https://img.shields.io/badge/License-MIT-f472b6?style=for-the-badge&logo=open-source-initiative&logoColor=white&labelColor=0a0a0f">
+<img src="https://img.shields.io/badge/Status-Production%20Ready-10b981?style=for-the-badge&logo=checkmarx&logoColor=white&labelColor=0a0a0f">
 
-## 🧰 THE TOOLBOX
+<br><br>
 
-<div align="center">
+```
+$ python3 scripts/search.py "SaaS landing page" --design-system
 
-### 🛠️ 17 Standalone Scripts · 100% Python · Zero Dependencies
-
-</div>
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="100%">
-  <defs>
-    <filter id="toolGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  
-  <rect width="1200" height="500" fill="#0A0A0F" rx="10"/>
-  
-  <!-- Grid of tools -->
-  <!-- Row 1 -->
-  <g filter="url(#toolGlow)">
-    <rect x="80" y="60" width="200" height="80" rx="8" fill="#0F172A" stroke="#FF006E" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="180" y="95" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#FF006E">search.py</text>
-    <text x="180" y="115" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">BM25 Design Search</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="300" y="60" width="200" height="80" rx="8" fill="#0F172A" stroke="#22D3EE" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/>
-    </rect>
-    <text x="400" y="95" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#22D3EE">svg_generator.py</text>
-    <text x="400" y="115" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">70+ SVG Icons</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="520" y="60" width="200" height="80" rx="8" fill="#0F172A" stroke="#A78BFA" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.4s" repeatCount="indefinite"/>
-    </rect>
-    <text x="620" y="95" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#A78BFA">css_generator.py</text>
-    <text x="620" y="115" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Shadows · Glass · Glow</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="740" y="60" width="200" height="80" rx="8" fill="#0F172A" stroke="#F97316" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.6s" repeatCount="indefinite"/>
-    </rect>
-    <text x="840" y="95" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#F97316">palette_gen.py</text>
-    <text x="840" y="115" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Color Harmony Engine</text>
-  </g>
-  
-  <!-- Row 2 -->
-  <g filter="url(#toolGlow)">
-    <rect x="80" y="160" width="200" height="80" rx="8" fill="#0F172A" stroke="#10B981" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.8s" repeatCount="indefinite"/>
-    </rect>
-    <text x="180" y="195" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#10B981">typography_gen.py</text>
-    <text x="180" y="215" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Modular Type Scales</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="300" y="160" width="200" height="80" rx="8" fill="#0F172A" stroke="#F472B6" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.1s" repeatCount="indefinite"/>
-    </rect>
-    <text x="400" y="195" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#F472B6">theme_exporter.py</text>
-    <text x="400" y="215" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">CSS · Tailwind · SCSS</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="520" y="160" width="200" height="80" rx="8" fill="#0F172A" stroke="#FCD34D" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="620" y="195" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#FCD34D">component_gen.py</text>
-    <text x="620" y="215" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">12 Production Components</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="740" y="160" width="200" height="80" rx="8" fill="#0F172A" stroke="#60A5FA" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite"/>
-    </rect>
-    <text x="840" y="195" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#60A5FA">page_builder.py</text>
-    <text x="840" y="215" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Full HTML Landing Page</text>
-  </g>
-  
-  <!-- Row 3 -->
-  <g filter="url(#toolGlow)">
-    <rect x="80" y="260" width="200" height="80" rx="8" fill="#0F172A" stroke="#C084FC" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.9s" repeatCount="indefinite"/>
-    </rect>
-    <text x="180" y="295" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#C084FC">layout_gen.py</text>
-    <text x="180" y="315" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">5 Layout Templates</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="300" y="260" width="200" height="80" rx="8" fill="#0F172A" stroke="#34D399" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/>
-    </rect>
-    <text x="400" y="295" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#34D399">anim_gen.py</text>
-    <text x="400" y="315" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">12 Animation Patterns</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="520" y="260" width="200" height="80" rx="8" fill="#0F172A" stroke="#FB923C" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.4s" repeatCount="indefinite"/>
-    </rect>
-    <text x="620" y="295" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#FB923C">chart_gen.py</text>
-    <text x="620" y="315" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Chart.js · Recharts</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="740" y="260" width="200" height="80" rx="8" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.6s" repeatCount="indefinite"/>
-    </rect>
-    <text x="840" y="295" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#F43F5E">pattern_gen.py</text>
-    <text x="840" y="315" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">12 CSS Backgrounds</text>
-  </g>
-  
-  <!-- Row 4 -->
-  <g filter="url(#toolGlow)">
-    <rect x="80" y="360" width="200" height="80" rx="8" fill="#0F172A" stroke="#A3E635" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="180" y="395" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#A3E635">favicon_gen.py</text>
-    <text x="180" y="415" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">SVG + PWA Manifest</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="300" y="360" width="200" height="80" rx="8" fill="#0F172A" stroke="#FBBF24" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.3s" repeatCount="indefinite"/>
-    </rect>
-    <text x="400" y="395" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#FBBF24">copy_gen.py</text>
-    <text x="400" y="415" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Headlines · CTAs · A/B</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="520" y="360" width="200" height="80" rx="8" fill="#0F172A" stroke="#2DD4BF" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite"/>
-    </rect>
-    <text x="620" y="395" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#2DD4BF">a11y_audit.py</text>
-    <text x="620" y="415" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">Real WCAG Checks</text>
-  </g>
-  
-  <g filter="url(#toolGlow)">
-    <rect x="740" y="360" width="200" height="80" rx="8" fill="#0F172A" stroke="#818CF8" stroke-width="1.5">
-      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3.7s" repeatCount="indefinite"/>
-    </rect>
-    <text x="840" y="395" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#818CF8">mockup_gen.py</text>
-    <text x="840" y="415" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#64748B">ASCII Wireframes</text>
-  </g>
-</svg>
-
-### 📋 Complete Tool Reference
-
-| # | Script | Purpose | Quick Example |
-|---|--------|---------|---------------|
-| 01 | `search.py` | BM25 design search across 10 domains | `python3 scripts/search.py "saas" --design-system` |
-| 02 | `svg_generator.py` | 70+ SVG icons, patterns, logos | `python3 scripts/svg_generator.py --icon search --size 24` |
-| 03 | `css_generator.py` | Shadows, gradients, glass, glow, neumorphism | `python3 scripts/css_generator.py --ui-kit --primary #2563EB` |
-| 04 | `palette_generator.py` | Harmony palettes + shade scales + WCAG | `python3 scripts/palette_generator.py "#2563EB" --harmony triadic --check-wcag` |
-| 05 | `typography_generator.py` | Modular type scales + font pairings | `python3 scripts/typography_generator.py --scale golden-ratio` |
-| 06 | `theme_exporter.py` | Export → CSS / Tailwind / SCSS / JSON | `python3 scripts/theme_exporter.py "#2563EB" --format all` |
-| 07 | `component_generator.py` | 12 ready components | `python3 scripts/component_generator.py --component navbar --product "SaaS"` |
-| 08 | `page_builder.py` | Compose a full HTML landing page | `python3 scripts/page_builder.py --sections navbar,hero,features --out landing.html` |
-| 09 | `layout_generator.py` | Grids, containers, 5 templates | `python3 scripts/layout_generator.py --layout dashboard` |
-| 10 | `animation_generator.py` | 12 animations + full kit | `python3 scripts/animation_generator.py --type bounce --duration 0.6` |
-| 11 | `chart_generator.py` | Chart.js & Recharts (8 types) | `python3 scripts/chart_generator.py --chart bar --labels "Q1,Q2" --data "25,40"` |
-| 12 | `pattern_generator.py` | 12 CSS background patterns | `python3 scripts/pattern_generator.py checkerboard --color #2563EB` |
-| 13 | `favicon_generator.py` | Favicon SVG + HTML head + PWA | `python3 scripts/favicon_generator.py --text CR --bg #2563EB` |
-| 14 | `copy_generator.py` | Headlines, CTAs, A/B variants | `python3 scripts/copy_generator.py --headline saas --count 3` |
-| 15 | `mockup_generator.py` | ASCII wireframes | `python3 scripts/mockup_generator.py --type dashboard` |
-| 16 | `social_specs.py` | Social media dimensions | `python3 scripts/social_specs.py --platform instagram` |
-| 17 | `accessibility_audit.py` | WCAG audit of HTML | `python3 scripts/accessibility_audit.py index.html` |
-
----
-
-## 🚀 INSTALLATION
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 250" width="100%">
-  <defs>
-    <linearGradient id="installGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#22D3EE"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="250" fill="#0A0A0F" rx="10"/>
-  
-  <g font-family="Courier New, monospace">
-    <text x="60" y="60" font-size="16" fill="#10B981" font-weight="900">▌Option 1: Direct Use</text>
-    
-    <rect x="60" y="80" width="520" height="80" rx="6" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
-    <text x="80" y="110" font-size="13" fill="#22D3EE">$ git clone https://github.com/CyebRageAnonymuos/ui-ux-cr.git</text>
-    <text x="80" y="135" font-size="13" fill="#F97316">$ cd ui-ux-cr</text>
-    
-    <text x="640" y="60" font-size="16" fill="#A78BFA" font-weight="900">▌Option 2: As a Skill</text>
-    
-    <rect x="640" y="80" width="500" height="80" rx="6" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
-    <text x="660" y="110" font-size="13" fill="#22D3EE">$ mkdir -p .opencode/skills/ui-ux-cr</text>
-    <text x="660" y="135" font-size="13" fill="#F97316">$ cp -r ui-ux-cr/* .opencode/skills/ui-ux-cr/</text>
-    
-    <text x="60" y="210" font-size="14" fill="#64748B">Requires: Python 3.8+ · No additional dependencies · Zero-config</text>
-  </g>
-</svg>
-
-### 📦 Prerequisites
-
-```bash
-python3 --version  # Should be 3.8+
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  CYBER-RAGE DESIGN INTELLIGENCE ENGINE  v2.1                 ║
+    ║  ─────────────────────────────────────────────────────────   ║
+    ║  [⚡] 10 domains searched in parallel                       ║
+    ║  [🎨] Design system generated in 0.847s                     ║
+    ║  [✓]  70+ product types matched                             ║
+    ╚══════════════════════════════════════════════════════════════╝
 ```
 
-Not installed?
-- **macOS**: `brew install python3`
-- **Ubuntu**: `sudo apt install python3`
-- **Windows**: `winget install Python.Python.3.12`
+</div>
 
 ---
 
-## 💻 USAGE
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    FEATURE SHOWCASE SVG                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
-### ⚡ Generate a Complete Design System (Core Feature)
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" width="28">
+  <b>WHAT IS UI UX CR?</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" width="28">
+</h3>
+
+</div>
+
+**UI UX CR** is not just another design tool — it is a **terminal-based design intelligence engine** that transforms your text prompts into complete, production-ready design systems. Built with pure Python, it runs entirely offline and generates everything from color palettes to full HTML landing pages in seconds.
+
+Think of it as **ChatGPT for design systems**, but running locally in your terminal with zero API calls, zero subscriptions, and zero dependencies beyond Python itself.
+
+<br>
+
+<div align="center">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    ANIMATED FEATURE GRID                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<svg width="100%" height="420" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f5ff"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Card 1: Search -->
+  <rect x="10" y="10" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#00f5ff" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="35" y="45" font-family="monospace, sans-serif" font-size="14" fill="#00f5ff" font-weight="700">🔍 ENHANCED BM25 SEARCH</text>
+  <text x="35" y="70" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Fuzzy matching across 10 domains</text>
+  <text x="35" y="88" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">120+ synonym groups</text>
+  <text x="35" y="106" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">N-gram detection engine</text>
+
+  <!-- Card 2: Design System -->
+  <rect x="345" y="10" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#ff00ff" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="370" y="45" font-family="monospace, sans-serif" font-size="14" fill="#ff00ff" font-weight="700">🎨 DESIGN SYSTEM GENERATOR</text>
+  <text x="370" y="70" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Complete systems in one command</text>
+  <text x="370" y="88" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Colors + typography + components</text>
+  <text x="370" y="106" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Reasoning engine included</text>
+
+  <!-- Card 3: Color Theory -->
+  <rect x="680" y="10" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="705" y="45" font-family="monospace, sans-serif" font-size="14" fill="#f97316" font-weight="700">🌈 COLOR THEORY ENGINE</text>
+  <text x="705" y="70" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">6 harmony types + shade scales</text>
+  <text x="705" y="88" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">WCAG contrast validation</text>
+  <text x="705" y="106" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Color-blind simulation</text>
+
+  <!-- Card 4: Toolbox -->
+  <rect x="10" y="150" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="35" y="185" font-family="monospace, sans-serif" font-size="14" fill="#22d3ee" font-weight="700">🧰 17 TOOLBOX SCRIPTS</text>
+  <text x="35" y="210" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">SVG icons, CSS kits, components</text>
+  <text x="35" y="228" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Animations, charts, pages, mockups</text>
+  <text x="35" y="246" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Favicons, patterns, social specs</text>
+
+  <!-- Card 5: Page Builder -->
+  <rect x="345" y="150" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.7s" repeatCount="indefinite"/>
+  </rect>
+  <text x="370" y="185" font-family="monospace, sans-serif" font-size="14" fill="#10b981" font-weight="700">🏗️ FULL PAGE BUILDER</text>
+  <text x="370" y="210" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Compose landing pages in one cmd</text>
+  <text x="370" y="228" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Navbar + hero + pricing + footer</text>
+  <text x="370" y="246" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Tailwind CSS ready output</text>
+
+  <!-- Card 6: Accessibility -->
+  <rect x="680" y="150" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="705" y="185" font-family="monospace, sans-serif" font-size="14" fill="#a78bfa" font-weight="700">♿ WCAG AUDITOR</text>
+  <text x="705" y="210" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Contrast ratio analysis</text>
+  <text x="705" y="228" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Alt text & label validation</text>
+  <text x="705" y="246" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Heading order checker</text>
+
+  <!-- Card 7: Animation -->
+  <rect x="10" y="290" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#fbbf24" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="35" y="325" font-family="monospace, sans-serif" font-size="14" fill="#fbbf24" font-weight="700">✨ ANIMATION DATABASE</text>
+  <text x="35" y="350" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">30+ animation patterns</text>
+  <text x="35" y="368" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Full CSS animation kit</text>
+  <text x="35" y="386" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Reduced-motion fallback</text>
+
+  <!-- Card 8: Tokens -->
+  <rect x="345" y="290" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#f43f5e" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.9s" repeatCount="indefinite"/>
+  </rect>
+  <text x="370" y="325" font-family="monospace, sans-serif" font-size="14" fill="#f43f5e" font-weight="700">🔖 DESIGN TOKENS</text>
+  <text x="370" y="350" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">70+ token categories</text>
+  <text x="370" y="368" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">CSS variables export</text>
+  <text x="370" y="386" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Tailwind config generation</text>
+
+  <!-- Card 9: Typography -->
+  <rect x="680" y="290" width="310" height="120" rx="16" fill="url(#cardBg)" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.3">
+    <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="705" y="325" font-family="monospace, sans-serif" font-size="14" fill="#06b6d4" font-weight="700">🔤 TYPOGRAPHY ENGINE</text>
+  <text x="705" y="350" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Modular type scales</text>
+  <text x="705" y="368" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Google Fonts pairings</text>
+  <text x="705" y="386" font-family="monospace, sans-serif" font-size="11" fill="#94a3b8">Golden ratio & perfect fourth</text>
+</svg>
+
+</div>
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    ANIMATED DATA COVERAGE                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Bar%20Chart.png" width="28">
+  <b>DATA COVERAGE v2.1</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Bar%20Chart.png" width="28">
+</h3>
+
+<svg width="100%" height="340" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f5ff"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+    <filter id="barGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="340" rx="20" fill="#0a0a0f" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-family="monospace, sans-serif" font-size="16" fill="#e2e8f0" font-weight="700" letter-spacing="4">DATABASE COVERAGE</text>
+  <line x1="350" y1="45" x2="550" y2="45" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+
+  <!-- Product Types: 70+ -->
+  <text x="30" y="82" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Product Types</text>
+  <rect x="220" y="70" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="70" width="600" height="18" rx="9" fill="url(#barGrad)" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;600" dur="2s" begin="0.2s" fill="freeze"/>
+  </rect>
+  <text x="840" y="84" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">70+</text>
+
+  <!-- UI Styles: 46+ -->
+  <text x="30" y="122" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">UI Styles</text>
+  <rect x="220" y="110" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="110" width="395" height="18" rx="9" fill="url(#barGrad)" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;395" dur="2s" begin="0.4s" fill="freeze"/>
+  </rect>
+  <text x="630" y="124" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">46+</text>
+
+  <!-- Color Palettes: 80+ -->
+  <text x="30" y="162" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Color Palettes</text>
+  <rect x="220" y="150" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="150" width="600" height="18" rx="9" fill="url(#barGrad)" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;600" dur="2s" begin="0.6s" fill="freeze"/>
+  </rect>
+  <text x="840" y="164" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">80+</text>
+
+  <!-- Font Pairings: 75+ -->
+  <text x="30" y="202" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Font Pairings</text>
+  <rect x="220" y="190" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="190" width="562" height="18" rx="9" fill="url(#barGrad)" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;562" dur="2s" begin="0.8s" fill="freeze"/>
+  </rect>
+  <text x="802" y="204" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">75+</text>
+
+  <!-- Synonym Groups: 120+ -->
+  <text x="30" y="242" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Synonym Groups</text>
+  <rect x="220" y="230" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="230" width="600" height="18" rx="9" fill="url(#barGrad)" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;600" dur="2s" begin="1s" fill="freeze"/>
+  </rect>
+  <text x="840" y="244" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">120+</text>
+
+  <!-- Toolbox Scripts: 17 -->
+  <text x="30" y="282" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Toolbox Scripts</text>
+  <rect x="220" y="270" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="270" width="145" height="18" rx="9" fill="#f97316" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;145" dur="2s" begin="1.2s" fill="freeze"/>
+  </rect>
+  <text x="385" y="284" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">17</text>
+
+  <!-- Components: 12 -->
+  <text x="30" y="322" font-family="monospace, sans-serif" font-size="12" fill="#94a3b8">Components</text>
+  <rect x="220" y="310" width="600" height="18" rx="9" fill="#1e293b"/>
+  <rect x="220" y="310" width="102" height="18" rx="9" fill="#22d3ee" filter="url(#barGlow)">
+    <animate attributeName="width" values="0;102" dur="2s" begin="1.4s" fill="freeze"/>
+  </rect>
+  <text x="342" y="324" font-family="monospace, sans-serif" font-size="12" fill="#e2e8f0" font-weight="700">12</text>
+</svg>
+
+</div>
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    THE 17 TOOLS TABLE                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Toolbox.png" width="28">
+  <b>THE 17 TOOLBOX SCRIPTS</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Toolbox.png" width="28">
+</h3>
+
+</div>
+
+| # | Script | What It Does | Quick Command |
+|---|--------|-------------|---------------|
+| 01 | `search.py` | BM25 design search across 10 domains | `python3 scripts/search.py "saas" --design-system` |
+| 02 | `svg_generator.py` | 70+ SVG icons, 6 patterns, logos | `python3 scripts/svg_generator.py --icon search --size 24` |
+| 03 | `css_generator.py` | Shadows, gradients, glass, glow, UI kit | `python3 scripts/css_generator.py --ui-kit --primary #2563EB` |
+| 04 | `palette_generator.py` | Harmony palettes, shade scales, WCAG | `python3 scripts/palette_generator.py "#2563EB" --harmony triadic` |
+| 05 | `typography_generator.py` | Modular type scales + font pairings | `python3 scripts/typography_generator.py --scale golden-ratio` |
+| 06 | `theme_exporter.py` | Export theme → CSS/Tailwind/SCSS/JSON | `python3 scripts/theme_exporter.py "#2563EB" --format all` |
+| 07 | `component_generator.py` | 12 ready components from database | `python3 scripts/component_generator.py --component navbar` |
+| 08 | `page_builder.py` | Compose full HTML landing pages | `python3 scripts/page_builder.py --sections navbar,hero,features,pricing,cta,footer` |
+| 09 | `layout_generator.py` | Grids, containers, spacing, breakpoints | `python3 scripts/layout_generator.py --layout dashboard` |
+| 10 | `animation_generator.py` | 12 animations with parameters + kit | `python3 scripts/animation_generator.py --type bounce --duration 0.6` |
+| 11 | `chart_generator.py` | Chart.js & Recharts configs (8 types) | `python3 scripts/chart_generator.py --chart bar --labels "Q1,Q2"` |
+| 12 | `pattern_generator.py` | 12 CSS background patterns | `python3 scripts/pattern_generator.py checkerboard --color #2563EB` |
+| 13 | `favicon_generator.py` | Favicon SVG + HTML head + PWA manifest | `python3 scripts/favicon_generator.py --text CR --bg #2563EB` |
+| 14 | `copy_generator.py` | Headlines, CTAs, placeholders, A/B | `python3 scripts/copy_generator.py --headline saas --count 3` |
+| 15 | `mockup_generator.py` | ASCII wireframes (desktop, mobile, etc) | `python3 scripts/mockup_generator.py --type dashboard` |
+| 16 | `social_specs.py` | Social media dimension cheat sheets | `python3 scripts/social_specs.py --platform instagram` |
+| 17 | `accessibility_audit.py` | WCAG audit of HTML files | `python3 scripts/accessibility_audit.py index.html` |
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    VERSION COMPARISON TABLE                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="28">
+  <b>EVOLUTION: v1.x → v2.0 → v2.1</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="28">
+</h3>
+
+</div>
+
+| Category | v1.x | v2.0 | **v2.1** |
+|----------|------|------|----------|
+| Product Types | 51 | 70+ | **70+** |
+| UI Styles | 31 | 46+ | **46+** |
+| Color Palettes | 61 | 80+ | **80+** |
+| Font Pairings | 61 | 75+ | **75+** |
+| Synonym Groups | 34 | 120+ | **120+** |
+| Toolbox Scripts | ❌ | 9 | **17** |
+| Components | — | — | **12 generated** |
+| Layout Templates | — | — | **5** |
+| Chart Types | — | — | **8 + 2 frameworks** |
+| Background Patterns | — | — | **12 CSS** |
+| SVG Icons | — | — | **70+** |
+| WCAG Audit | ❌ | — | **Built-in tool** |
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    INSTALLATION SECTION                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="28">
+  <b>INSTALLATION</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="28">
+</h3>
+
+</div>
+
+### Option 1: Direct Clone
+
+```bash
+git clone https://github.com/CyebRageAnonymuos/ui-ux-cr.git
+cd ui-ux-cr
+```
+
+### Option 2: As an OpenCode / Claude Skill
+
+```bash
+mkdir -p .opencode/skills/ui-ux-cr
+cp -r ui-ux-cr/scripts .opencode/skills/ui-ux-cr/
+cp -r ui-ux-cr/data .opencode/skills/ui-ux-cr/
+cp ui-ux-cr/SKILL.md .opencode/skills/ui-ux-cr/
+```
+
+### Prerequisites
+
+```bash
+python3 --version   # Requires Python 3.8+
+```
+
+> **No pip install. No dependencies. No API keys.** Just pure Python.
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    USAGE SECTION                               -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Keyboard.png" width="28">
+  <b>USAGE</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Keyboard.png" width="28">
+</h3>
+
+</div>
+
+### Primary Feature: Generate a Complete Design System
 
 ```bash
 python3 scripts/search.py "SaaS landing page modern" --design-system -p "My SaaS"
 ```
 
-**You get:**
-- ✨ Pattern & Style recommendations
-- 🎨 Colors + extended palette with WCAG contrast
-- 🔤 Typography (with Google Fonts links)
-- 🎭 Effects (glassmorphism, neumorphism, etc.)
-- 🧩 Components with ready-to-use code
-- 💫 Animations with CSS snippets
-- 📱 Responsive patterns
-- ⚠️ Anti-patterns to avoid
-- ✅ Pre-delivery checklist
+**Output includes:**
+- Pattern & style recommendations
+- Color palette + extended palette
+- Typography with Google Fonts links
+- Effects & components with code
+- Animations with CSS
+- Responsive patterns & anti-patterns
+- Pre-delivery checklist
 
-### 🎯 Advanced Flags
+### Advanced Search Flags
 
 ```bash
 # WCAG contrast analysis
@@ -511,23 +579,69 @@ python3 scripts/search.py "healthcare" --color-palette
 # Multi-domain analysis
 python3 scripts/search.py "modern dark" --multi-domains style,color,typography
 
-# Persist design system for reuse
+# Save design system for reuse
 python3 scripts/search.py "ecommerce" --design-system --persist -p "MyShop"
 ```
 
-### 📤 Output Formats
+### Output Formats
 
 ```bash
 python3 scripts/search.py "fintech" --design-system              # ASCII (terminal)
 python3 scripts/search.py "fintech" --design-system -f markdown  # Markdown docs
-python3 scripts/search.py "glassmorphism" --domain style --json  # JSON
+python3 scripts/search.py "glassmorphism" --domain style --json   # JSON API
 ```
+
+<br>
 
 ---
 
-## 🗂 AVAILABLE DOMAINS & STACKS
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    REALISTIC WORKFLOW                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
-### 🔍 Domains
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Stopwatch.png" width="28">
+  <b>REALISTIC WORKFLOW: 60 SECONDS</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Stopwatch.png" width="28">
+</h3>
+
+</div>
+
+```bash
+# 1. Build a full landing page for a Micro SaaS
+python3 scripts/page_builder.py --product "Micro SaaS"   --sections navbar,hero,features,pricing,cta,footer   --out landing.html
+
+# 2. Replace emoji placeholders with real SVG icons
+python3 scripts/svg_generator.py --icon check --color "#10B981" --size 24
+
+# 3. Add a complete animation kit
+python3 scripts/animation_generator.py --kit
+
+# 4. Audit the page for accessibility
+python3 scripts/accessibility_audit.py landing.html
+```
+
+<br>
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    DOMAINS & STACKS                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Books.png" width="28">
+  <b>AVAILABLE DOMAINS & STACKS</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Books.png" width="28">
+</h3>
+
+</div>
+
+### Domains
 
 | Domain | Use For | Example Keywords |
 |--------|---------|------------------|
@@ -546,70 +660,59 @@ python3 scripts/search.py "glassmorphism" --domain style --json  # JSON
 | `react` | React/Next.js performance | memo, suspense, bundle |
 | `web` | Web interface guidelines | aria, focus, keyboard |
 
-### 🛠 Stacks
+### Supported Stacks
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" width="100%">
-  <rect width="1200" height="100" fill="#0A0A0F" rx="10"/>
-  <g font-family="Courier New, monospace">
-    <!-- Animated marquee -->
-    <g>
-      <text y="60" font-size="16" fill="#22D3EE">html-tailwind</text>
-      <text y="60" font-size="16" fill="#F97316" dx="180">react</text>
-      <text y="60" font-size="16" fill="#A78BFA" dx="280">nextjs</text>
-      <text y="60" font-size="16" fill="#10B981" dx="400">vue</text>
-      <text y="60" font-size="16" fill="#FF006E" dx="490">nuxtjs</text>
-      <text y="60" font-size="16" fill="#22D3EE" dx="610">svelte</text>
-      <text y="60" font-size="16" fill="#F97316" dx="730">swiftui</text>
-      <text y="60" font-size="16" fill="#A78BFA" dx="860">react-native</text>
-      <text y="60" font-size="16" fill="#10B981" dx="1040">flutter</text>
-    </g>
-  </g>
-</svg>
-
-**Available:** `html-tailwind` · `react` · `nextjs` · `vue` · `nuxtjs` · `svelte` · `swiftui` · `react-native` · `flutter` · `shadcn` · `jetpack-compose` · `angular` · `laravel` · `threejs` · `astro` · `nuxt-ui`
-
----
-
-## 🎯 EXAMPLES
-
-### 📊 Example 1 — SaaS Landing Page (End-to-End)
-
-```bash
-# 1. Design system
-python3 scripts/search.py "SaaS landing page modern" --design-system -p "My SaaS"
-
-# 2. Full page
-python3 scripts/page_builder.py --product "SaaS (General)" \
-  --sections navbar,hero,features,pricing,cta,footer \
-  --out landing.html
-
-# 3. Custom CSS kit + icons
-python3 scripts/css_generator.py --ui-kit --primary #2563EB --cta #F97316
-python3 scripts/svg_generator.py --icon check --size 24
-
-# 4. Accessibility audit
-python3 scripts/accessibility_audit.py landing.html
+```
+html-tailwind (default) · react · nextjs · vue · nuxtjs · svelte
+swiftui · react-native · flutter · shadcn · jetpack-compose · angular
+laravel · threejs · astro · nuxt-ui
 ```
 
-**Recommended:** Glassmorphism + Flat · Trust blue `#2563EB` + orange CTA `#F97316` · Poppins + Inter
+<br>
 
 ---
 
-### 🏥 Example 2 — Healthcare Dashboard
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    EXAMPLES SECTION                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Light%20Bulb.png" width="28">
+  <b>EXAMPLES</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Light%20Bulb.png" width="28">
+</h3>
+
+</div>
+
+### Example 1: SaaS Landing Page — Built End to End
+
+```bash
+# Design system
+python3 scripts/search.py "SaaS landing page modern" --design-system -p "My SaaS"
+
+# Full page
+python3 scripts/page_builder.py --product "SaaS (General)"   --sections navbar,hero,features,pricing,cta,footer   --out landing.html
+
+# Custom CSS kit + icons
+python3 scripts/css_generator.py --ui-kit --primary #2563EB --cta #F97316
+python3 scripts/svg_generator.py --icon check --size 24
+```
+
+> **Recommended:** Glassmorphism + Flat · Trust blue `#2563EB` + orange CTA `#F97316` · Poppins + Inter
+
+### Example 2: Healthcare Dashboard
 
 ```bash
 python3 scripts/search.py "healthcare dashboard" --design-system -p "Health App"
 python3 scripts/layout_generator.py --layout dashboard
-python3 scripts/chart_generator.py --chart line \
-  --labels "Mon,Tue,Wed,Thu,Fri" \
-  --data "120,180,150,220,190"
+python3 scripts/chart_generator.py --chart line   --labels "Mon,Tue,Wed,Thu,Fri"   --data "120,180,150,220,190"
 ```
 
-**Recommended:** Dark Mode (OLED) · `#0F172A` bg + health green `#22C55E` · Merriweather + Open Sans
+> **Recommended:** Dark Mode (OLED) · `#0F172A` bg + health green `#22C55E` · Merriweather + Open Sans
 
----
-
-### 💎 Example 3 — Luxury E-commerce
+### Example 3: E-commerce Luxury Store
 
 ```bash
 python3 scripts/search.py "ecommerce luxury" --design-system -p "Luxury Shop"
@@ -617,220 +720,94 @@ python3 scripts/component_generator.py --component card --product "E-commerce"
 python3 scripts/palette_generator.py "#1C1917" --harmony tetradic --check-wcag
 ```
 
-**Recommended:** Liquid Glass + Glassmorphism · Premium dark + gold `#CA8A04` · Cormorant Garamond + Montserrat
+> **Recommended:** Liquid Glass + Glassmorphism · Premium dark + gold `#CA8A04` · Cormorant Garamond + Montserrat
+
+<br>
 
 ---
 
-## 📊 DATA COVERAGE
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%">
-  <defs>
-    <linearGradient id="barGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF006E"/>
-      <stop offset="100%" stop-color="#F97316"/>
-    </linearGradient>
-    <linearGradient id="barGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22D3EE"/>
-      <stop offset="100%" stop-color="#60A5FA"/>
-    </linearGradient>
-    <linearGradient id="barGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#A78BFA"/>
-      <stop offset="100%" stop-color="#C084FC"/>
-    </linearGradient>
-    <linearGradient id="barGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#34D399"/>
-    </linearGradient>
-    <linearGradient id="barGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FBBF24"/>
-      <stop offset="100%" stop-color="#F59E0B"/>
-    </linearGradient>
-    <linearGradient id="barGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#F43F5E"/>
-      <stop offset="100%" stop-color="#E11D48"/>
-    </linearGradient>
-  </defs>
-  
-  <rect width="1200" height="400" fill="#0A0A0F" rx="10"/>
-  
-  <text x="600" y="40" text-anchor="middle" font-family="Courier New, monospace" font-size="22" font-weight="900" fill="#22D3EE" letter-spacing="4">DATA COVERAGE v2.1</text>
-  
-  <!-- Bar 1 -->
-  <text x="100" y="100" font-family="Courier New, monospace" font-size="14" fill="#94A3B8">Product Types</text>
-  <rect x="100" y="110" width="0" height="30" rx="6" fill="url(#barGrad1)">
-    <animate attributeName="width" from="0" to="700" dur="1.5s" fill="freeze"/>
-  </rect>
-  <text x="820" y="130" font-family="Courier New, monospace" font-size="16" fill="#FF006E" font-weight="900">70+</text>
-  
-  <!-- Bar 2 -->
-  <text x="100" y="170" font-family="Courier New, monospace" font-size="14" fill="#94A3B8">UI Styles</text>
-  <rect x="100" y="180" width="0" height="30" rx="6" fill="url(#barGrad2)">
-    <animate attributeName="width" from="0" to="460" dur="1.5s" fill="freeze"/>
-  </rect>
-  <text x="580" y="200" font-family="Courier New, monospace" font-size="16" fill="#22D3EE" font-weight="900">46+</text>
-  
-  <!-- Bar 3 -->
-  <text x="100" y="240" font-family="Courier New, monospace" font-size="14" fill="#94A3B8">Color Palettes</text>
-  <rect x="100" y="250" width="0" height="30" rx="6" fill="url(#barGrad3)">
-    <animate attributeName="width" from="0" to="800" dur="1.5s" fill="freeze"/>
-  </rect>
-  <text x="920" y="270" font-family="Courier New, monospace" font-size="16" fill="#A78BFA" font-weight="900">80+</text>
-  
-  <!-- Bar 4 -->
-  <text x="100" y="310" font-family="Courier New, monospace" font-size="14" fill="#94A3B8">Font Pairings</text>
-  <rect x="100" y="320" width="0" height="30" rx="6" fill="url(#barGrad4)">
-    <animate attributeName="width" from="0" to="750" dur="1.5s" fill="freeze"/>
-  </rect>
-  <text x="870" y="340" font-family="Courier New, monospace" font-size="16" fill="#10B981" font-weight="900">75+</text>
-  
-  <!-- Bar 5 -->
-  <text x="100" y="380" font-family="Courier New, monospace" font-size="14" fill="#94A3B8">Synonym Groups</text>
-  <rect x="100" y="390" width="0" height="30" rx="6" fill="url(#barGrad5)">
-    <animate attributeName="width" from="0" to="1000" dur="1.5s" fill="freeze"/>
-  </rect>
-  <text x="1120" y="410" font-family="Courier New, monospace" font-size="16" fill="#FBBF24" font-weight="900">120+</text>
-</svg>
-
-| Category | v1.x | v2.0 | v2.1 |
-|----------|------|------|------|
-| Product Types | 51 | 70+ | **70+** |
-| UI Styles | 31 | 46+ | **46+** |
-| Color Palettes | 61 | 80+ | **80+** |
-| Font Pairings | 61 | 75+ | **75+** |
-| Synonym Groups | 34 | 120+ | **120+** |
-| Toolbox Scripts | ✗ | 9 | **17** |
-| Components | — | — | **12 generated** |
-| Layout Templates | — | — | **5** |
-| Chart Types | — | — | **8 + 2 frameworks** |
-| Background Patterns | — | — | **12 CSS** |
-| SVG Icons | — | — | **70+** |
-| WCAG Audit | ✗ | — | **Built-in tool** |
-
----
-
-## ✅ PRE-DELIVERY CHECKLIST
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    PRE-DELIVERY CHECKLIST                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
 <div align="center">
 
-### 🎯 Ship with Confidence
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Clipboard.png" width="28">
+  <b>PRE-DELIVERY CHECKLIST</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Clipboard.png" width="28">
+</h3>
 
 </div>
 
-```markdown
-- [ ] No emojis as icons — use `svg_generator.py`
-- [ ] `cursor-pointer` on every clickable element
-- [ ] Hover states 150–300 ms, zero layout shift
-- [ ] Contrast ≥ 4.5:1 — verify with `accessibility_audit.py`
-- [ ] All images have meaningful `alt` text
-- [ ] Form inputs have associated labels
-- [ ] `prefers-reduced-motion` is respected
-- [ ] Tested at 375 / 768 / 1024 / 1440 px
-- [ ] Loading, error, and empty states designed
-- [ ] Dark mode tested
 ```
+☐ No emojis as icons — use svg_generator.py
+☐ cursor-pointer on all clickable elements
+☐ Hover states 150-300ms, no layout shift
+☐ Contrast 4.5:1 minimum — verify with accessibility_audit.py
+☐ All images have alt text
+☐ Form inputs have labels
+☐ prefers-reduced-motion respected
+☐ Responsive at 375 / 768 / 1024 / 1440px
+☐ Loading, error, and empty states designed
+☐ Dark mode tested
+```
+
+<br>
 
 ---
 
-## 🤝 CONTRIBUTING
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    CONTRIBUTING & LICENSE                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
 <div align="center">
 
-### 💡 Join the Cyber-Rage Revolution
+<h3>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" width="28">
+  <b>CONTRIBUTING</b>
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" width="28">
+</h3>
 
 </div>
 
-```mermaid
-graph LR
-    A[Fork the repo] --> B[Create your branch]
-    B --> C[Commit your changes]
-    C --> D[Push to the branch]
-    D --> E[Open a Pull Request]
-    E --> F[🚀 Merged!]
-```
-
-1. Fork the repository
+1. **Fork** the repository
 2. Create your branch: `git checkout -b feature/AmazingFeature`
 3. Commit: `git commit -m 'Add some AmazingFeature'`
-4. Push and open a Pull Request
-
----
-
-## 📄 LICENSE
+4. Push and open a **Pull Request**
 
 <div align="center">
 
-**MIT License** — See [LICENSE](LICENSE) for details.
-
-</div>
-
 ---
 
-<div align="center">
+## License
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" width="100%">
+**MIT** — see [LICENSE](LICENSE) for details.
+
+<br>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    FOOTER ANIMATION                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<svg width="100%" height="100" viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF006E">
-        <animate attributeName="stop-color" values="#FF006E;#22D3EE;#A78BFA;#FF006E" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="100%" stop-color="#F97316">
-        <animate attributeName="stop-color" values="#F97316;#A78BFA;#22D3EE;#F97316" dur="4s" repeatCount="indefinite"/>
-      </stop>
+      <stop offset="0%" stop-color="#00f5ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00f5ff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/>
     </linearGradient>
-    <filter id="footerGlow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
-  
-  <rect width="1200" height="200" fill="#0A0A0F" rx="10"/>
-  
-  <g filter="url(#footerGlow)">
-    <text x="600" y="80" text-anchor="middle" font-family="Courier New, monospace" font-size="24" font-weight="900" fill="url(#footerGrad)" letter-spacing="6">
-      BUILT WITH CYBER-RAGE ⚡
-    </text>
-  </g>
-  
-  <text x="600" y="120" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#64748B">
-    Making AI-powered design accessible to everyone
+  <line x1="100" y1="50" x2="1100" y2="50" stroke="url(#footerGrad)" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3s" repeatCount="indefinite"/>
+  </line>
+  <text x="600" y="75" text-anchor="middle" font-family="monospace, sans-serif" font-size="12" fill="#475569" letter-spacing="8">
+    CYBER-RAGE DESIGN INTELLIGENCE ENGINE
+    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite"/>
   </text>
-  
-  <text x="600" y="160" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#94A3B8">
-    GitHub: CyebRageAnonymuos/ui-ux-cr
+  <text x="600" y="92" text-anchor="middle" font-family="monospace, sans-serif" font-size="10" fill="#334155" letter-spacing="4">
+    BUILT WITH PURE PYTHON · ZERO DEPENDENCIES · OFFLINE FIRST
   </text>
 </svg>
-
-<p align="center">
-  <a href="https://github.com/CyebRageAnonymuos/ui-ux-cr">
-    <img src="https://img.shields.io/github/stars/CyebRageAnonymuos/ui-ux-cr?style=for-the-badge&logo=github&label=Stars&color=FF006E&labelColor=0A0A0F" alt="Stars"/>
-  </a>
-  <a href="https://github.com/CyebRageAnonymuos/ui-ux-cr">
-    <img src="https://img.shields.io/github/forks/CyebRageAnonymuos/ui-ux-cr?style=for-the-badge&logo=github&label=Forks&color=22D3EE&labelColor=0A0A0F" alt="Forks"/>
-  </a>
-  <a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/issues">
-    <img src="https://img.shields.io/github/issues/CyebRageAnonymuos/ui-ux-cr?style=for-the-badge&logo=github&label=Issues&color=A78BFA&labelColor=0A0A0F" alt="Issues"/>
-  </a>
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=CyebRageAnonymuos&label=Profile%20views&color=22D3EE&style=for-the-badge" alt="views"/>
-</p>
-
-</div>
-
----
-
-<div align="center">
-
-### 🎮 **Ready to level up your design game?** 🎮
-
-**Star ⭐ this repo and start building!**
-
-```bash
-git clone https://github.com/CyebRageAnonymuos/ui-ux-cr.git && cd ui-ux-cr
-```
 
 </div>
