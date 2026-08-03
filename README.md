@@ -22,19 +22,7 @@
 
 ---
 
-## 🎬 Live Demo — watch it build
-
-<kbd>
-  <img src="assets/hero-banner.gif" alt="Animated hero banner" width="100%">
-</kbd>
-
-> **This is a real animated GIF.** It plays on GitHub, on mobile, everywhere. (Pillow-generated frames, 36fps loop.)
-
----
-
 ## 🧩 17 Tools at Your Fingertips
-
-<img src="assets/tools-grid.gif" alt="17 toolbox scripts animated grid" width="100%">
 
 | # | Script | What it does | Quick example |
 |---|--------|--------------|---------------|
@@ -75,9 +63,7 @@ python3 scripts/accessibility_audit.py landing.html
 
 ---
 
-## 📊 Database, in motion
-
-<img src="assets/stats-bars.gif" alt="Data coverage animated bars" width="100%">
+## 📊 Database coverage
 
 ### Data coverage v2.1
 
