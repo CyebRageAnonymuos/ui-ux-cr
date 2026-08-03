@@ -112,6 +112,29 @@ python3 scripts/search.py "ecommerce luxury" --export-tailwind
 python3 scripts/search.py "healthcare" --color-palette
 ```
 
+### Step 3: Generate with Toolbox Scripts (v2.1)
+
+After getting the design system, generate ready-to-use assets with the toolbox:
+
+| Tool | Purpose | Example |
+|------|---------|---------|
+| `svg_generator.py` | SVG icons, patterns, logos | `python3 scripts/svg_generator.py --icon search --size 24` |
+| `css_generator.py` | Shadows, gradients, glass, glow, UI kit, neumorphism | `python3 scripts/css_generator.py --ui-kit --primary #2563EB` |
+| `theme_exporter.py` | Export theme to CSS/Tailwind/SCSS/JSON | `python3 scripts/theme_exporter.py "#2563EB" --format all` |
+| `layout_generator.py` | Grid systems, containers, spacing, breakpoints, layout templates | `python3 scripts/layout_generator.py --layout dashboard` |
+| `component_generator.py` | Ready HTML/Tailwind components from database | `python3 scripts/component_generator.py --component navbar --product "SaaS (General)"` |
+| `animation_generator.py` | CSS animations with parameters + full animation kit | `python3 scripts/animation_generator.py --type bounce --duration 0.6` |
+| `mockup_generator.py` | ASCII wireframes (desktop, dashboard, mobile, landing, login) | `python3 scripts/mockup_generator.py --type dashboard` |
+| `chart_generator.py` | Chart.js & Recharts configs (line, bar, pie, area, radar...) | `python3 scripts/chart_generator.py --chart bar --labels "Q1,Q2" --data "25,40"` |
+| `accessibility_audit.py` | WCAG audit of HTML files (contrast, alt, labels, headings) | `python3 scripts/accessibility_audit.py index.html` |
+
+**Toolbox Workflow:**
+1. `component_generator.py --component hero --product "SaaS (General)"` → get HTML + CSS variables
+2. `svg_generator.py --icon check` → get SVG icon to replace emoji placeholders
+3. `css_generator.py --ui-kit` → get complete button/card/input/badge CSS kit
+4. `animation_generator.py --kit` → get transitions, micro-interactions, loaders
+5. `accessibility_audit.py` → verify the final HTML passes WCAG checks
+
 ### Step 3: Supplement with Detailed Searches (as needed)
 
 After getting the design system, use domain searches to get additional details:
@@ -253,6 +276,14 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 | Code Generation | ✗ | **Auto-generated** |
 | Color Blind Simulation | ✗ | **3 types** |
 | CSS/Tailwind Export | ✗ | **Supported** |
+| SVG Icon/Pattern Generator | ✗ | **New tool** |
+| CSS Utility Generator | ✗ | **New tool** |
+| Component Code Generator | ✗ | **12 components** |
+| Layout/Grid Generator | ✗ | **5 templates** |
+| Animation Generator | ✗ | **12 animations + kit** |
+| ASCII Mockup Generator | ✗ | **5 layouts** |
+| Chart Config Generator | ✗ | **Chart.js + Recharts** |
+| Accessibility Auditor | ✗ | **WCAG audit tool** |
 
 ## Key Features v2.0
 
