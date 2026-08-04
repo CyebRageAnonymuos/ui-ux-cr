@@ -20,6 +20,29 @@ If this saves you a design pass, a ⭐ helps a lot.
 
 <div align="center">
 
+<svg width="820" height="280" viewBox="0 0 820 280" xmlns="http://www.w3.org/2000/svg">
+  <rect width="820" height="280" rx="14" fill="#0B1120"/>
+  <rect width="820" height="36" rx="14" fill="#161B26"/>
+  <rect y="22" width="820" height="14" fill="#161B26"/>
+  <circle cx="24" cy="18" r="6" fill="#F87171"/>
+  <circle cx="46" cy="18" r="6" fill="#FBBF24"/>
+  <circle cx="68" cy="18" r="6" fill="#34D399"/>
+  <text x="410" y="23" text-anchor="middle" fill="#64748B" font-size="11" font-family="monospace">search.py</text>
+  <text x="24" y="70" font-family="monospace" font-size="13" fill="#22D3EE" opacity="0">$ python3 scripts/search.py "saas dashboard" --design-system<animate attributeName="opacity" values="0;0;1" dur="0.6s" begin="0.2s" fill="freeze"/></text>
+  <text x="24" y="106" font-family="monospace" font-size="12.5" fill="#94A3B8" opacity="0">→ searching 10 domains in parallel...<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.0s" fill="freeze"/></text>
+  <text x="24" y="134" font-family="monospace" font-size="12.5" fill="#FDBA74" opacity="0">✓ style        Glassmorphism + Flat<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.5s" fill="freeze"/></text>
+  <text x="24" y="160" font-family="monospace" font-size="12.5" fill="#67E8F9" opacity="0">✓ colors       #2563EB · #F97316<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.9s" fill="freeze"/></text>
+  <text x="24" y="186" font-family="monospace" font-size="12.5" fill="#A7F3D0" opacity="0">✓ typography   Poppins + Inter<animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.3s" fill="freeze"/></text>
+  <text x="24" y="212" font-family="monospace" font-size="12.5" fill="#C4B5FD" opacity="0">✓ wcag         AA contrast passed<animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.7s" fill="freeze"/></text>
+  <text x="24" y="246" font-family="monospace" font-size="13" fill="#34D399" opacity="0">✓ design system ready — 8 sections generated<animate attributeName="opacity" values="0;1" dur="0.5s" begin="3.2s" fill="freeze"/></text>
+</svg>
+
+</div>
+
+<br/>
+
+<div align="center">
+
 <svg width="820" height="140" viewBox="0 0 820 140" xmlns="http://www.w3.org/2000/svg">
   <rect width="820" height="140" rx="14" fill="#0F172A"/>
   <defs>
@@ -141,9 +164,104 @@ This mirrors the exact workflow defined in the skill's own instructions (`SKILL.
 | **Accessibility Auditor** | Standalone WCAG audit — contrast, alt text, labels, heading order |
 | **Master + Overrides Persistence** | `--persist` keeps one project-wide design source of truth with per-page overrides |
 
+<div align="center">
+
+<svg width="820" height="180" viewBox="0 0 820 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="820" height="180" rx="14" fill="#0F172A"/>
+  <text x="24" y="30" fill="#E2E8F0" font-size="14" font-weight="700">6 Color Harmony Types</text>
+  <g>
+    <circle cx="90" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="90" cy="64" r="9" fill="#F97316"><animate attributeName="r" values="7;10;7" dur="2.4s" repeatCount="indefinite"/></circle>
+    <circle cx="90" cy="116" r="9" fill="#22D3EE"><animate attributeName="r" values="7;10;7" dur="2.4s" begin="0.2s" repeatCount="indefinite"/></circle>
+    <text x="90" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Complementary</text>
+  </g>
+  <g>
+    <circle cx="215" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="205" cy="66" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.1s" repeatCount="indefinite"/></circle>
+    <circle cx="230" cy="72" r="8" fill="#FB923C"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></circle>
+    <circle cx="238" cy="98" r="8" fill="#FBBF24"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.5s" repeatCount="indefinite"/></circle>
+    <text x="215" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Analogous</text>
+  </g>
+  <g>
+    <circle cx="340" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="340" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+    <circle cx="318" cy="103" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.4s" repeatCount="indefinite"/></circle>
+    <circle cx="362" cy="103" r="8" fill="#A78BFA"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.8s" repeatCount="indefinite"/></circle>
+    <text x="340" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Triadic</text>
+  </g>
+  <g>
+    <circle cx="465" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="465" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.1s" repeatCount="indefinite"/></circle>
+    <circle cx="440" cy="108" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.5s" repeatCount="indefinite"/></circle>
+    <circle cx="490" cy="108" r="8" fill="#38BDF8"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></circle>
+    <text x="465" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Split-Comp.</text>
+  </g>
+  <g>
+    <circle cx="590" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="590" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+    <circle cx="616" cy="90" r="8" fill="#FBBF24"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></circle>
+    <circle cx="590" cy="116" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></circle>
+    <circle cx="564" cy="90" r="8" fill="#818CF8"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></circle>
+    <text x="590" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Tetradic</text>
+  </g>
+  <g>
+    <circle cx="715" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="715" cy="72" r="7" fill="#9A3412"><animate attributeName="r" values="5;8;5" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+    <circle cx="715" cy="90" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.2s" repeatCount="indefinite"/></circle>
+    <circle cx="715" cy="108" r="9" fill="#FDBA74"><animate attributeName="r" values="7;10;7" dur="2.4s" begin="0.4s" repeatCount="indefinite"/></circle>
+    <text x="715" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Monochromatic</text>
+  </g>
+</svg>
+
+</div>
+
 <br/>
 
 ## The Toolbox
+
+<div align="center">
+
+<svg width="820" height="110" viewBox="0 0 820 110" xmlns="http://www.w3.org/2000/svg">
+  <rect width="820" height="110" rx="14" fill="#0F172A"/>
+  <text x="18" y="26" fill="#E2E8F0" font-size="13" font-weight="700">17 Toolbox Scripts — one wave, one system</text>
+  <rect x="18" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.00s" repeatCount="indefinite"/></rect>
+  <text x="38.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">01</text>
+  <rect x="65" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.10s" repeatCount="indefinite"/></rect>
+  <text x="85.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">02</text>
+  <rect x="112" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.20s" repeatCount="indefinite"/></rect>
+  <text x="132.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">03</text>
+  <rect x="159" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.30s" repeatCount="indefinite"/></rect>
+  <text x="179.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">04</text>
+  <rect x="206" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.40s" repeatCount="indefinite"/></rect>
+  <text x="226.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">05</text>
+  <rect x="253" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.50s" repeatCount="indefinite"/></rect>
+  <text x="273.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">06</text>
+  <rect x="300" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.60s" repeatCount="indefinite"/></rect>
+  <text x="320.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">07</text>
+  <rect x="347" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.70s" repeatCount="indefinite"/></rect>
+  <text x="367.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">08</text>
+  <rect x="394" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.80s" repeatCount="indefinite"/></rect>
+  <text x="414.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">09</text>
+  <rect x="441" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.90s" repeatCount="indefinite"/></rect>
+  <text x="461.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">10</text>
+  <rect x="488" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.00s" repeatCount="indefinite"/></rect>
+  <text x="508.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">11</text>
+  <rect x="535" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.10s" repeatCount="indefinite"/></rect>
+  <text x="555.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">12</text>
+  <rect x="582" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.20s" repeatCount="indefinite"/></rect>
+  <text x="602.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">13</text>
+  <rect x="629" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.30s" repeatCount="indefinite"/></rect>
+  <text x="649.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">14</text>
+  <rect x="676" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.40s" repeatCount="indefinite"/></rect>
+  <text x="696.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">15</text>
+  <rect x="723" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.50s" repeatCount="indefinite"/></rect>
+  <text x="743.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">16</text>
+  <rect x="770" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.60s" repeatCount="indefinite"/></rect>
+  <text x="790.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">17</text>
+  <text x="18" y="98" fill="#64748B" font-size="9" font-family="monospace">search · svg · css · palette · type · theme · component · page · layout · anim · chart · pattern · favicon · copy · mockup · social · a11y</text>
+</svg>
+
+</div>
 
 17 standalone scripts — each one works alone, or feeds into `search.py`'s recommendations.
 
