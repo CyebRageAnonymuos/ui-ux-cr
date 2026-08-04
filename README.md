@@ -1,595 +1,1122 @@
-![UI UX CR](https://capsule-render.vercel.app/api?type=waving&color=0:F97316,100:22D3EE&height=210&section=header&text=UI%20UX%20CR&fontSize=52&fontColor=0F172A&animation=fadeIn&fontAlignY=35&desc=Cyber-Rage%20Design%20Intelligence%20Engine&descAlignY=58&descSize=18&descColor=0F172A)
+<style>
+/* GLOBAL ANIMATIONS */
+@keyframes pulse-glow {
+  0%, 100% { text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41, 0 0 15px #00FF4166; opacity: 1; }
+  50% { text-shadow: 0 0 10px #00FF41, 0 0 20px #00FF41, 0 0 30px #00FF4199; opacity: 0.9; }
+}
 
-<div align="center">
+@keyframes pulse-blue {
+  0%, 100% { text-shadow: 0 0 5px #00D4FF, 0 0 10px #00D4FF; opacity: 1; }
+  50% { text-shadow: 0 0 15px #00D4FF, 0 0 25px #00D4FF; opacity: 0.8; }
+}
 
-[![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=20&duration=2600&pause=700&color=F97316&center=true&vCenter=true&width=750&lines=17+Toolbox+Scripts.+One+Command.;BM25+Search+Across+10+Domains;Complete+Design+Systems%2C+Generated;WCAG+Accessibility%2C+Built-In)](https://github.com/CyebRageAnonymuos/ui-ux-cr)
+@keyframes typing-cursor {
+  0%, 49%, 100% { opacity: 1; }
+  50%, 99% { opacity: 0; }
+}
 
-[![Version](https://img.shields.io/badge/version-2.1-F97316?style=for-the-badge)](https://github.com/CyebRageAnonymuos/ui-ux-cr/releases)
-[![Python](https://img.shields.io/badge/Python-3.x-22D3EE?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Tools](https://img.shields.io/badge/toolbox-17_scripts-1E293B?style=for-the-badge)](#the-toolbox)
-[![License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](https://github.com/CyebRageAnonymuos/ui-ux-cr/blob/main/LICENSE)
-[![Stars](https://img.shields.io/github/stars/CyebRageAnonymuos/ui-ux-cr?style=for-the-badge&color=F97316&label=Stars)](https://github.com/CyebRageAnonymuos/ui-ux-cr/stargazers)
+@keyframes glitch {
+  0% { text-shadow: 0 0 0 #00FF41, 0 0 0 #00D4FF; }
+  20% { text-shadow: 2px 0 0 #00FF41, -2px 0 0 #00D4FF; }
+  40% { text-shadow: -2px 0 0 #00FF41, 2px 0 0 #00D4FF; }
+  60% { text-shadow: 1px 0 0 #00FF41, -1px 0 0 #00D4FF; }
+  80% { text-shadow: -1px 0 0 #00FF41, 1px 0 0 #00D4FF; }
+  100% { text-shadow: 0 0 0 #00FF41, 0 0 0 #00D4FF; }
+}
 
-**A design-intelligence skill that turns "build me a SaaS landing page" into a complete, reasoned design system — colors, type, components, animations, accessibility — in one terminal command.**
+@keyframes scanline-sweep {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
 
-If this saves you a design pass, a ⭐ helps a lot.
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
 
+@keyframes matrix-rain {
+  0% { color: #00FF41; }
+  50% { color: #00D4FF; }
+  100% { color: #00FF41; }
+}
+
+@keyframes box-glow {
+  0%, 100% { border-color: #00FF41; box-shadow: 0 0 10px #00FF4166; }
+  50% { border-color: #00D4FF; box-shadow: 0 0 20px #00D4FF99; }
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0; }
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #00FF41;
+  font-family: 'Courier New', monospace;
+}
+
+.neon-header {
+  animation: pulse-glow 2s infinite;
+  letter-spacing: 2px;
+}
+
+.neon-blue {
+  color: #00D4FF;
+  animation: pulse-blue 2.5s infinite;
+}
+
+.cursor-blink {
+  animation: typing-cursor 1s infinite;
+}
+
+.glitch-text {
+  animation: glitch 0.3s infinite;
+}
+
+.scanline {
+  position: fixed;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to bottom, transparent, #00FF4144);
+  animation: scanline-sweep 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.glow-box {
+  border: 2px solid #00FF41;
+  animation: box-glow 2s infinite;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.float-element {
+  animation: float-y 3s ease-in-out infinite;
+}
+
+.spinner-icon {
+  display: inline-block;
+  animation: spinner 2s linear infinite;
+}
+
+.matrix-text {
+  animation: matrix-rain 3s infinite;
+}
+
+.status-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #00FF41;
+  border-radius: 50%;
+  animation: pulse-glow 1s infinite;
+  margin-right: 5px;
+}
+
+.code-block {
+  background-color: #0A0A0A;
+  border-left: 4px solid #00FF41;
+  border-right: 2px solid #00D4FF;
+  padding: 1rem;
+  animation: box-glow 2s infinite;
+  overflow-x: auto;
+}
+
+.badge-pulse {
+  animation: pulse-glow 2s infinite;
+  display: inline-block;
+}
+
+a {
+  color: #00D4FF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0 0 10px #00D4FF, 0 0 20px #00D4FF;
+}
+
+blockquote {
+  border-left: 4px solid #00FF41;
+  padding-left: 1rem;
+  color: #00D4FF;
+  font-style: italic;
+}
+
+h1, h2, h3 {
+  color: #00FF41;
+  text-shadow: 0 0 10px #00FF4166;
+  letter-spacing: 1px;
+}
+
+h2 {
+  border-bottom: 2px solid #00D4FF;
+  padding-bottom: 0.5rem;
+  animation: pulse-blue 2.5s infinite;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #00FF41, #00D4FF, transparent);
+  margin: 2rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+table td, table th {
+  border: 1px solid #00FF41;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+table th {
+  background-color: rgba(0, 255, 65, 0.1);
+  color: #00FF41;
+  font-weight: bold;
+  animation: pulse-glow 2s infinite;
+}
+
+.tool-card {
+  border: 2px solid #00D4FF;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  animation: box-glow 2s infinite;
+}
+
+.feature-check {
+  color: #00FF41;
+  animation: pulse-glow 1s infinite;
+  font-weight: bold;
+}
+</style>
+
+<div class="scanline"></div>
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║              ╔═════════════════════════════════════════╗             ║
+║              ║  UI UX CR - DESIGN INTELLIGENCE ENGINE  ║             ║
+║              ║    CYBER-RAGE CLASSIFIED SYSTEM v2.1    ║             ║
+║              ╚═════════════════════════════════════════╝             ║
+║                                                                      ║
+║                        [████████████████████] 100%                  ║
+║                     SYSTEM INITIALIZATION COMPLETE                  ║
+║                                                                      ║
+║                 STATUS: █ ONLINE  |  READY FOR DEPLOYMENT            ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+<h1 class="neon-header" style="text-align: center; font-size: 2.5em; margin: 2rem 0;">
+  ⚡ UI/UX CR ⚡
+  <span class="cursor-blink" style="font-size: 1.2em;">█</span>
+</h1>
+
+---
+
+## <span class="neon-blue">→ SYSTEM STATUS</span>
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0;">
+  <span class="badge-pulse" style="border: 2px solid #00FF41; padding: 0.5rem 1rem; border-radius: 20px;">
+    <span class="status-pulse"></span>ONLINE
+  </span>
+  <span class="badge-pulse" style="border: 2px solid #00D4FF; padding: 0.5rem 1rem; border-radius: 20px;">
+    <span class="spinner-icon">⚙</span>v2.1.0
+  </span>
+  <span class="badge-pulse" style="border: 2px solid #00FF41; padding: 0.5rem 1rem; border-radius: 20px;">
+    17<span class="neon-blue">_TOOLS</span>
+  </span>
+  <span class="badge-pulse" style="border: 2px solid #00D4FF; padding: 0.5rem 1rem; border-radius: 20px;">
+    MIT<span class="neon-blue">_LICENSE</span>
+  </span>
 </div>
 
-<br/>
-
-<div align="center">
-
-<svg width="820" height="280" viewBox="0 0 820 280" xmlns="http://www.w3.org/2000/svg">
-  <rect width="820" height="280" rx="14" fill="#0B1120"/>
-  <rect width="820" height="36" rx="14" fill="#161B26"/>
-  <rect y="22" width="820" height="14" fill="#161B26"/>
-  <circle cx="24" cy="18" r="6" fill="#F87171"/>
-  <circle cx="46" cy="18" r="6" fill="#FBBF24"/>
-  <circle cx="68" cy="18" r="6" fill="#34D399"/>
-  <text x="410" y="23" text-anchor="middle" fill="#64748B" font-size="11" font-family="monospace">search.py</text>
-  <text x="24" y="70" font-family="monospace" font-size="13" fill="#22D3EE" opacity="0">$ python3 scripts/search.py "saas dashboard" --design-system<animate attributeName="opacity" values="0;0;1" dur="0.6s" begin="0.2s" fill="freeze"/></text>
-  <text x="24" y="106" font-family="monospace" font-size="12.5" fill="#94A3B8" opacity="0">→ searching 10 domains in parallel...<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.0s" fill="freeze"/></text>
-  <text x="24" y="134" font-family="monospace" font-size="12.5" fill="#FDBA74" opacity="0">✓ style        Glassmorphism + Flat<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.5s" fill="freeze"/></text>
-  <text x="24" y="160" font-family="monospace" font-size="12.5" fill="#67E8F9" opacity="0">✓ colors       #2563EB · #F97316<animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.9s" fill="freeze"/></text>
-  <text x="24" y="186" font-family="monospace" font-size="12.5" fill="#A7F3D0" opacity="0">✓ typography   Poppins + Inter<animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.3s" fill="freeze"/></text>
-  <text x="24" y="212" font-family="monospace" font-size="12.5" fill="#C4B5FD" opacity="0">✓ wcag         AA contrast passed<animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.7s" fill="freeze"/></text>
-  <text x="24" y="246" font-family="monospace" font-size="13" fill="#34D399" opacity="0">✓ design system ready — 8 sections generated<animate attributeName="opacity" values="0;1" dur="0.5s" begin="3.2s" fill="freeze"/></text>
-</svg>
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<svg width="820" height="140" viewBox="0 0 820 140" xmlns="http://www.w3.org/2000/svg">
-  <rect width="820" height="140" rx="14" fill="#0F172A"/>
+<svg width="100%" height="80" viewBox="0 0 800 80" style="margin: 1rem 0;">
   <defs>
-    <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F97316"/>
-      <stop offset="100%" stop-color="#22D3EE"/>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FF41;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect x="16" y="52" width="120" height="36" rx="18" fill="#1E293B" stroke="#F97316" stroke-opacity="0.7"/>
-  <text x="76" y="75" text-anchor="middle" fill="#FDBA74" font-size="12" font-family="monospace">your query</text>
-  <line x1="136" y1="70" x2="176" y2="70" stroke="url(#flowGrad)" stroke-width="2" stroke-dasharray="6 4">
-    <animate attributeName="stroke-dashoffset" values="0;-20" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <rect x="180" y="46" width="150" height="48" rx="10" fill="#1E293B" stroke="#22D3EE" stroke-opacity="0.7">
-    <animate attributeName="stroke-opacity" values="0.3;0.9;0.3" dur="2.4s" repeatCount="indefinite"/>
+  
+  <!-- DATA READOUT -->
+  <text x="30" y="25" fill="#00D4FF" font-size="14" font-weight="bold">SYSTEMS OPERATIONAL</text>
+  
+  <!-- Bar 1: Products -->
+  <text x="30" y="55" fill="#94A3B8" font-size="13">Products:</text>
+  <rect x="150" y="45" width="200" height="16" rx="8" fill="#1E293B"/>
+  <rect x="150" y="45" width="200" height="16" rx="8" fill="url(#barGrad)">
+    <animate attributeName="width" values="0;200" dur="1.5s" fill="freeze"/>
   </rect>
-  <text x="255" y="66" text-anchor="middle" fill="#67E8F9" font-size="11" font-weight="700">BM25 Engine</text>
-  <text x="255" y="82" text-anchor="middle" fill="#94A3B8" font-size="9">n-gram · fuzzy · 120+ synonyms</text>
-  <line x1="330" y1="70" x2="370" y2="70" stroke="url(#flowGrad)" stroke-width="2" stroke-dasharray="6 4">
-    <animate attributeName="stroke-dashoffset" values="0;-20" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <rect x="374" y="46" width="160" height="48" rx="10" fill="#1E293B" stroke="#F97316" stroke-opacity="0.7">
-    <animate attributeName="stroke-opacity" values="0.9;0.3;0.9" dur="2.4s" repeatCount="indefinite"/>
+  <text x="360" y="56" fill="#00FF41" font-size="13" font-weight="bold">70+</text>
+  
+  <!-- Bar 2: Styles -->
+  <text x="520" y="55" fill="#94A3B8" font-size="13">UI Styles:</text>
+  <rect x="640" y="45" width="120" height="16" rx="8" fill="#1E293B"/>
+  <rect x="640" y="45" width="120" height="16" rx="8" fill="url(#barGrad)">
+    <animate attributeName="width" values="0;120" dur="1.5s" begin="0.3s" fill="freeze"/>
   </rect>
-  <text x="454" y="66" text-anchor="middle" fill="#FDBA74" font-size="11" font-weight="700">10 Domains</text>
-  <text x="454" y="82" text-anchor="middle" fill="#94A3B8" font-size="9">searched in parallel</text>
-  <line x1="534" y1="70" x2="574" y2="70" stroke="url(#flowGrad)" stroke-width="2" stroke-dasharray="6 4">
-    <animate attributeName="stroke-dashoffset" values="0;-20" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <rect x="578" y="46" width="150" height="48" rx="10" fill="#1E293B" stroke="#22D3EE" stroke-opacity="0.7">
-    <animate attributeName="stroke-opacity" values="0.3;0.9;0.3" dur="2.4s" repeatCount="indefinite" begin="0.6s"/>
-  </rect>
-  <text x="653" y="66" text-anchor="middle" fill="#67E8F9" font-size="11" font-weight="700">Reasoning</text>
-  <text x="653" y="82" text-anchor="middle" fill="#94A3B8" font-size="9">ui-reasoning.csv rules</text>
-  <line x1="728" y1="70" x2="760" y2="70" stroke="url(#flowGrad)" stroke-width="2" stroke-dasharray="6 4">
-    <animate attributeName="stroke-dashoffset" values="0;-20" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <circle cx="784" cy="70" r="24" fill="#1E293B" stroke="url(#flowGrad)" stroke-width="2">
-    <animate attributeName="r" values="22;26;22" dur="2s" repeatCount="indefinite"/>
+  <text x="770" y="56" fill="#00FF41" font-size="13" font-weight="bold">46+</text>
+</svg>
+
+---
+
+## <span class="neon-blue">→ // MISSION BRIEFING</span>
+
+<svg width="100%" height="120" viewBox="0 0 800 120" style="margin: 1rem 0;">
+  <style>
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    .type-text {
+      animation: typewriter 3s steps(60, end) 0.5s forwards;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  </style>
+  
+  <!-- Animated typing text -->
+  <text x="20" y="40" fill="#00FF41" font-size="14" font-weight="bold" class="type-text">
+    $ root@github:~$ cat MISSION_BRIEFING.txt
+  </text>
+  
+  <text x="20" y="70" fill="#00D4FF" font-size="13">UI UX CR is an elite design intelligence system for AI assistants.</text>
+  <text x="20" y="90" fill="#00D4FF" font-size="13">Mission: Generate complete design systems, build full pages, export themes,</text>
+  <text x="20" y="110" fill="#00D4FF" font-size="13">and audit accessibility — all from your terminal.</text>
+</svg>
+
+<blockquote style="animation: pulse-blue 2.5s infinite;">
+  <strong class="neon-blue">> CLASSIFIED BRIEFING:</strong><br/>
+  This system doesn't just recommend designs. It <strong style="color: #00FF41;">GENERATES</strong> complete design systems, <strong style="color: #00FF41;">BUILDS</strong> full HTML/Tailwind pages, <strong style="color: #00FF41;">EXPORTS</strong> themes to any format, and <strong style="color: #00FF41;">AUDITS</strong> accessibility compliance — all from your terminal. Your design infrastructure, automated.
+</blockquote>
+
+---
+
+## <span class="neon-blue">→ TACTICAL OVERVIEW (TABLE OF CONTENTS)</span>
+
+<div style="background-color: rgba(0, 255, 65, 0.05); padding: 1.5rem; border-left: 4px solid #00FF41; margin: 1.5rem 0;">
+
+```
+root@cyber-rage:~$ ls -la ./README
+ 
+  ✓ SYSTEM STATUS ............................ Connected
+  ✓ MISSION BRIEFING ......................... Decrypted
+  ✓ TACTICAL OVERVIEW ....................... [YOU ARE HERE]
+  ✓ CORE CAPABILITIES ....................... Ready
+  ✓ 17 TOOLBOX ARSENAL ...................... Loaded
+  ✓ DATA COVERAGE ........................... 70+/80+/120+
+  ✓ DEPLOYMENT PROTOCOL ..................... Enabled
+  ✓ RAPID INITIALIZATION .................... Available
+  ✓ COMPONENT MODULES ....................... Active
+  ✓ FILE STRUCTURE .......................... Mapped
+  ✓ ACCESS PROTOCOL ......................... Open
+  ✓ FUTURE MISSIONS ......................... Planning
+  ✓ OPERATOR INFO ........................... Below
+  ✓ LICENSING .............................. MIT
+```
+
+</div>
+
+---
+
+## <span class="neon-blue">⚡ CORE CAPABILITIES</span>
+
+<table>
+  <tr style="background-color: rgba(0, 255, 65, 0.15);">
+    <th style="color: #00FF41;">CAPABILITY</th>
+    <th style="color: #00D4FF;">STATUS</th>
+    <th style="color: #00FF41;">POWER LEVEL</th>
+  </tr>
+  <tr>
+    <td><strong>🔍 Enhanced BM25 Search</strong><br/>Fuzzy matching, n-grams, 120+ synonyms</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">████████████████░░</span></td>
+  </tr>
+  <tr>
+    <td><strong>🎨 Design System Generator</strong><br/>10 domains searched in parallel</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">██████████████████</span></td>
+  </tr>
+  <tr>
+    <td><strong>🌈 Color Theory Engine</strong><br/>Extended palettes, 6 harmony types, WCAG audit</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">██████████████░░░░</span></td>
+  </tr>
+  <tr>
+    <td><strong>🛠️ 17 Toolbox Scripts</strong><br/>SVG, CSS, components, animations, pages</td>
+    <td><span class="status-pulse"></span>ARMED</td>
+    <td><span class="neon-blue">██████████████████</span></td>
+  </tr>
+  <tr>
+    <td><strong>🧩 Component Generator</strong><br/>12 ready components (navbar, hero, pricing...)</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">████████████░░░░░░</span></td>
+  </tr>
+  <tr>
+    <td><strong>📄 Page Builder</strong><br/>Compose full HTML landing pages in seconds</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">██████████████████</span></td>
+  </tr>
+  <tr>
+    <td><strong>♿ Accessibility Auditor</strong><br/>WCAG audit: contrast, alt text, labels, order</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">███████████████░░░</span></td>
+  </tr>
+  <tr>
+    <td><strong>✨ Animation Database</strong><br/>30+ patterns + kit with reduced-motion fallback</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">███████████████░░░</span></td>
+  </tr>
+  <tr>
+    <td><strong>🎯 Design Tokens</strong><br/>70+ categories with CSS variables & Tailwind</td>
+    <td><span class="status-pulse"></span>ACTIVE</td>
+    <td><span class="neon-blue">██████████████████</span></td>
+  </tr>
+</table>
+
+---
+
+## <span class="neon-blue">⚙️ THE 17-TOOL ARSENAL</span>
+
+<svg width="100%" height="40" viewBox="0 0 800 40" style="margin: 1rem 0;">
+  <text x="400" y="25" text-anchor="middle" fill="#00FF41" font-size="14" font-weight="bold">
+    INITIALIZING TOOLBOX SYSTEMS...
+  </text>
+  <circle cx="750" cy="20" r="8" fill="none" stroke="#00D4FF" stroke-width="2">
+    <animateTransform attributeName="transform" type="rotate" values="0 750 20;360 750 20" dur="2s" repeatCount="indefinite"/>
   </circle>
-  <text x="784" y="75" text-anchor="middle" font-size="16">🎨</text>
 </svg>
 
-</div>
-
-<br/>
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Why Its Different](#why-its-different)
-- [How It Works](#how-it-works)
-- [Features](#features)
-- [The Toolbox](#the-toolbox)
-- [By the Numbers](#by-the-numbers)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Available Domains](#available-domains)
-- [Available Stacks](#available-stacks)
-- [Built-in Design Rules](#built-in-design-rules)
-- [Pre-Delivery Checklist](#pre-delivery-checklist)
-- [Worked Examples](#worked-examples)
-- [Good to Know](#good-to-know)
-- [Contributing](#contributing)
-- [License](#license)
-
-<br/>
-
-## Overview
-
-**UI UX CR** is a design-intelligence *skill* — a self-contained toolbox of Python scripts, backed by a hand-curated design database, meant to be dropped straight into an AI coding assistant's skill folder (Claude, opencode, or any agent that can shell out to Python). Point it at a request like *"healthcare SaaS dashboard"* and it doesn't hand back a vague suggestion — it runs an actual search-and-reasoning pipeline across ten design domains and returns a complete, justified design system: pattern, style, extended color palette, typography with real Google Fonts pairings, components with working HTML/Tailwind code, animations, responsive rules, anti-patterns to avoid, and a pre-delivery checklist.
-
-On top of that sits a 17-script toolbox that turns any piece of that design system into a ready asset — a full HTML landing page, an SVG icon set, a CSS utility kit, a favicon, a WCAG accessibility report — all generated, not guessed.
-
-<br/>
-
-## Why It's Different
-
-Most "design helper" tools are either a static mood board or a prompt wrapper around an LLM's memory of what a SaaS site looks like. This one is closer to a small search engine with opinions:
-
-- 🔍 **It searches, it doesn't guess** — an enhanced BM25 ranking engine (n-gram phrase matching, Levenshtein fuzzy matching for typos, 120+ synonym groups) retrieves the closest real entries from the design database instead of freehand-generating one.
-- 🧠 **It reasons before it answers** — a dedicated rules file (`ui-reasoning.csv`) decides which of the retrieved matches actually belong together, so the color palette, the typography, and the component set are chosen to be coherent, not just individually plausible.
-- 💾 **It remembers per project** — the `--persist` flag writes a `design-system/MASTER.md` as the single source of truth, with a `design-system/pages/` folder for page-specific overrides, so a multi-page build stays visually consistent across sessions instead of re-rolling the palette every time.
-- 🛠️ **It finishes the job** — the same database backs 17 generator scripts, so the system doesn't stop at a recommendation; it can hand you the actual HTML page, the SVG icons, and a WCAG audit of the result.
-
-<br/>
-
-## How It Works
-
-```mermaid
-flowchart TD
-    A[User asks for UI/UX work] --> B["Step 1 — Analyze request<br/>product, style, industry, stack"]
-    B --> C["Step 2 — search.py --design-system<br/>(required first call)"]
-    C --> D["BM25 engine searches<br/>10 domains in parallel"]
-    D --> E["ui-reasoning.csv<br/>selects the coherent matches"]
-    E --> F["Color theory engine<br/>builds the extended palette + WCAG check"]
-    F --> G["Complete design system returned:<br/>pattern, colors, type, components, animations"]
-    G --> H{Need generated assets?}
-    H -->|yes| I["Toolbox scripts —<br/>page_builder, svg_generator, css_generator..."]
-    H -->|optional| J["--persist saves to<br/>design-system/MASTER.md"]
-    I --> K["accessibility_audit.py —<br/>final WCAG pass"]
-```
-
-This mirrors the exact workflow defined in the skill's own instructions (`SKILL.md`) for how an AI assistant should use it: analyze the request, always run `--design-system` first, optionally persist it, pull individual toolbox scripts for assets, then close with an accessibility audit before delivery.
-
-<br/>
-
-## Features
-
-| Feature | Description |
-|---|---|
-| **Enhanced BM25 Search v2** | N-gram + Levenshtein fuzzy matching, 120+ synonym groups, category-based keyword boosting |
-| **Design System Generator** | 10 domains searched in parallel, reconciled by a reasoning engine |
-| **Color Theory Engine** | 50–900 shade palettes, 6 harmony types, HSL/HSV/CMYK conversion, WCAG AA/AAA contrast, color-blindness simulation (protanopia, deuteranopia, tritanopia) |
-| **Component Library** | 30+ recommendations, 12 with auto-generated HTML/Tailwind code + ARIA guidance |
-| **Animation Database** | 30+ patterns with full CSS, duration/easing/GPU notes, `prefers-reduced-motion` fallbacks |
-| **Responsive Patterns** | 20+ patterns, mobile-first, breakpoints at 375 / 768 / 1024 / 1440px, RTL-ready |
-| **Design Tokens** | 70+ categories as CSS variables and Tailwind config, light + dark values |
-| **Accessibility Auditor** | Standalone WCAG audit — contrast, alt text, labels, heading order |
-| **Master + Overrides Persistence** | `--persist` keeps one project-wide design source of truth with per-page overrides |
-
-<div align="center">
-
-<svg width="820" height="180" viewBox="0 0 820 180" xmlns="http://www.w3.org/2000/svg">
-  <rect width="820" height="180" rx="14" fill="#0F172A"/>
-  <text x="24" y="30" fill="#E2E8F0" font-size="14" font-weight="700">6 Color Harmony Types</text>
-  <g>
-    <circle cx="90" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="90" cy="64" r="9" fill="#F97316"><animate attributeName="r" values="7;10;7" dur="2.4s" repeatCount="indefinite"/></circle>
-    <circle cx="90" cy="116" r="9" fill="#22D3EE"><animate attributeName="r" values="7;10;7" dur="2.4s" begin="0.2s" repeatCount="indefinite"/></circle>
-    <text x="90" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Complementary</text>
-  </g>
-  <g>
-    <circle cx="215" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="205" cy="66" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.1s" repeatCount="indefinite"/></circle>
-    <circle cx="230" cy="72" r="8" fill="#FB923C"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></circle>
-    <circle cx="238" cy="98" r="8" fill="#FBBF24"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.5s" repeatCount="indefinite"/></circle>
-    <text x="215" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Analogous</text>
-  </g>
-  <g>
-    <circle cx="340" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="340" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
-    <circle cx="318" cy="103" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.4s" repeatCount="indefinite"/></circle>
-    <circle cx="362" cy="103" r="8" fill="#A78BFA"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.8s" repeatCount="indefinite"/></circle>
-    <text x="340" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Triadic</text>
-  </g>
-  <g>
-    <circle cx="465" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="465" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.1s" repeatCount="indefinite"/></circle>
-    <circle cx="440" cy="108" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.5s" repeatCount="indefinite"/></circle>
-    <circle cx="490" cy="108" r="8" fill="#38BDF8"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></circle>
-    <text x="465" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Split-Comp.</text>
-  </g>
-  <g>
-    <circle cx="590" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="590" cy="64" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
-    <circle cx="616" cy="90" r="8" fill="#FBBF24"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></circle>
-    <circle cx="590" cy="116" r="8" fill="#22D3EE"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></circle>
-    <circle cx="564" cy="90" r="8" fill="#818CF8"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></circle>
-    <text x="590" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Tetradic</text>
-  </g>
-  <g>
-    <circle cx="715" cy="90" r="30" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-    <circle cx="715" cy="72" r="7" fill="#9A3412"><animate attributeName="r" values="5;8;5" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
-    <circle cx="715" cy="90" r="8" fill="#F97316"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="0.2s" repeatCount="indefinite"/></circle>
-    <circle cx="715" cy="108" r="9" fill="#FDBA74"><animate attributeName="r" values="7;10;7" dur="2.4s" begin="0.4s" repeatCount="indefinite"/></circle>
-    <text x="715" y="150" text-anchor="middle" fill="#94A3B8" font-size="10">Monochromatic</text>
-  </g>
-</svg>
-
-</div>
-
-<br/>
-
-## The Toolbox
-
-<div align="center">
-
-<svg width="820" height="110" viewBox="0 0 820 110" xmlns="http://www.w3.org/2000/svg">
-  <rect width="820" height="110" rx="14" fill="#0F172A"/>
-  <text x="18" y="26" fill="#E2E8F0" font-size="13" font-weight="700">17 Toolbox Scripts — one wave, one system</text>
-  <rect x="18" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.00s" repeatCount="indefinite"/></rect>
-  <text x="38.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">01</text>
-  <rect x="65" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.10s" repeatCount="indefinite"/></rect>
-  <text x="85.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">02</text>
-  <rect x="112" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.20s" repeatCount="indefinite"/></rect>
-  <text x="132.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">03</text>
-  <rect x="159" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.30s" repeatCount="indefinite"/></rect>
-  <text x="179.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">04</text>
-  <rect x="206" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.40s" repeatCount="indefinite"/></rect>
-  <text x="226.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">05</text>
-  <rect x="253" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.50s" repeatCount="indefinite"/></rect>
-  <text x="273.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">06</text>
-  <rect x="300" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.60s" repeatCount="indefinite"/></rect>
-  <text x="320.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">07</text>
-  <rect x="347" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.70s" repeatCount="indefinite"/></rect>
-  <text x="367.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">08</text>
-  <rect x="394" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.80s" repeatCount="indefinite"/></rect>
-  <text x="414.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">09</text>
-  <rect x="441" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="0.90s" repeatCount="indefinite"/></rect>
-  <text x="461.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">10</text>
-  <rect x="488" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.00s" repeatCount="indefinite"/></rect>
-  <text x="508.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">11</text>
-  <rect x="535" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.10s" repeatCount="indefinite"/></rect>
-  <text x="555.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">12</text>
-  <rect x="582" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.20s" repeatCount="indefinite"/></rect>
-  <text x="602.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">13</text>
-  <rect x="629" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.30s" repeatCount="indefinite"/></rect>
-  <text x="649.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">14</text>
-  <rect x="676" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.40s" repeatCount="indefinite"/></rect>
-  <text x="696.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">15</text>
-  <rect x="723" y="40" width="41" height="36" rx="8" fill="#22D3EE" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.50s" repeatCount="indefinite"/></rect>
-  <text x="743.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">16</text>
-  <rect x="770" y="40" width="41" height="36" rx="8" fill="#F97316" fill-opacity="0.55"><animate attributeName="fill-opacity" values="0.3;0.85;0.3" dur="2.2s" begin="1.60s" repeatCount="indefinite"/></rect>
-  <text x="790.5" y="63" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700">17</text>
-  <text x="18" y="98" fill="#64748B" font-size="9" font-family="monospace">search · svg · css · palette · type · theme · component · page · layout · anim · chart · pattern · favicon · copy · mockup · social · a11y</text>
-</svg>
-
-</div>
-
-17 standalone scripts — each one works alone, or feeds into `search.py`'s recommendations.
-
-| # | Script | What it does |
-|---|---|---|
-| 01 | `search.py` | BM25 design search across 10 domains — the primary entry point |
-| 02 | `svg_generator.py` | 70+ SVG icons, 6 background patterns, logo generation |
-| 03 | `css_generator.py` | Shadows, gradients, glassmorphism, glow, neumorphism, full UI kit |
-| 04 | `palette_generator.py` | Harmony palettes, shade scales, WCAG report |
-| 05 | `typography_generator.py` | Modular type scales + font pairings from the database |
-| 06 | `theme_exporter.py` | Exports a theme to CSS / Tailwind / SCSS / JSON |
-| 07 | `component_generator.py` | 12 ready components (navbar, hero, pricing, modal, table, sidebar…) |
-| 08 | `page_builder.py` | Composes a full HTML landing page from sections in one command |
-| 09 | `layout_generator.py` | Grids, containers, spacing, breakpoints, 5 layout templates |
-| 10 | `animation_generator.py` | 12 parameterized animations, or a full animation kit |
-| 11 | `chart_generator.py` | Chart.js & Recharts configs across 8 chart types |
-| 12 | `pattern_generator.py` | 12 CSS background patterns |
-| 13 | `favicon_generator.py` | Favicon SVG, HTML head block, PWA manifest |
-| 14 | `copy_generator.py` | Headlines, CTAs, placeholders, error copy, A/B variants |
-| 15 | `mockup_generator.py` | ASCII wireframes — desktop, mobile, dashboard, login |
-| 16 | `social_specs.py` | Dimension cheat sheets for 10 social platforms |
-| 17 | `accessibility_audit.py` | WCAG audit of a finished HTML file |
-
-**A realistic 60-second workflow:**
-
+### **[01]** `search.py` — BM25 Design Intelligence
+<div class="glow-box" style="animation: box-glow 2s infinite;">
+  <strong>→ Fuzzy matching across 10 domains | n-gram detection | 120+ synonym groups</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
 ```bash
-# 1. Build a full landing page for a Micro SaaS
-python3 scripts/page_builder.py --product "Micro SaaS" --sections navbar,hero,features,pricing,cta,footer --out landing.html
-
-# 2. Replace emoji placeholders with real SVG icons
-python3 scripts/svg_generator.py --icon check --color "#10B981" --size 24
-
-# 3. Add a complete animation kit
-python3 scripts/animation_generator.py --kit
-
-# 4. Audit the page for accessibility
-python3 scripts/accessibility_audit.py landing.html
+python3 scripts/search.py "SaaS landing page" --design-system
+python3 scripts/search.py "healthcare dashboard" --wcag --export-css
 ```
+  </div>
+</div>
 
-<br/>
+### **[02]** `svg_generator.py` — Vector Icon Arsenal
+<div class="glow-box" style="animation: box-glow 2s infinite 0.1s;">
+  <strong>→ 70+ SVG icons | 6 pattern templates | Logo generator</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/svg_generator.py --icon search --size 24 --color "#00FF41"
+python3 scripts/svg_generator.py --pattern dots --scale 2
+```
+  </div>
+</div>
 
-## By the Numbers
+### **[03]** `css_generator.py` — Styling Engine
+<div class="glow-box" style="animation: box-glow 2s infinite 0.2s;">
+  <strong>→ Shadows, gradients, glassmorphism, glow effects, neumorphism</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/css_generator.py --ui-kit --primary #2563EB --secondary #F97316
+```
+  </div>
+</div>
 
-<div align="center">
+### **[04]** `palette_generator.py` — Color Harmony
+<div class="glow-box" style="animation: box-glow 2s infinite 0.3s;">
+  <strong>→ 6 harmony types | Shade scales | WCAG contrast analysis</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/palette_generator.py "#2563EB" --harmony triadic --check-wcag
+```
+  </div>
+</div>
 
-<svg width="820" height="290" viewBox="0 0 820 290" xmlns="http://www.w3.org/2000/svg">
-  <rect width="820" height="290" rx="14" fill="#0F172A"/>
+### **[05]** `typography_generator.py` — Type Systems
+<div class="glow-box" style="animation: box-glow 2s infinite 0.4s;">
+  <strong>→ Modular type scales | Google Fonts integration | Font pairings</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/typography_generator.py --scale golden-ratio --font-pairing elegant
+```
+  </div>
+</div>
+
+### **[06]** `theme_exporter.py` — Format Multiplexer
+<div class="glow-box" style="animation: box-glow 2s infinite 0.5s;">
+  <strong>→ Export to CSS | Tailwind | SCSS | JSON | Figma tokens</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/theme_exporter.py "#2563EB" --format all
+```
+  </div>
+</div>
+
+### **[07]** `component_generator.py` — UI Components
+<div class="glow-box" style="animation: box-glow 2s infinite 0.6s;">
+  <strong>→ 12 ready components | Navbar, Hero, Pricing, Modal, Table, Sidebar...</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/component_generator.py --component navbar --product "SaaS (General)"
+```
+  </div>
+</div>
+
+### **[08]** `page_builder.py` — Full Page Composer
+<div class="glow-box" style="animation: box-glow 2s infinite 0.7s;">
+  <strong>→ Compose complete landing pages | Multi-section support | Export HTML</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/page_builder.py --product "SaaS" --sections navbar,hero,features,pricing,cta,footer --out landing.html
+```
+  </div>
+</div>
+
+### **[09]** `layout_generator.py` — Grid & Spacing
+<div class="glow-box" style="animation: box-glow 2s infinite 0.8s;">
+  <strong>→ 5 layout templates | Grids | Containers | Breakpoints</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/layout_generator.py --layout dashboard --breakpoints
+```
+  </div>
+</div>
+
+### **[10]** `animation_generator.py` — Motion Library
+<div class="glow-box" style="animation: box-glow 2s infinite 0.9s;">
+  <strong>→ 12 animation patterns | Parameters | Reduced-motion fallback</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/animation_generator.py --type bounce --duration 0.6 --kit
+```
+  </div>
+</div>
+
+### **[11]** `chart_generator.py` — Data Visualization
+<div class="glow-box" style="animation: box-glow 2s infinite 1s;">
+  <strong>→ 8 chart types | Chart.js & Recharts | Live data configs</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/chart_generator.py --chart bar --labels "Q1,Q2,Q3" --data "25,40,60"
+```
+  </div>
+</div>
+
+### **[12]** `pattern_generator.py` — Background Patterns
+<div class="glow-box" style="animation: box-glow 2s infinite 1.1s;">
+  <strong>→ 12 CSS patterns | Customizable colors | SVG exports</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/pattern_generator.py checkerboard --color "#2563EB" --size 20
+```
+  </div>
+</div>
+
+### **[13]** `favicon_generator.py` — Icon Generator
+<div class="glow-box" style="animation: box-glow 2s infinite 1.2s;">
+  <strong>→ SVG favicon generation | HTML head tags | PWA manifest</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/favicon_generator.py --text "CR" --bg "#2563EB" --format all
+```
+  </div>
+</div>
+
+### **[14]** `copy_generator.py` — Microcopy Engine
+<div class="glow-box" style="animation: box-glow 2s infinite 1.3s;">
+  <strong>→ Headlines, CTAs, placeholders, errors | A/B variants</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/copy_generator.py --headline saas --count 5 --variant ab
+```
+  </div>
+</div>
+
+### **[15]** `accessibility_audit.py` — WCAG Compliance
+<div class="glow-box" style="animation: box-glow 2s infinite 1.4s;">
+  <strong>→ Contrast ratios | Alt text | Form labels | Heading hierarchy</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/accessibility_audit.py landing.html --generate-report
+```
+  </div>
+</div>
+
+### **[16]** `mockup_generator.py` — ASCII Wireframes
+<div class="glow-box" style="animation: box-glow 2s infinite 1.5s;">
+  <strong>→ Desktop, mobile, dashboard, login templates | Quick iteration</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/mockup_generator.py --type dashboard --export svg
+```
+  </div>
+</div>
+
+### **[17]** `social_specs.py` — Platform Dimensions
+<div class="glow-box" style="animation: box-glow 2s infinite 1.6s;">
+  <strong>→ Instagram, Twitter, LinkedIn, TikTok, YouTube specs</strong>
+  <div class="code-block" style="margin-top: 0.5rem;">
+```bash
+python3 scripts/social_specs.py --platform instagram --generate-cheatsheet
+```
+  </div>
+</div>
+
+---
+
+## <span class="neon-blue">📊 DATA PAYLOAD — v2.1 CAPABILITIES</span>
+
+<svg width="100%" height="300" viewBox="0 0 800 300" style="margin: 1rem 0;">
   <defs>
-    <linearGradient id="barGrad2" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F97316"/>
-      <stop offset="100%" stop-color="#22D3EE"/>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FF41;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <text x="24" y="34" fill="#E2E8F0" font-size="15" font-weight="700">Data Coverage — v2.1</text>
-
-  <text x="24" y="70" fill="#94A3B8" font-size="12">Product Types</text>
-  <rect x="230" y="58" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="58" width="327" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;327" dur="1.6s" begin="0.1s" fill="freeze"/>
+  
+  <!-- Title -->
+  <text x="400" y="25" text-anchor="middle" fill="#00FF41" font-size="16" font-weight="bold">
+    SYSTEM INVENTORY ANALYSIS
+  </text>
+  
+  <!-- Row 1: Products -->
+  <text x="30" y="60" fill="#00D4FF" font-size="12" font-weight="bold">📦 Product Types</text>
+  <rect x="250" y="50" width="500" height="20" rx="10" fill="#1E293B"/>
+  <rect x="250" y="50" width="500" height="20" rx="10" fill="url(#dataGrad)">
+    <animate attributeName="width" values="0;500" dur="2s" fill="freeze"/>
   </rect>
-  <text x="800" y="71" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">70+</text>
-
-  <text x="24" y="102" fill="#94A3B8" font-size="12">Color Palettes</text>
-  <rect x="230" y="90" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="90" width="373" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;373" dur="1.6s" begin="0.3s" fill="freeze"/>
+  <text x="760" y="65" fill="#00FF41" font-size="13" font-weight="bold">70+</text>
+  
+  <!-- Row 2: Styles -->
+  <text x="30" y="110" fill="#00D4FF" font-size="12" font-weight="bold">🎨 UI Styles</text>
+  <rect x="250" y="100" width="500" height="20" rx="10" fill="#1E293B"/>
+  <rect x="250" y="100" width="368" height="20" rx="10" fill="url(#dataGrad)">
+    <animate attributeName="width" values="0;368" dur="2s" begin="0.2s" fill="freeze"/>
   </rect>
-  <text x="800" y="103" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">80+</text>
-
-  <text x="24" y="134" fill="#94A3B8" font-size="12">Font Pairings</text>
-  <rect x="230" y="122" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="122" width="350" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;350" dur="1.6s" begin="0.5s" fill="freeze"/>
+  <text x="640" y="115" fill="#00FF41" font-size="13" font-weight="bold">46+</text>
+  
+  <!-- Row 3: Colors -->
+  <text x="30" y="160" fill="#00D4FF" font-size="12" font-weight="bold">🌈 Color Palettes</text>
+  <rect x="250" y="150" width="500" height="20" rx="10" fill="#1E293B"/>
+  <rect x="250" y="150" width="560" height="20" rx="10" fill="url(#dataGrad)">
+    <animate attributeName="width" values="0;560" dur="2s" begin="0.4s" fill="freeze"/>
   </rect>
-  <text x="800" y="135" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">75+</text>
-
-  <text x="24" y="166" fill="#94A3B8" font-size="12">UI Styles</text>
-  <rect x="230" y="154" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="154" width="215" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;215" dur="1.6s" begin="0.7s" fill="freeze"/>
+  <text x="800" y="165" fill="#00FF41" font-size="13" font-weight="bold">80+</text>
+  
+  <!-- Row 4: Fonts -->
+  <text x="30" y="210" fill="#00D4FF" font-size="12" font-weight="bold">✍️ Font Pairings</text>
+  <rect x="250" y="200" width="500" height="20" rx="10" fill="#1E293B"/>
+  <rect x="250" y="200" width="525" height="20" rx="10" fill="url(#dataGrad)">
+    <animate attributeName="width" values="0;525" dur="2s" begin="0.6s" fill="freeze"/>
   </rect>
-  <text x="800" y="167" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">46+</text>
-
-  <text x="24" y="198" fill="#94A3B8" font-size="12">Synonym Groups</text>
-  <rect x="230" y="186" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="186" width="560" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;560" dur="1.6s" begin="0.9s" fill="freeze"/>
+  <text x="790" y="215" fill="#00FF41" font-size="13" font-weight="bold">75+</text>
+  
+  <!-- Row 5: Synonyms -->
+  <text x="30" y="260" fill="#00D4FF" font-size="12" font-weight="bold">🔤 Synonym Groups</text>
+  <rect x="250" y="250" width="500" height="20" rx="10" fill="#1E293B"/>
+  <rect x="250" y="250" width="560" height="20" rx="10" fill="url(#dataGrad)">
+    <animate attributeName="width" values="0;560" dur="2s" begin="0.8s" fill="freeze"/>
   </rect>
-  <text x="800" y="199" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">120+</text>
+  <text x="800" y="265" fill="#00FF41" font-size="13" font-weight="bold">120+</text>
+</svg>
 
-  <text x="24" y="230" fill="#94A3B8" font-size="12">Tech Stacks</text>
-  <rect x="230" y="218" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="218" width="75" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;75" dur="1.6s" begin="1.1s" fill="freeze"/>
-  </rect>
-  <text x="800" y="231" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">16</text>
+<table>
+  <tr style="background-color: rgba(0, 255, 65, 0.15);">
+    <th style="color: #00FF41;">CATEGORY</th>
+    <th style="color: #00D4FF;">v1.x</th>
+    <th style="color: #00D4FF;">v2.0</th>
+    <th style="color: #00FF41;">v2.1 ⭐</th>
+  </tr>
+  <tr>
+    <td><strong>Product Types</strong></td>
+    <td>51</td>
+    <td>70+</td>
+    <td><strong class="neon-blue">70+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>UI Styles</strong></td>
+    <td>31</td>
+    <td>46+</td>
+    <td><strong class="neon-blue">46+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Color Palettes</strong></td>
+    <td>61</td>
+    <td>80+</td>
+    <td><strong class="neon-blue">80+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Font Pairings</strong></td>
+    <td>61</td>
+    <td>75+</td>
+    <td><strong class="neon-blue">75+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Synonym Groups</strong></td>
+    <td>34</td>
+    <td>120+</td>
+    <td><strong class="neon-blue">120+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Toolbox Scripts</strong></td>
+    <td>✗</td>
+    <td>9</td>
+    <td><strong class="neon-blue">17 🚀</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Components</strong></td>
+    <td>—</td>
+    <td>—</td>
+    <td><strong class="neon-blue">12 generated</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Layout Templates</strong></td>
+    <td>—</td>
+    <td>—</td>
+    <td><strong class="neon-blue">5</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Chart Types</strong></td>
+    <td>—</td>
+    <td>—</td>
+    <td><strong class="neon-blue">8 + 2 libs</strong></td>
+  </tr>
+  <tr>
+    <td><strong>SVG Icons</strong></td>
+    <td>—</td>
+    <td>—</td>
+    <td><strong class="neon-blue">70+</strong></td>
+  </tr>
+  <tr>
+    <td><strong>WCAG Audit</strong></td>
+    <td>✗</td>
+    <td>—</td>
+    <td><strong class="neon-blue">Built-in ✓</strong></td>
+  </tr>
+</table>
 
-  <text x="24" y="262" fill="#94A3B8" font-size="12">Toolbox Scripts</text>
-  <rect x="230" y="250" width="560" height="16" rx="8" fill="#1E293B"/>
-  <rect x="230" y="250" width="79" height="16" rx="8" fill="url(#barGrad2)">
-    <animate attributeName="width" values="0;79" dur="1.6s" begin="1.3s" fill="freeze"/>
+---
+
+## <span class="neon-blue">📡 DEPLOYMENT PROTOCOL</span>
+
+<div style="background-color: rgba(0, 255, 65, 0.05); padding: 1.5rem; border: 2px solid #00FF41; border-radius: 8px; margin: 1.5rem 0; animation: box-glow 2s infinite;">
+
+### **PHASE 1: ACQUISITION**
+
+<div class="code-block" style="margin-top: 0.5rem;">
+```bash
+# Clone the repository
+git clone https://github.com/CyebRageAnonymuos/ui-ux-cr.git
+cd ui-ux-cr
+
+# Verify Python installation
+python3 --version  # Requires 3.8+
+```
+</div>
+
+### **PHASE 2: INSTALLATION**
+
+<div class="code-block" style="margin-top: 0.5rem;">
+```bash
+# Validate prerequisites
+which python3  # Should be in your PATH
+pip3 --version  # Check pip is installed
+
+# Navigate to scripts
+cd scripts
+ls -la  # Verify all 17 tools are present
+```
+</div>
+
+### **PHASE 3: INITIALIZATION**
+
+<div class="code-block" style="margin-top: 0.5rem;">
+```bash
+# Run your first command
+python3 search.py "modern SaaS dashboard" --design-system
+
+# Verify output
+# ✓ Pattern: [Retrieved]
+# ✓ Style: [Retrieved]
+# ✓ Colors: [Retrieved]
+# ✓ Typography: [Retrieved]
+```
+</div>
+
+<svg width="100%" height="50" viewBox="0 0 800 50" style="margin-top: 1rem;">
+  <text x="20" y="25" fill="#00FF41" font-size="13" font-weight="bold">DEPLOYMENT STATUS:</text>
+  <rect x="250" y="10" width="300" height="30" rx="15" fill="none" stroke="#00D4FF" stroke-width="2">
+    <animate attributeName="r" values="0;15;0" dur="2s" repeatCount="indefinite"/>
   </rect>
-  <text x="800" y="263" fill="#E2E8F0" font-size="12" font-weight="700" text-anchor="end">17</text>
+  <text x="400" y="32" text-anchor="middle" fill="#00D4FF" font-size="12" font-weight="bold">
+    ✓ SYSTEM READY
+  </text>
 </svg>
 
 </div>
 
-| Category | v1.x | v2.0 | v2.1 |
-|---|---|---|---|
-| Product Types | 51 | 70+ | **70+** |
-| UI Styles | 31 | 46+ | **46+** |
-| Color Palettes | 61 | 80+ | **80+** |
-| Font Pairings | 61 | 75+ | **75+** |
-| Synonym Groups | 34 | 120+ | **120+** |
-| Toolbox Scripts | ✗ | 9 | **17** |
-| Components (generated) | — | — | **12** |
-| Layout Templates | — | — | **5** |
-| Chart Types | — | — | **8 + 2 frameworks** |
-| Background Patterns | — | — | **12 CSS** |
-| SVG Icons | — | — | **70+** |
-| WCAG Audit | ✗ | — | **Built-in tool** |
+---
 
-<br/>
+## <span class="neon-blue">⚡ RAPID INITIALIZATION (Quick Start)</span>
 
-## Installation
+<svg width="100%" height="100" viewBox="0 0 800 100" style="margin: 1rem 0;">
+  <text x="20" y="30" fill="#00FF41" font-size="14" font-weight="bold">
+    $ python3 scripts/page_builder.py --init
+  </text>
+  
+  <text x="40" y="55" fill="#00D4FF" font-size="12">
+    [████████████████████] 100% - INITIALIZING...
+  </text>
+  
+  <text x="40" y="75" fill="#00FF41" font-size="12" font-weight="bold">
+    ✓ BOOT COMPLETE - READY FOR OPERATIONS
+  </text>
+</svg>
 
-**Option 1 — Direct copy**
+### **60-SECOND MISSION: Build a Landing Page**
 
+<div class="code-block">
 ```bash
-git clone https://github.com/CyebRageAnonymuos/ui-ux-cr.git
-cp -r ui-ux-cr /path/to/your/project/
+# Step 1: Build the entire page structure
+python3 scripts/page_builder.py \
+  --product "My Startup" \
+  --sections navbar,hero,features,pricing,cta,footer \
+  --out landing.html
+
+# Step 2: Generate SVG icons
+python3 scripts/svg_generator.py --icon check --size 24 --color "#00FF41"
+
+# Step 3: Create color palette
+python3 scripts/palette_generator.py "#2563EB" --harmony complementary --check-wcag
+
+# Step 4: Audit accessibility
+python3 scripts/accessibility_audit.py landing.html
+
+# Result: A complete, accessible landing page ready for deployment
 ```
+</div>
 
-**Option 2 — As an opencode / Claude skill**
+<div style="background-color: rgba(0, 255, 65, 0.1); padding: 1rem; border-left: 4px solid #00FF41; margin: 1rem 0;">
+  <strong class="neon-blue">→ RESULT:</strong> A professionally designed, fully accessible landing page in under a minute. No design experience required.
+</div>
 
-```bash
-mkdir -p .opencode/skills/ui-ux-cr
-cp -r ui-ux-cr/scripts .opencode/skills/ui-ux-cr/
-cp -r ui-ux-cr/data .opencode/skills/ui-ux-cr/
-cp ui-ux-cr/SKILL.md .opencode/skills/ui-ux-cr/
-```
+---
 
-**Prerequisites**
+## <span class="neon-blue">🧩 SYSTEM MODULES (Components)</span>
 
-```bash
-python3 --version
-```
+<div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
 
-Not installed? `brew install python3` (macOS) · `sudo apt install python3` (Ubuntu) · `winget install Python.Python.3.12` (Windows)
+<div class="tool-card">
+  <strong class="neon-blue">✓ Navbar Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Responsive navigation with logo, links, CTA button</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component navbar
+  </div>
+</div>
 
-<br/>
+<div class="tool-card">
+  <strong class="neon-blue">✓ Hero Section Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Full-width hero with headline, subtext, CTA, background image</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component hero --style glassmorphism
+  </div>
+</div>
 
-## Usage
+<div class="tool-card">
+  <strong class="neon-blue">✓ Features Grid Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">3-column feature cards with icons, title, description</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component features --count 6
+  </div>
+</div>
 
-**Generate a complete design system (primary feature):**
+<div class="tool-card">
+  <strong class="neon-blue">✓ Pricing Table Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">3-tier pricing with features, CTA buttons</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component pricing --tiers 3
+  </div>
+</div>
 
-```bash
-python3 scripts/search.py "SaaS landing page modern" --design-system -p "My SaaS"
-```
+<div class="tool-card">
+  <strong class="neon-blue">✓ Modal/Dialog Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Responsive modal with backdrop, close button, form</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component modal --type form
+  </div>
+</div>
 
-Returns: pattern, style, colors + extended palette, typography with Google Fonts links, effects, components with code, animations with CSS, responsive patterns, anti-patterns, and a pre-delivery checklist.
+<div class="tool-card">
+  <strong class="neon-blue">✓ Data Table Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Sortable, responsive table with pagination</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component table --rows 10
+  </div>
+</div>
 
-**Persist it as the project's design source of truth:**
+<div class="tool-card">
+  <strong class="neon-blue">✓ Sidebar Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Collapsible sidebar navigation for dashboards</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component sidebar --style dark
+  </div>
+</div>
 
-```bash
-python3 scripts/search.py "ecommerce" --design-system --persist -p "MyShop"
-```
-
-**Full cross-domain analysis:**
-
-```bash
-python3 scripts/search.py "<query>" --analyze
-```
-
-**Advanced flags:**
-
-```bash
-python3 scripts/search.py "healthcare saas" --wcag              # WCAG contrast analysis
-python3 scripts/search.py "fintech dashboard" --export-css      # CSS custom properties
-python3 scripts/search.py "ecommerce luxury" --export-tailwind  # Tailwind config
-python3 scripts/search.py "healthcare" --color-palette          # Extended color palette
-python3 scripts/search.py "modern dark" --multi-domains style,color,typography
-```
-
-**Output formats:**
-
-```bash
-python3 scripts/search.py "fintech" --design-system               # ASCII, for the terminal
-python3 scripts/search.py "fintech" --design-system -f markdown   # Markdown, for docs
-python3 scripts/search.py "glassmorphism" --domain style --json   # JSON
-```
-
-<br/>
-
-## Available Domains
-
-| Domain | Use For | Example Keywords |
-|---|---|---|
-| `style` | UI styles, colors, effects | glassmorphism, minimalism, dark mode |
-| `color` | Color palettes by product | saas, ecommerce, healthcare |
-| `typography` | Font pairings | elegant, playful, professional |
-| `landing` | Page structure, CTA strategy | hero, testimonial, pricing |
-| `chart` | Chart types & libraries | trend, comparison, funnel |
-| `ux` | Best practices, anti-patterns | animation, accessibility, loading |
-| `component` | Component recommendations | button, card, modal, form |
-| `animation` | Animation patterns | hover, entrance, scroll |
-| `responsive` | Responsive patterns | mobile-first, grid |
-| `design_token` | Design tokens | color, spacing, shadow |
-| `product` | Product types | SaaS, e-commerce |
-| `icons` | Icon recommendations | lucide, heroicons |
-| `react` | React/Next.js performance | memo, suspense, bundle |
-| `web` | Web interface guidelines | aria, focus, keyboard |
-
-<br/>
-
-## Available Stacks
-
-`html-tailwind` (default) · `react` · `nextjs` · `vue` · `nuxtjs` · `svelte` · `swiftui` · `react-native` · `flutter` · `shadcn` · `jetpack-compose` · `angular` · `laravel` · `threejs` · `astro` · `nuxt-ui`
-
-<br/>
-
-## Built-in Design Rules
-
-The skill doesn't just generate assets — it enforces a set of professional UI rules on every output. Pulled directly from its own guidelines:
-
-**Icons & Visual Elements**
-
-| Rule | Do | Don't |
-|---|---|---|
-| No emoji icons | Use SVG icons (Heroicons, Lucide, Simple Icons) | Use emojis as UI icons |
-| Stable hover states | Use color/opacity transitions on hover | Use scale transforms that shift layout |
-| Correct brand logos | Research the official SVG from Simple Icons | Guess or use incorrect logo paths |
-| Consistent icon sizing | Fixed viewBox (24×24) with `w-6 h-6` | Mix different icon sizes randomly |
-
-**Interaction & Cursor**
-
-| Rule | Do | Don't |
-|---|---|---|
-| Cursor pointer | Add `cursor-pointer` to all clickable elements | Leave the default cursor on interactive elements |
-| Hover feedback | Provide visual feedback (color, shadow, border) | Give no indication an element is interactive |
-| Smooth transitions | Use `transition-colors duration-200` | Instant state changes, or anything over 500ms |
-
-**Light / Dark Mode Contrast**
-
-| Rule | Do | Don't |
-|---|---|---|
-| Glass card, light mode | Use `bg-white/80` or higher opacity | Use `bg-white/10` (too transparent) |
-| Text contrast, light mode | Use `#0F172A` (slate-900) for text | Use `#94A3B8` (slate-400) for body text |
-| Muted text, light mode | Use `#475569` (slate-600) minimum | Use gray-400 or lighter |
-| Border visibility | Use `border-gray-200` in light mode | Use `border-white/10` (invisible) |
-
-<br/>
-
-## Pre-Delivery Checklist
-
-- [ ] No emojis as icons — use `svg_generator.py`
-- [ ] `cursor-pointer` on all clickable elements
-- [ ] Hover states 150–300ms, no layout shift
-- [ ] Contrast 4.5:1 minimum — verify with `accessibility_audit.py`
-- [ ] All images have alt text
-- [ ] Form inputs have labels
-- [ ] `prefers-reduced-motion` respected
-- [ ] Responsive at 375 / 768 / 1024 / 1440px
-- [ ] Loading, error, and empty states designed
-- [ ] Dark mode tested
-
-<br/>
-
-## Worked Examples
-
-**SaaS landing page, end to end**
-
-```bash
-python3 scripts/search.py "SaaS landing page modern" --design-system -p "My SaaS"
-python3 scripts/page_builder.py --product "SaaS (General)" --sections navbar,hero,features,pricing,cta,footer --out landing.html
-python3 scripts/css_generator.py --ui-kit --primary #2563EB --cta #F97316
-python3 scripts/svg_generator.py --icon check --size 24
-```
-*Recommended: Glassmorphism + Flat · Trust blue `#2563EB` + orange CTA `#F97316` · Poppins + Inter*
-
-**Healthcare dashboard**
-
-```bash
-python3 scripts/search.py "healthcare dashboard" --design-system -p "Health App"
-python3 scripts/layout_generator.py --layout dashboard
-python3 scripts/chart_generator.py --chart line --labels "Mon,Tue,Wed,Thu,Fri" --data "120,180,150,220,190"
-```
-*Recommended: Dark Mode (OLED) · `#0F172A` background + health green `#22C55E` · Merriweather + Open Sans*
-
-**E-commerce store**
-
-```bash
-python3 scripts/search.py "ecommerce luxury" --design-system -p "Luxury Shop"
-python3 scripts/component_generator.py --component card --product "E-commerce"
-python3 scripts/palette_generator.py "#1C1917" --harmony tetradic --check-wcag
-```
-*Recommended: Liquid Glass + Glassmorphism · Premium dark + gold `#CA8A04` · Cormorant Garamond + Montserrat*
-
-<br/>
-
-## Good to Know
-
-- `SKILL.md` still headlines itself as **v2.0** ("Ultra-premium design intelligence system v2.0") and its own data-coverage table stops at 9 toolbox scripts, while `README.md` has moved on to **v2.1** and 17 scripts — the two docs haven't been updated in lockstep.
-- The reasoning layer depends on a `ui-reasoning.csv` file shipped in `data/` — worth keeping in mind if you ever restructure the `data/` folder, since `search.py --design-system` reads it directly.
-
-<br/>
-
-## Contributing
-
-1. Fork the repository
-2. Create your branch: `git checkout -b feature/AmazingFeature`
-3. Commit: `git commit -m 'Add some AmazingFeature'`
-4. Push and open a Pull Request
-
-<br/>
-
-## License
-
-MIT — see [LICENSE](https://github.com/CyebRageAnonymuos/ui-ux-cr/blob/main/LICENSE).
-
-<br/>
-
-<div align="center">
-
-**[⬆ Back to top](#table-of-contents)**
-
-Built with passion by Cyber-Rage — making AI-powered design accessible to everyone.
+<div class="tool-card">
+  <strong class="neon-blue">✓ Footer Module</strong><br/>
+  <span style="color: #00D4FF; font-size: 0.9em;">Multi-column footer with links, social, newsletter</span>
+  <div class="code-block" style="margin-top: 0.5rem; font-size: 0.85em;">
+    python3 scripts/component_generator.py --component footer --columns 4
+  </div>
+</div>
 
 </div>
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=0:22D3EE,100:F97316&height=120&section=footer)
+---
+
+## <span class="neon-blue">📁 SYSTEM ARCHITECTURE (File Structure)</span>
+
+<div style="background-color: rgba(0, 255, 65, 0.05); padding: 1.5rem; border-left: 4px solid #00FF41; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 0.95em;">
+
+```
+ui-ux-cr/
+│
+├── scripts/                          # ⚙️ THE 17-TOOL ARSENAL
+│   ├── search.py                    # 🔍 BM25 design intelligence
+│   ├── svg_generator.py             # 🎨 Vector icon generator
+│   ├── css_generator.py             # 💅 CSS effect suite
+│   ├── palette_generator.py         # 🌈 Color harmony engine
+│   ├── typography_generator.py      # ✍️ Type system builder
+│   ├── theme_exporter.py            # 📤 Multi-format exporter
+│   ├── component_generator.py       # 🧩 UI component kit
+│   ├── page_builder.py              # 📄 Landing page composer
+│   ├── layout_generator.py          # 📐 Grid & spacing system
+│   ├── animation_generator.py       # ✨ Motion patterns
+│   ├── chart_generator.py           # 📊 Data viz configs
+│   ├── pattern_generator.py         # 🔲 Background patterns
+│   ├── favicon_generator.py         # 🏷️ Icon & manifest builder
+│   ├── copy_generator.py            # 📝 Microcopy engine
+│   ├── mockup_generator.py          # 📐 ASCII wireframes
+│   ├── accessibility_audit.py       # ♿ WCAG compliance checker
+│   └── social_specs.py              # 📱 Platform dimensions
+│
+├── data/                            # 📚 KNOWLEDGE BASE
+│   ├── products.json                # 70+ product definitions
+│   ├── styles.json                  # 46+ UI style patterns
+│   ├── colors.json                  # 80+ color palettes
+│   ├── typography.json              # 75+ font pairings
+│   ├── synonyms.json                # 120+ keyword groups
+│   └── components.json              # 12 ready components
+│
+├── README.md                        # 📖 This legendary file
+├── SKILL.md                         # 🤖 AI skill integration
+├── LICENSE                          # ⚖️ MIT License
+└── .gitignore                       # 🚫 Exclusions
+
+KEY DIRECTORIES:
+• scripts/  = All executable tools (17 total)
+• data/     = Database of designs, palettes, fonts
+• output/   = Generated files (HTML, CSS, SVG, JSON)
+```
+
+</div>
+
+---
+
+## <span class="neon-blue">🤝 OPERATOR ACCESS PROTOCOL (Contributing)</span>
+
+<div style="background-color: rgba(0, 212, 255, 0.05); padding: 1.5rem; border: 2px solid #00D4FF; border-radius: 8px; margin: 1.5rem 0;">
+
+### **STEP 1: FORK THE NETWORK**
+<div class="code-block">
+```bash
+# Fork on GitHub, then clone your fork
+git clone https://github.com/YOUR-USERNAME/ui-ux-cr.git
+cd ui-ux-cr
+```
+</div>
+
+### **STEP 2: CREATE SECURE CHANNEL**
+<div class="code-block">
+```bash
+# Create feature branch
+git checkout -b feature/AmazingDesignFeature
+```
+</div>
+
+### **STEP 3: DEPLOY CHANGES**
+<div class="code-block">
+```bash
+# Make your changes, test thoroughly
+git add .
+git commit -m "Add amazing design feature to search system"
+```
+</div>
+
+### **STEP 4: PUSH TO NETWORK**
+<div class="code-block">
+```bash
+# Push your branch
+git push origin feature/AmazingDesignFeature
+```
+</div>
+
+### **STEP 5: INITIATE MERGE REQUEST**
+Open a Pull Request on GitHub with:
+- **Title:** Concise description of changes
+- **Description:** What, why, and how
+- **Testing:** Steps to verify your changes
+
+<blockquote style="animation: pulse-blue 2.5s infinite; margin-top: 1.5rem;">
+  <strong class="neon-blue">> CONTRIBUTION GUIDELINES</strong><br/>
+  All contributions enhance the collective intelligence. Code quality, documentation, and testing are non-negotiable. Join us in making AI-powered design accessible to everyone.
+</blockquote>
+
+</div>
+
+---
+
+## <span class="neon-blue">🗺️ MISSION ROADMAP (Future Deployments)</span>
+
+<div style="background-color: rgba(0, 255, 65, 0.05); padding: 1.5rem; border-left: 4px solid #00FF41; margin: 1.5rem 0;">
+
+### **Q3 2026 — PHASE ALPHA**
+- ☑️ **17 Toolbox Scripts** (DEPLOYED)
+- ☑️ **Accessibility Auditor** (DEPLOYED)
+- ☐ **Figma Plugin Integration** (IN PROGRESS)
+- ☐ **Advanced AI Reasoning** (NEXT)
+
+### **Q4 2026 — PHASE BETA**
+- ☐ **Component Library UI** (PLANNED)
+- ☐ **Real-time Collaboration** (PLANNED)
+- ☐ **Design System Versioning** (PLANNED)
+- ☐ **Extended Framework Support** (PLANNED)
+
+### **2027 — PHASE GAMMA**
+- ☐ **Cloud Deployment** (RESEARCH)
+- ☐ **Mobile App** (RESEARCH)
+- ☐ **API Marketplace** (RESEARCH)
+- ☐ **Enterprise SaaS** (RESEARCH)
+
+<blockquote style="animation: pulse-glow 2s infinite; margin-top: 1.5rem; color: #00FF41; border-left-color: #00D4FF;">
+  <strong class="neon-blue">> PRIORITY: HIGH</strong><br/>
+  Every feature is designed to democratize professional design. No gatekeeping. No expensive tools. Just raw power in your terminal.
+</blockquote>
+
+</div>
+
+---
+
+## <span class="neon-blue">👤 OPERATOR CREDENTIALS (Author)</span>
+
+<svg width="100%" height="60" viewBox="0 0 800 60" style="margin: 1rem 0;">
+  <text x="20" y="30" fill="#00FF41" font-size="14" font-weight="bold">
+    OPERATOR: CyebRageAnonymuos
+  </text>
+  <text x="20" y="50" fill="#00D4FF" font-size="12">
+    Mission: Making AI-powered design accessible to everyone
+  </text>
+</svg>
+
+<div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap;">
+  <a href="https://github.com/CyebRageAnonymuos" style="border: 2px solid #00D4FF; padding: 0.75rem 1.5rem; border-radius: 8px; animation: box-glow 2s infinite;">
+    <span class="neon-blue">🔗</span> GitHub Profile
+  </a>
+  <a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/issues" style="border: 2px solid #00FF41; padding: 0.75rem 1.5rem; border-radius: 8px; animation: box-glow 2s infinite 0.5s;">
+    <span class="neon-blue">💬</span> Report Issues
+  </a>
+  <a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/discussions" style="border: 2px solid #00D4FF; padding: 0.75rem 1.5rem; border-radius: 8px; animation: box-glow 2s infinite 1s;">
+    <span class="neon-blue">💭</span> Start Discussion
+  </a>
+</div>
+
+---
+
+## <span class="neon-blue">📄 CLEARANCE & LICENSING</span>
+
+<div style="background-color: rgba(0, 255, 65, 0.1); padding: 1.5rem; border: 2px solid #00FF41; border-radius: 8px; margin: 1.5rem 0; text-align: center;">
+
+### **MIT LICENSE** ⚖️
+
+<span style="color: #00D4FF; font-size: 1.1em; font-weight: bold;">
+  OPEN SOURCE • FREE TO USE • MODIFY • DISTRIBUTE
+</span>
+
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for full terms.
+
+<blockquote style="animation: pulse-glow 2s infinite; margin-top: 1.5rem;">
+  <strong class="neon-blue">→ YOU ARE FREE TO:</strong><br/>
+  ✓ Use this system commercially<br/>
+  ✓ Modify and redistribute<br/>
+  ✓ Include in your projects<br/>
+  ✓ Private or public use<br/>
+  <br/>
+  <strong style="color: #00D4FF;">→ YOU MUST:</strong><br/>
+  • Include the original license<br/>
+  • Give appropriate credit
+</blockquote>
+
+</div>
+
+---
+
+## <span class="neon-blue">═══════════════════════════════════════════════════════</span>
+
+<svg width="100%" height="120" viewBox="0 0 800 120" style="margin: 2rem 0;">
+  <defs>
+    <linearGradient id="finalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FF41;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00FF41;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <text x="400" y="35" text-anchor="middle" fill="#00FF41" font-size="16" font-weight="bold" style="animation: pulse-glow 2s infinite;">
+    UI UX CR — CYBER-RAGE DESIGN INTELLIGENCE
+  </text>
+  
+  <text x="400" y="60" text-anchor="middle" fill="#00D4FF" font-size="13">
+    17 Tools • 70+ Products • 120+ Synonyms • 100% Python
+  </text>
+  
+  <text x="400" y="85" text-anchor="middle" fill="#00FF41" font-size="12" style="animation: typing-cursor 1s infinite;">
+    Built with passion by CyebRageAnonymuos █
+  </text>
+  
+  <!-- Final scanline -->
+  <rect x="0" y="100" width="800" height="3" fill="url(#finalGrad)" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+  </rect>
+</svg>
+
+<div style="text-align: center; margin-top: 2rem; padding: 1.5rem; border-top: 2px solid #00D4FF; border-bottom: 2px solid #00FF41;">
+  <strong class="neon-blue" style="font-size: 1.1em; animation: pulse-blue 2.5s infinite;">
+    → CONNECTION STABLE • SYSTEMS ONLINE • READY FOR DEPLOYMENT →
+  </strong>
+  <br/>
+  <span style="color: #00FF41; margin-top: 1rem; display: block; animation: typing-cursor 1s infinite; font-size: 0.9em;">
+    root@github:~$ █
+  </span>
+</div>
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                   END OF TRANSMISSION                    │
+│                   THANK YOU, OPERATOR                    │
+│                                                          │
+│          github.com/CyebRageAnonymuos/ui-ux-cr          │
+│                  MIT License • Open Source               │
+│                                                          │
+│                   STATUS: READY TO DEPLOY               │
+└──────────────────────────────────────────────────────────┘
+```
