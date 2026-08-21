@@ -2,7 +2,7 @@
 
 # UI UX CR v2 - Cyber-Rage Design Intelligence Engine
 
-Ultra-premium design intelligence system **v2.0** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **75+ font pairings**, and **16+ tech stacks**.
+Ultra-premium design intelligence system **v2.2** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **100+ font pairings**, **65 ready-made premium themes**, **155 SVG icons**, and **16+ tech stacks**.
 
 ## Prerequisites
 
@@ -134,7 +134,22 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 | `mockup_generator.py` | ASCII wireframes (desktop, dashboard, mobile, landing, login) | `python3 scripts/mockup_generator.py --type dashboard` |
 | `social_specs.py` | Social media dimension cheat sheets (10 platforms) | `python3 scripts/social_specs.py --platform instagram` |
 | `banner_generator.py` | ASCII art banners for terminal | `python3 scripts/banner_generator.py --text "UI UX CR" --style block` |
+| `theme_pack.py` | 65 ready-made premium themes (Dracula, Nord, Cyberpunk, Luxury Gold...) → CSS/Tailwind/JSON | `python3 scripts/theme_pack.py --name dracula --format css` |
+| `text_deco.py` | Fancy Unicode fonts (gothic, script, bubble...) + decorative shapes, dividers, frames, bars — emoji-free | `python3 scripts/text_deco.py --text "Sale" --style gothic` |
 | `accessibility_audit.py` | WCAG audit of HTML files (contrast, alt, labels, headings) | `python3 scripts/accessibility_audit.py index.html` |
+
+**Theme Pack quick reference:**
+- List all: `python3 scripts/theme_pack.py --list`
+- Filter: `python3 scripts/theme_pack.py --dark --mood cyberpunk` or `--light --mood minimal`
+- Export: `python3 scripts/theme_pack.py --name nord --format all` (css/tailwind/json/all)
+- Popular themes: `dracula`, `nord`, `tokyo-night`, `catppuccin-mocha`, `cyberpunk-neon`, `luxury-gold`, `vaporwave`, `matrix-green`, `github-dark`, `oled-black`
+
+**Text Decorator quick reference (use INSTEAD of emojis):**
+- Fancy fonts: `python3 scripts/text_deco.py --text "Hello" --style gothic|script|double-struck|bubble|aesthetic|small-caps|monospace` (25+ styles, see `--styles`)
+- Dividers: `python3 scripts/text_deco.py --divider star-line|wave|ornate|circuit` (35+ dividers)
+- Frames: `python3 scripts/text_deco.py --frame "TITLE" --frame-style double|stars|tech` (12 frame styles)
+- Symbols: `python3 scripts/text_deco.py --symbols stars|arrows|status|geometric` (16 categories)
+- Progress/rating: `--bar 70` → `██████████████░░░░░░ 70%`, `--rating 4` → `★★★★☆`
 
 **Toolbox Workflow:**
 1. `page_builder.py --product "SaaS (General)"` → get a complete HTML landing page
@@ -269,29 +284,33 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 
 ---
 
-## Data Coverage v2.0
+## Data Coverage v2.2
 
-| Category | v1.x | v2.0 |
-|----------|------|------|
-| Product Types | 51 | **70+** |
-| UI Styles | 31 | **46+** |
-| Color Palettes | 61 | **80+** |
-| Font Pairings | 61 | **75+** |
-| Synonym Groups | 34 | **120+** |
-| Animations | 31 | **31** |
-| Components | 31 | **31** |
-| Responsive Patterns | 21 | **21** |
-| Backgrounds | 46 | **46** |
-| Tech Stacks | 16 | **16** |
-| WCAG Checks | ✗ | **Built-in** |
-| Code Generation | ✗ | **Auto-generated** |
-| Color Blind Simulation | ✗ | **3 types** |
-| CSS/Tailwind Export | ✗ | **Supported** |
-| SVG Icon/Pattern Generator | ✗ | **New tool** |
-| CSS Utility Generator | ✗ | **New tool** |
-| Palette Generator | ✗ | **New tool** |
-| Typography Generator | ✗ | **New tool** |
-| Component Code Generator | ✗ | **12 components** |
+| Category | v1.x | v2.0 | v2.2 |
+|----------|------|------|------|
+| Product Types | 51 | **70+** | **70+** |
+| UI Styles | 31 | **46+** | **46+** |
+| Color Palettes | 61 | **80+** | **80+** |
+| Font Pairings | 61 | **75+** | **103** |
+| Premium Themes (ready-made) | ✗ | ✗ | **65** |
+| SVG Icons | ✗ | **70+** | **155** |
+| Unicode Font Styles | ✗ | ✗ | **25+** |
+| Decorative Shapes/Dividers | ✗ | ✗ | **50+** |
+| Synonym Groups | 34 | **120+** | **120+** |
+| Animations | 31 | **31** | **31** |
+| Components | 31 | **31** | **31** |
+| Responsive Patterns | 21 | **21** | **21** |
+| Backgrounds | 46 | **46** | **46** |
+| Tech Stacks | 16 | **16** | **16** |
+| WCAG Checks | ✗ | **Built-in** | **Built-in** |
+| Code Generation | ✗ | **Auto-generated** | **Auto-generated** |
+| Color Blind Simulation | ✗ | **3 types** | **3 types** |
+| CSS/Tailwind Export | ✗ | **Supported** | **Supported** |
+| SVG Icon/Pattern Generator | ✗ | **New tool** | **155 icons** |
+| CSS Utility Generator | ✗ | **New tool** | **New tool** |
+| Palette Generator | ✗ | **New tool** | **New tool** |
+| Typography Generator | ✗ | **New tool** | **New tool** |
+| Component Code Generator | ✗ | **12 components** | **12 components** |
 | Page Builder | ✗ | **Full HTML pages** |
 | Layout/Grid Generator | ✗ | **5 templates** |
 | Animation Generator | ✗ | **12 animations + kit** |
