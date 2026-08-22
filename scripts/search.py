@@ -127,6 +127,13 @@ def export_css_variables(query):
     lines.append(f"  --color-warning: #F59E0B;")
     lines.append(f"  --color-error: #EF4444;")
     lines.append(f"  --color-info: #3B82F6;")
+    # Extended palette must live INSIDE the :root rule - custom
+    # properties at the stylesheet top level are invalid CSS and get
+    # dropped by parsers, silently losing the whole palette.
+    lines.append("")
+    lines.append("  /* Extended Primary Palette */")
+    for key, value in theme.get("primary", {}).get("shades", {}).items():
+        lines.append(f"  --primary-{key}: {value};")
     lines.append("}")
     lines.append("")
     lines.append("/* Dark Mode */")
@@ -139,12 +146,6 @@ def export_css_variables(query):
     lines.append("    --color-border: #334155;")
     lines.append("  }")
     lines.append("}")
-
-    # Add extended palette
-    lines.append("")
-    lines.append("/* Extended Primary Palette */")
-    for key, value in theme.get("primary", {}).get("shades", {}).items():
-        lines.append(f"--primary-{key}: {value};")
 
     return "\n".join(lines)
 
@@ -267,13 +268,19 @@ if __name__ == "__main__":
         print(result)
 
         if args.persist:
-            project_slug = args.project_name.lower().replace(' ', '-') if args.project_name else "default"
+            # Mirror persist_design_system's actual slug logic exactly:
+            # it derives the slug from project_name OR the uppercased
+            # query - computing it from "default" here pointed users at
+            # directories that were never created.
+            effective_name = args.project_name or args.query.upper()
+            project_slug = effective_name.lower().replace(' ', '-')
+            base_dir = args.output_dir or "."
             print("\n" + "=" * 60)
-            print(f"Design system persisted to design-system/{project_slug}/")
-            print(f"   design-system/{project_slug}/MASTER.md")
+            print(f"Design system persisted to {base_dir}/design-system/{project_slug}/")
+            print(f"   {base_dir}/design-system/{project_slug}/MASTER.md")
             if args.page:
                 page_filename = args.page.lower().replace(' ', '-')
-                print(f"   design-system/{project_slug}/pages/{page_filename}.md")
+                print(f"   {base_dir}/design-system/{project_slug}/pages/{page_filename}.md")
             print("=" * 60)
     elif args.multi_domains:
         domains = [d.strip() for d in args.multi_domains.split(",")]

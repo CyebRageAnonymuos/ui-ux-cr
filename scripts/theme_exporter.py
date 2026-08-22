@@ -51,6 +51,14 @@ def export_css(theme, name="brand"):
     lines.append("  /* Light mode */")
     for key, value in theme["light_mode"].items():
         lines.append(f"  --{name}-{key.replace('_', '-')}: {value};")
+    lines.append("")
+
+    # Gradient - must stay INSIDE the :root rule; a custom property at
+    # the top level of the stylesheet is invalid CSS and gets dropped.
+    gradient = theme.get("gradient", {})
+    if gradient:
+        lines.append(f"  /* {name} gradient */")
+        lines.append(f"  --{name}-gradient: {gradient['css_linear']};")
     lines.append("}")
 
     # Dark mode
@@ -61,13 +69,6 @@ def export_css(theme, name="brand"):
         lines.append(f"    --{name}-{key.replace('_', '-')}: {value};")
     lines.append("  }")
     lines.append("}")
-
-    # Gradient
-    gradient = theme.get("gradient", {})
-    if gradient:
-        lines.append("")
-        lines.append("/* Gradients */")
-        lines.append(f"--{name}-gradient: {gradient['css_linear']};")
 
     return "\n".join(lines)
 
@@ -98,39 +99,39 @@ def export_tailwind(theme, name="brand"):
 def export_scss(theme, name="brand"):
     lines = []
     lines.append(f"// {name.capitalize()} Theme - SCSS Variables")
-    lines.append(f"$brand-primary: {theme['primary']['base']};")
-    lines.append(f"$brand-secondary: {theme['secondary']['base']};")
-    lines.append(f"$brand-accent: {theme['accent']['base']};")
-    lines.append(f"$brand-success: {theme['success']['base']};")
-    lines.append(f"$brand-warning: {theme['warning']['base']};")
-    lines.append(f"$brand-error: {theme['error']['base']};")
-    lines.append(f"$brand-info: {theme['info']['base']};")
+    lines.append(f"${name}-primary: {theme['primary']['base']};")
+    lines.append(f"${name}-secondary: {theme['secondary']['base']};")
+    lines.append(f"${name}-accent: {theme['accent']['base']};")
+    lines.append(f"${name}-success: {theme['success']['base']};")
+    lines.append(f"${name}-warning: {theme['warning']['base']};")
+    lines.append(f"${name}-error: {theme['error']['base']};")
+    lines.append(f"${name}-info: {theme['info']['base']};")
     lines.append("")
 
     lines.append("// Primary scale")
     for shade, color in theme["primary"]["shades"].items():
-        lines.append(f"$brand-primary-{shade}: {color};")
+        lines.append(f"${name}-primary-{shade}: {color};")
     lines.append("")
 
     lines.append("// Neutrals")
     for shade, color in theme["primary"]["neutrals"].items():
-        lines.append(f"$brand-neutral-{shade}: {color};")
+        lines.append(f"${name}-neutral-{shade}: {color};")
     lines.append("")
 
     lines.append("// Light mode")
     for key, value in theme["light_mode"].items():
-        lines.append(f"$brand-{key.replace('_', '-')}: {value};")
+        lines.append(f"${name}-{key.replace('_', '-')}: {value};")
     lines.append("")
 
     lines.append("// Dark mode")
     for key, value in theme["dark_mode"].items():
-        lines.append(f"$brand-dark-{key.replace('_', '-')}: {value};")
+        lines.append(f"${name}-dark-{key.replace('_', '-')}: {value};")
 
     gradient = theme.get("gradient", {})
     if gradient:
         lines.append("")
         lines.append("// Gradient")
-        lines.append(f"$brand-gradient: {gradient['css_linear']};")
+        lines.append(f"${name}-gradient: {gradient['css_linear']};")
 
     return "\n".join(lines)
 

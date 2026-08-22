@@ -43,11 +43,46 @@ def find_product(name):
     return None
 
 
+DEFAULT_COLORS_ROW = {
+    "Product Type": "SaaS (General)",
+    "Primary (Hex)": "#2563EB",
+    "Secondary (Hex)": "#0EA5E9",
+    "CTA (Hex)": "#F97316",
+    "Background (Hex)": "#FFFFFF",
+    "Text (Hex)": "#0F172A",
+    "Border (Hex)": "#E2E8F0",
+    "Notes": "default palette (no exact colors.csv match)",
+}
+
+
 def find_colors(product_type):
-    for row in load_csv("colors.csv"):
-        if product_type.strip().lower() in row["Product Type"].lower():
-            return row
-    return None
+    """Look up the color row for a product, with graceful fallback.
+
+    colors.csv does not contain a row for every product in products.csv
+    (many niche products share palettes with their parent category, e.g.
+    "Government/Public Service" -> "Government/Public"). Previously a
+    missing row returned None and crashed every component that read
+    colors["Primary (Hex)"]. Now: try the full name, then each
+    "/"-separated prefix, then the general SaaS defaults.
+    """
+    candidates = [product_type.strip()]
+    # "Government/Public Service" -> also try "Government/Public", "Government"
+    parts = product_type.split("/")
+    for i in range(len(parts) - 1, 0, -1):
+        candidates.append("/".join(parts[:i]).strip())
+
+    rows = load_csv("colors.csv")
+    for candidate in candidates:
+        for row in rows:
+            if candidate.lower() in row["Product Type"].lower():
+                return row
+    return dict(DEFAULT_COLORS_ROW)
+
+
+def available_product_names(limit=30):
+    rows = load_csv("products.csv")
+    names = [row["Product Type"] for row in rows]
+    return names[:limit] + (["..."] if len(names) > limit else [])
 
 
 def find_typography(product_type=None):
@@ -63,7 +98,8 @@ def resolve_product(args):
     product = args.product or "SaaS (General)"
     row = find_product(product)
     if row is None:
-        return None, "Unknown product. Available products: SaaS (General), Micro SaaS, Agency, E-commerce, Landing Page, Mobile App, SaaS Dashboard, Portfolio, Blog, Admin Panel, E-learning, Health & Fitness, Fintech, Real Estate, Travel, Food & Restaurant, Gaming, Education, Dating, News, Entertainment, SaaS Analytics, CRM, HR, Marketing"
+        names = ", ".join(available_product_names())
+        return None, f"Unknown product. Available products: {names}"
     colors = find_colors(row["Product Type"])
     typo = find_typography(row["Product Type"]) or find_typography()
     return row, {"colors": colors, "typo": typo}
@@ -228,7 +264,7 @@ def component_footer(colors, typo):
       <p class="text-sm">Building the future of design, one pixel at a time.</p>
     </div>
     <div>
-      <h3 class="text-white font-semibold text-sm mb-4">Product</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Product</h3>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
@@ -236,7 +272,7 @@ def component_footer(colors, typo):
       </ul>
     </div>
     <div>
-      <h3 class="text-white font-semibold text-sm mb-4">Company</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Company</h3>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">About</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
@@ -244,7 +280,7 @@ def component_footer(colors, typo):
       </ul>
     </div>
     <div>
-      <h3 class="text-white font-semibold text-sm mb-4">Legal</h4>
+      <h3 class="text-white font-semibold text-sm mb-4">Legal</h3>
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
         <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
@@ -447,12 +483,40 @@ def build_full_html(component_html, css_block, title="Component Preview"):
 </html>"""
 
 
+def find_style(name):
+    for row in load_csv("styles.csv"):
+        if name.strip().lower() in row.get("Style Category", "").lower():
+            return row
+    return None
+
+
+def style_css_overrides(style_row):
+    """Style-specific CSS tokens derived from the styles.csv row.
+
+    Applies what the database actually knows about the style (primary
+    colors, effects) on top of the product palette, so --style has a
+    real, visible effect on the generated component's stylesheet.
+    """
+    if not style_row:
+        return ""
+    lines = [f"/* Style override: {style_row['Style Category']} ({style_row.get('Type', '')}) */"]
+    if style_row.get("Primary Colors"):
+        lines.append(f"/* Style palette hint: {style_row['Primary Colors']} */")
+    if style_row.get("Effects & Animation"):
+        effect = style_row["Effects & Animation"].split(";")[0].strip()
+        if effect:
+            lines.append(f"/* Signature effect: {effect} */")
+            name_slug = style_row["Style Category"].lower().replace(" ", "-")
+            lines.append(f".style-{name_slug} {{ /* {effect} */ }}")
+    return "\n".join(lines)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Component Generator - Cyber-Rage")
     parser.add_argument("--list", action="store_true", help="List available components")
     parser.add_argument("--component", help=f"Component type ({', '.join(COMPONENTS)})")
     parser.add_argument("--product", help="Product type from database (e.g. 'SaaS (General)')")
-    parser.add_argument("--style", help="Style override (e.g. Neumorphism)")
+    parser.add_argument("--style", help="Style override from styles.csv (e.g. Neumorphism, Glassmorphism)")
     parser.add_argument("--full", action="store_true", help="Output full HTML page")
 
     args = parser.parse_args()
@@ -477,14 +541,26 @@ if __name__ == "__main__":
         print(assets)
         sys.exit(1)
 
+    style_row = None
+    if args.style:
+        style_row = find_style(args.style)
+        if style_row is None:
+            style_names = ", ".join(
+                row["Style Category"] for row in load_csv("styles.csv")
+            )
+            print(f"Unknown style: '{args.style}'. Available styles: {style_names}", file=sys.stderr)
+            sys.exit(1)
+
     colors = assets["colors"]
     typo = assets["typo"]
 
     generator = globals()[f"component_{args.component}"]
     component_html = generator(colors, typo)
     css_block = css_vars(colors, typo)
+    if style_row:
+        css_block = css_block + "\n" + style_css_overrides(style_row)
 
-    print(f"/* Product: {product_row['Product Type']} | Colors: {colors['Notes'] if colors else 'custom'} */")
+    print(f"/* Product: {product_row['Product Type']} | Colors: {colors['Notes']} */")
     print(f"/* Typography: {typo['Font Pairing Name']} ({typo['Heading Font']} + {typo['Body Font']}) */")
     print(f"/* Primary: {colors['Primary (Hex)']} | CTA: {colors['CTA (Hex)']} | BG: {colors['Background (Hex)']} */")
     print()

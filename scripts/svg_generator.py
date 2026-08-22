@@ -281,7 +281,7 @@ if __name__ == "__main__":
     elif args.icon:
         print(generate_icon(args.icon, args.size, args.color, args.stroke_width))
     elif args.pattern:
-        print(generate_pattern(args.pattern, args.bg, args.fg))
+        print(generate_pattern(args.pattern, args.bg, args.fg, args.size))
     elif args.logo:
         print(generate_logo(args.logo, args.bg, args.text_color, args.size))
     else:

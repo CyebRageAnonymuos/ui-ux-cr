@@ -49,7 +49,9 @@ def chartjs_chart(chart_type, labels, datasets, colors, options=None):
         datasets_json.append(ds)
 
     chart_cfg = {
-        "type": chart_type,
+        # Chart.js has no "area" controller - area charts are line charts
+        # with fill: true (emitting "type": "area" throws at runtime).
+        "type": "line" if chart_type == "area" else chart_type,
         "data": {"labels": labels, "datasets": datasets_json},
         "options": options or {
             "responsive": True,
@@ -85,14 +87,32 @@ def recharts_chart(chart_type, labels, datasets, colors):
         f"""      <{comp.split("Chart")[0]} dataKey="v{i}" name="Series {i + 1}" stroke="{colors[i % len(colors)]}" fill="{colors[i % len(colors)]}" />"""
         for i in range(len(datasets))
     )
+    # Only iterate as far as the SHORTEST dataset reaches - a longer
+    # labels list than the data previously raised IndexError here.
+    row_count = min([len(labels)] + [len(d) for d in datasets]) if datasets else 0
     data_rows = "".join(
         f"    {{ name: '{labels[i]}', " + ", ".join(f"v{j}: {datasets[j][i]}" for j in range(len(datasets))) + " },"
-        for i in range(len(labels))
+        for i in range(row_count)
     )
 
-    cartesian = "CartesianGrid" if chart_type in ("line", "bar", "area") else ""
+    # Radar needs polar axes instead of Cartesian, and scatter uses ZAxis.
+    if chart_type == "radar":
+        axes = ["PolarAngleAxis", "PolarRadiusAxis"]
+        axes_markup = '      <PolarAngleAxis dataKey="name" />\n      <PolarRadiusAxis />'
+    elif chart_type == "scatter":
+        axes = ["XAxis", "YAxis", "ZAxis"]
+        axes_markup = '      <XAxis dataKey="x" type="number" />\n      <YAxis dataKey="y" type="number" />'
+    else:
+        axes = ["CartesianGrid", "XAxis", "YAxis"]
+        axes_markup = '      <CartesianGrid strokeDasharray="3 3" />\n      <XAxis dataKey="name" />\n      <YAxis />'
+
+    # Build the import list without empty slots - "import { RadarChart, ,
+    # XAxis ... }" is a syntax error the file would never survive.
+    imports = [comp] + axes + ["Tooltip", "Legend", "ResponsiveContainer"]
+    import_line = ", ".join(dict.fromkeys(imports))
+
     return f"""// React + Recharts - {chart_type} chart
-import {{ {comp}, {cartesian}, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer }} from 'recharts';
+import {{ {import_line} }} from 'recharts';
 
 const data = [
 {data_rows}
@@ -101,9 +121,7 @@ const data = [
 const Chart = () => (
   <ResponsiveContainer width="100%" height={300}>
     <{comp} data={{data}}>
-      {cartesian and f'<{cartesian} strokeDasharray="3 3" />'}
-      <XAxis dataKey="name" />
-      <YAxis />
+{axes_markup}
       <Tooltip />
       <Legend />
 {series}

@@ -163,20 +163,6 @@ SUCCESS_TOASTS = [
 ]
 
 
-def get_items(category):
-    if category in HEADLINES:
-        return HEADLINES[category]
-    if category in ERRORS:
-        return ERRORS[category]
-    if category == "cta":
-        return CTAS
-    if category == "toast":
-        return SUCCESS_TOASTS
-    if category == "placeholder":
-        return [f"{k}: {v}" for k, v in PLACEHOLDERS.items()]
-    return None
-
-
 def pick(items, count):
     if count >= len(items):
         return items
@@ -232,8 +218,13 @@ def print_variants(count):
         "Sign Up Free", "Get Access", "Join Free", "Start Building", "Go Free",
         "Start Your Trial", "Launch Now",
     ]
-    for v in pick(variants, count):
-        print(f"  A: {v}")
+    chosen = pick(variants, count)
+    # Pair consecutive variants into real A/B arms - a list where every
+    # row is labeled "A" isn't an A/B test.
+    for i in range(0, len(chosen) - 1, 2):
+        print(f"  A: {chosen[i]}   vs   B: {chosen[i + 1]}")
+    if len(chosen) % 2:
+        print(f"  (unpaired: {chosen[-1]})")
     print()
 
 

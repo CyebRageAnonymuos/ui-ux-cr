@@ -300,6 +300,7 @@ if __name__ == "__main__":
     parser.add_argument("--gradient", help="Gradient colors comma-separated (e.g. '#2563EB,#F97316')")
     parser.add_argument("--angle", type=int, default=135, help="Gradient angle (default: 135)")
     parser.add_argument("--glass", action="store_true", help="Generate glassmorphism CSS")
+    parser.add_argument("--glass-tailwind", action="store_true", help="Generate glassmorphism Tailwind utility classes")
     parser.add_argument("--blur", type=int, default=15, help="Glass blur px (default: 15)")
     parser.add_argument("--opacity", type=float, default=0.15, help="Glass opacity (default: 0.15)")
     parser.add_argument("--glow", help="Glow color (e.g. '#6366F1')")
@@ -319,6 +320,8 @@ if __name__ == "__main__":
     elif args.gradient:
         colors = [c.strip() for c in args.gradient.split(",")]
         print(generate_gradient(colors, args.angle))
+    elif args.glass_tailwind:
+        print(generate_glass_tailwind(args.blur))
     elif args.glass:
         print(generate_glass(args.blur, args.opacity))
     elif args.glow:
@@ -330,5 +333,5 @@ if __name__ == "__main__":
     elif args.neumorphism:
         print(generate_neumorphism())
     else:
-        print("Specify one of: --shadow, --gradient, --glass, --glow, --radius, --ui-kit, --neumorphism")
+        print("Specify one of: --shadow, --gradient, --glass, --glass-tailwind, --glow, --radius, --ui-kit, --neumorphism")
         print("Example: python css_generator.py --ui-kit --primary #2563EB --cta #F97316")

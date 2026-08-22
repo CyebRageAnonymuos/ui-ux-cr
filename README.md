@@ -2,11 +2,11 @@
 
 # 🔥 UI UX CR — Cyber-Rage Design Intelligence Engine
 
-**Ultra-premium design intelligence for AI assistants — 19 tools in one skill.**
+**Ultra-premium design intelligence for AI assistants — 27 tools in one skill.**
 
-<a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/releases"><img src="https://img.shields.io/badge/version-2.2.0-FF006E?style=for-the-badge" alt="Version"></a>
+<a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/releases"><img src="https://img.shields.io/badge/version-3.0.0-FF006E?style=for-the-badge" alt="Version"></a>
 <img src="https://img.shields.io/badge/python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-<img src="https://img.shields.io/badge/tools-19-22D3EE?style=for-the-badge" alt="Tools">
+<img src="https://img.shields.io/badge/tools-27-22D3EE?style=for-the-badge" alt="Tools">
 <img src="https://img.shields.io/badge/themes-65-A855F7?style=for-the-badge" alt="Themes">
 <img src="https://img.shields.io/badge/icons-155-F97316?style=for-the-badge" alt="Icons">
 <img src="https://img.shields.io/badge/products-70+-10B981?style=for-the-badge" alt="Products">
@@ -24,7 +24,7 @@
 
 ---
 
-## 🧩 19 Tools at Your Fingertips
+## 🧩 27 Tools at Your Fingertips
 
 | # | Script | What it does | Quick example |
 |---|--------|--------------|---------------|
@@ -47,6 +47,14 @@
 | 17 | `theme_pack.py` | **65 ready-made premium themes** (Dracula, Nord, Cyberpunk, Luxury Gold...) | `python3 scripts/theme_pack.py --name dracula --format css` |
 | 18 | `text_deco.py` | **Fancy Unicode fonts + decorative shapes** — emoji-free | `python3 scripts/text_deco.py --text "Sale" --style gothic` |
 | 19 | `accessibility_audit.py` | WCAG audit of HTML (contrast, alt, labels) | `python3 scripts/accessibility_audit.py index.html` |
+| 20 | `gradient_generator.py` | **NEW v3** Linear/radial/conic/mesh gradients + gradient buttons | `python3 scripts/gradient_generator.py --mesh aurora` |
+| 21 | `logo_generator.py` | **NEW v3** SVG logos: monogram, badge, wordmark, shield | `python3 scripts/logo_generator.py --text "Cyber Rage" --style shield` |
+| 22 | `form_generator.py` | **NEW v3** Accessible forms: login, signup, contact, search | `python3 scripts/form_generator.py --form login --primary #2563EB` |
+| 23 | `email_template.py` | **NEW v3** Responsive table-based emails (welcome, reset, receipt...) | `python3 scripts/email_template.py --type reset --brand "Acme"` |
+| 24 | `tokens_exporter.py` | **NEW v3** W3C + Figma Tokens + Style Dictionary export | `python3 scripts/tokens_exporter.py "#2563EB" --format figma` |
+| 25 | `darkmode_generator.py` | **NEW v3** Light/dark theme pairs + persisted toggle | `python3 scripts/darkmode_generator.py "#2563EB" --toggle` |
+| 26 | `seo_audit.py` | **NEW v3** SEO/head audit: title, meta, OG, headings, images | `python3 scripts/seo_audit.py index.html` |
+| 27 | `icon_spriter.py` | **NEW v3** SVG symbol sprite sheets + `<use>` markup | `python3 scripts/icon_spriter.py --icons search,check --out icons.svg` |
 
 **Try the fancy fonts & shapes:**
 
@@ -85,23 +93,33 @@ python3 scripts/accessibility_audit.py landing.html
 
 ## 📊 Database coverage
 
-### Data coverage v2.1
+### Data coverage v3.0
 
-| Category | v1.x | v2.0 | v2.2 |
-|----------|------|------|------|
-| Product Types | 51 | 70+ | **70+** |
-| UI Styles | 31 | 46+ | **46+** |
-| Color Palettes | 61 | 80+ | **80+** |
-| Font Pairings | 61 | 75+ | **103** |
-| Premium Themes | — | — | **65** |
-| Synonym Groups | 34 | 120+ | **120+** |
-| Toolbox Scripts | ✗ | 9 | **19** |
-| Components | — | — | **12 generated** |
-| Layout Templates | — | — | **5** |
-| Chart Types | — | — | **8 + 2 frameworks** |
-| Background Patterns | — | — | **12 CSS** |
-| SVG Icons | — | — | **155** |
-| Unicode Font Styles | — | — | **25+** |
+| Category | v1.x | v2.0 | v2.2 | v3.0 |
+|----------|------|------|------|------|
+| Product Types | 51 | 70+ | **70+** | **70+** |
+| UI Styles | 31 | 46+ | **46+** | **46+** |
+| Color Palettes | 61 | 80+ | **80+** | **80+** |
+| Font Pairings | 61 | 75+ | **103** | **103** |
+| Premium Themes | — | — | **65** | **65** |
+| Synonym Groups | 34 | 120+ | **120+** | **120+** |
+| Toolbox Scripts | ✗ | 9 | 19 | **27** |
+| Components | — | — | **12 generated** | **12 generated** |
+| Layout Templates | — | — | **5** | **5** |
+| Chart Types | — | — | **8 + 2 frameworks** | **8 + 2 frameworks** |
+| Background Patterns | — | — | **12 CSS** | **12 CSS + 5 mesh presets** |
+| SVG Icons | — | — | **155** | **155 + sprite sheets** |
+| Unicode Font Styles | — | — | **25+** | **25+** |
+| Logo Styles | — | — | — | **4** |
+| Email Templates | — | — | — | **4 responsive** |
+| Form Types | — | — | — | **5 accessible** |
+| Token Formats | — | — | — | **W3C + Figma + Style Dictionary** |
+
+### What's new in v3.0
+
+- **8 new tools**: gradient studio (linear/radial/conic/mesh/buttons), SVG logo generator (monogram/badge/wordmark/shield), accessible form generator, responsive email templates, W3C/Figma/Style-Dictionary token exporter, dark-mode system with no-flash toggle, SEO auditor, SVG icon sprite builder
+- **28 bug fixes across the existing 19 tools**, including: SSH-style crash bugs (component_generator crashed on ~19 valid products; `--type slide` without `--param` crashed; mirrored text style crashed on X/Y/Z), invalid output (CSS variables emitted outside `:root`, chart.js `area` type, Recharts imports with empty slots, animation classes referencing non-existent keyframes), silently-ignored flags (`--style`, `--fg`, `--size`, `--mix`, `--glass`), page_builder swallowing failures and writing empty pages with exit 0, and the ASCII design-system box being misaligned on every line
+- Mobile mockups render perfectly aligned at any width; Tailwind grid gap no longer emits `gap-16` for 16px
 
 ---
 
@@ -112,12 +130,15 @@ python3 scripts/accessibility_audit.py landing.html
 | **Enhanced BM25 Search** | Fuzzy matching, n-gram detection, 120+ synonym groups |
 | **Design System Generator** | 10 domains searched in parallel with reasoning engine |
 | **Color Theory Engine** | Extended palettes, 6 harmony types, WCAG contrast, color-blind simulation |
-| **17 Toolbox Scripts** | SVG icons, CSS kits, components, animations, charts, pages, mockups |
+| **27 Toolbox Scripts** | SVG icons, CSS kits, components, animations, charts, pages, mockups, logos, emails, tokens |
 | **65 Premium Themes** | Dracula, Nord, Tokyo Night, Cyberpunk, Luxury Gold — export to CSS/Tailwind/JSON |
 | **Fancy Unicode Fonts** | 25+ text styles (gothic, script, bubble...) + decorative shapes, emoji-free |
 | **Component Generator** | 12 ready components (navbar, hero, pricing, modal, table, sidebar...) |
 | **Page Builder** | Compose a full HTML landing page in one command |
 | **Accessibility Auditor** | WCAG audit: contrast, alt text, labels, heading order |
+| **SEO Auditor** | NEW v3: title, meta, canonical, Open Graph, headings, images, lazy-loading |
+| **Dark Mode System** | NEW v3: full light/dark pairs + persisted no-flash toggle |
+| **Standards-based Tokens** | NEW v3: W3C Design Tokens draft + Figma Tokens + Style Dictionary pipeline |
 | **Animation Database** | 30+ patterns + animation kit with reduced-motion fallback |
 | **Design Tokens** | 70+ categories with CSS variables & Tailwind config |
 

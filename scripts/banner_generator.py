@@ -131,7 +131,10 @@ def render(text, font, color=None, rainbow=False):
     glyphs = []
     for ch in text:
         glyphs.append(FONTS[font].get(ch, FONTS[font][" "] if " " in FONTS[font] else ["?" * 3]))
-    height = len(FONTS[font].get(text[0] if text else "A", [""]))
+    # Height must match the glyphs actually rendered (same fallback
+    # logic as above). Deriving it from text[0] alone truncated the
+    # whole banner to a single row when the first char wasn't in the font.
+    height = len(glyphs[0]) if glyphs else len(FONTS[font].get("A", ["###"]))
 
     lines = []
     for row in range(height):

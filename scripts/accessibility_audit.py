@@ -161,7 +161,7 @@ def audit_html(html, source_name):
                 })
             prev = h
 
-    html_match = re.match(r'<html[^>]*>', html, re.IGNORECASE)
+    html_match = re.search(r'<html[^>]*>', html, re.IGNORECASE)
     if html_match and "lang" not in html_match.group(0).lower():
         issues.append({
             "severity": "warning",
@@ -176,8 +176,9 @@ def audit_html(html, source_name):
             "message": "Document missing <title> tag",
         })
 
-    fg_rgb, _ = find_color(styles, html, ["color", "--color", "--text"])
-    bg_rgb, _ = find_color(styles, html, ["background", "background-color", "--bg"])
+    # Contrast is checked from the body/:root/html rule (the only place
+    # where both fg and bg are reliably declared together).
+    fg_rgb, bg_rgb = None, None
     body_style = get_style_for(styles, "body") or get_style_for(styles, ":root") or get_style_for(styles, "html")
     if body_style:
         fg_rgb, _ = find_color(body_style, html, ["color", "--color", "--text"])

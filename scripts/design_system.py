@@ -436,6 +436,18 @@ def wrap_text(text, prefix, width):
     lines = []
     current = prefix
     for word in words:
+        # Unbreakable tokens (URLs) longer than a full line get hard-split
+        # into width-sized chunks, otherwise they overflow the box border.
+        if len(prefix) + len(word) > width - 2:
+            chunk = width - 2 - len(prefix)
+            if chunk < 8:
+                chunk = 8
+            pieces = [word[i:i + chunk] for i in range(0, len(word), chunk)]
+            for piece in pieces:
+                if current != prefix:
+                    lines.append(current)
+                current = prefix + piece
+            continue
         if len(current) + len(word) + 1 <= width - 2:
             current += (" " if current != prefix else "") + word
         else:
@@ -463,13 +475,13 @@ def format_ascii_box(design_system):
     code = design_system.get("code_snippets", {})
 
     lines = []
-    w = BOX_WIDTH - 1
+    w = BOX_WIDTH + 1  # aligns borders with the 103-char content/blank rows
 
     lines.append("+" + "=" * w + "+")
     lines.append(f"||  UI UX CR v2 - DESIGN SYSTEM: {project}".ljust(BOX_WIDTH + 1) + "||")
     lines.append(f"||  Category: {design_system.get('category', 'General')}".ljust(BOX_WIDTH + 1) + "||")
     lines.append("+" + "=" * w + "+")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     contrast_info = colors.get("contrast", {})
     contrast_line = ""
@@ -486,7 +498,7 @@ def format_ascii_box(design_system):
     sections = pattern.get("sections", "").split(">")
     for i, section in enumerate([s.strip() for s in sections if s.strip()], 1):
         lines.append(f"||       {i}. {section}".ljust(BOX_WIDTH + 1) + "||")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Style
     lines.append(f"||  STYLE: {style.get('name', '')}".ljust(BOX_WIDTH + 1) + "||")
@@ -499,7 +511,7 @@ def format_ascii_box(design_system):
     if style.get("performance") or style.get("accessibility"):
         perf = f"Performance: {style.get('performance', '')} | Accessibility: {style.get('accessibility', '')}"
         lines.append(f"||     {perf}".ljust(BOX_WIDTH + 1) + "||")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Colors
     lines.append("||  COLORS:".ljust(BOX_WIDTH + 1) + "||")
@@ -520,7 +532,7 @@ def format_ascii_box(design_system):
         lines.append("||     Extended Palette (50-900):".ljust(BOX_WIDTH + 1) + "||")
         for key, value in list(extended.items())[:6]:
             lines.append(f"||       {key}: {value}".ljust(BOX_WIDTH + 1) + "||")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Typography
     heading_f = typography.get("heading", "Inter")
@@ -530,22 +542,23 @@ def format_ascii_box(design_system):
         for line in wrap_text(f"Mood: {typography.get('mood', '')}", "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
     if typography.get("google_fonts_url"):
-        lines.append(f"||     Google Fonts: {typography.get('google_fonts_url', '')}".ljust(BOX_WIDTH + 1) + "||")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+        for gf_line in wrap_text(f"Google Fonts: {typography.get('google_fonts_url', '')}", "||     ", BOX_WIDTH):
+            lines.append(gf_line.ljust(BOX_WIDTH + 1) + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Effects
     if effects:
         lines.append("||  KEY EFFECTS:".ljust(BOX_WIDTH + 1) + "||")
         for line in wrap_text(effects, "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Code Snippet (Button)
     if code and code.get("button"):
         lines.append("||  CODE SNIPPET (Button):".ljust(BOX_WIDTH + 1) + "||")
         btn_code = code["button"].replace("\n", " ")[:BOX_WIDTH-10]
         lines.append(f"||     {btn_code}".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # CSS Variables
     if code and code.get("css_variables"):
@@ -555,7 +568,7 @@ def format_ascii_box(design_system):
             cl = cl.strip()
             if cl:
                 lines.append(f"||     {cl}".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Components
     if components:
@@ -570,7 +583,7 @@ def format_ascii_box(design_system):
             if comp_tailwind:
                 tw_short = comp_tailwind[:60]
                 lines.append(f"||       Tailwind: {tw_short}".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Animations
     if animations:
@@ -580,7 +593,7 @@ def format_ascii_box(design_system):
             anim_dur = anim.get("Duration", "")
             anim_ease = anim.get("Easing", "")
             lines.append(f"||     - {anim_name} ({anim_dur}, {anim_ease})".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Responsive
     if responsive:
@@ -591,7 +604,7 @@ def format_ascii_box(design_system):
             lines.append(f"||     - {resp_name}".ljust(BOX_WIDTH + 1) + "||")
             if resp_breakpoints:
                 lines.append(f"||       Breakpoints: {resp_breakpoints}".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Backgrounds
     if backgrounds:
@@ -600,14 +613,14 @@ def format_ascii_box(design_system):
             bg_name = bg.get("Background Name", "")
             bg_cat = bg.get("Category", "")
             lines.append(f"||     - {bg_name} ({bg_cat})".ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Anti-patterns
     if anti_patterns:
         lines.append("||  AVOID (Anti-patterns):".ljust(BOX_WIDTH + 1) + "||")
         for line in wrap_text(anti_patterns, "||     ", BOX_WIDTH):
             lines.append(line.ljust(BOX_WIDTH + 1) + "||")
-        lines.append("||" + " " * BOX_WIDTH + "||")
+        lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     # Checklist
     lines.append("||  PRE-DELIVERY CHECKLIST:".ljust(BOX_WIDTH + 1) + "||")
@@ -626,7 +639,7 @@ def format_ascii_box(design_system):
     ]
     for item in checklist:
         lines.append(f"||     {item}".ljust(BOX_WIDTH + 1) + "||")
-    lines.append("||" + " " * BOX_WIDTH + "||")
+    lines.append("||" + " " * (BOX_WIDTH - 1) + "||")
 
     lines.append("+" + "=" * w + "+")
 
@@ -883,7 +896,7 @@ def format_master_md(design_system):
 
     lines.append("# Design System Master File")
     lines.append("")
-    lines.append("> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.")
+    lines.append("> **LOGIC:** When building a specific page, first check `design-system/<project-slug>/pages/[page-name].md`.")
     lines.append("> If that file exists, its rules **override** this Master file.")
     lines.append("> If not, strictly follow the rules below.")
     lines.append("")
@@ -1149,7 +1162,7 @@ def format_page_override_md(design_system, page_name, page_query=None):
     lines.append(f"> **Generated:** {timestamp}")
     lines.append(f"> **Page Type:** {page_overrides.get('page_type', 'General')}")
     lines.append("")
-    lines.append("> IMPORTANT: Rules in this file **override** the Master file (`design-system/MASTER.md`).")
+    lines.append("> IMPORTANT: Rules in this file **override** the Master file (`design-system/<project-slug>/MASTER.md`).")
     lines.append("> Only deviations from the Master are documented here. For all other rules, refer to the Master.")
     lines.append("")
     lines.append("---")

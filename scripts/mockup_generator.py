@@ -87,28 +87,44 @@ def generate_dashboard(width=80):
 
 
 def generate_mobile(width=36):
+    # All content rows go through row()/inner boxes so the right border
+    # stays aligned at any width (previously most rows were hardcoded
+    # for one width and ragged everywhere else).
+    def inner_box(title, inner_width):
+        top = "┌" + "─" * inner_width + "┐"
+        mid = "│" + title.center(inner_width) + "│"
+        bot = "└" + "─" * inner_width + "┘"
+        return top, mid, bot
+
+    def sep():
+        return "├" + "─" * width + "┤"
+
     lines = []
-    lines.append("┌" + "─" * width + "┐")
-    lines.append("│" + label(" 9:41 AM", width) + "│")
-    lines.append("├" + "─" * width + "┤")
-    lines.append("│  [menu]  Brand              [cart]  │")
-    lines.append("├" + "─" * width + "┤")
-    lines.append("│" + " " * width + "│")
-    lines.append("│  ┌" + "─" * (width - 6) + "┐    │")
-    lines.append("│  │    HERO IMAGE     │    │")
-    lines.append("│  └" + "─" * (width - 6) + "┘    │")
-    lines.append("│" + " " * width + "│")
-    lines.append("│  Big headline           │")
-    lines.append("│  supporting text...      │")
-    lines.append("│" + " " * width + "│")
-    lines.append("│  [───────── CTA ──────────] │")
-    lines.append("│" + " " * width + "│")
-    lines.append("│  ┌───────────────┐        │")
-    lines.append("│  │  Product 1    │        │")
-    lines.append("│  └───────────────┘        │")
-    lines.append("│" + " " * width + "│")
-    lines.append("├" + "─" * width + "┤")
-    lines.append("│  [🏠] [🔍] [➕] [💬] [👤] │")
+    lines.append(line(width))
+    lines.append(row(label(" 9:41 AM", width - 2), width))
+    lines.append(sep())
+    lines.append(row("  [menu]  Brand" + " " * max(0, width - 30) + "[cart] ", width))
+    lines.append(sep())
+    lines.append(row("", width))
+    box_w = max(10, width - 10)
+    top, mid, bot = inner_box("HERO IMAGE", box_w)
+    lines.append(row("  " + top, width))
+    lines.append(row("  " + mid, width))
+    lines.append(row("  " + bot, width))
+    lines.append(row("", width))
+    lines.append(row("  Big headline", width))
+    lines.append(row("  supporting text...", width))
+    lines.append(row("", width))
+    cta = "[ " + "─" * max(4, width - 18) + " CTA " + "─" * max(4, width - 18) + " ]"
+    lines.append(row("  " + cta[:max(4, width - 4)], width))
+    lines.append(row("", width))
+    top, mid, bot = inner_box("Product 1", max(8, width - 12))
+    lines.append(row("  " + top, width))
+    lines.append(row("  " + mid, width))
+    lines.append(row("  " + bot, width))
+    lines.append(row("", width))
+    lines.append(sep())
+    lines.append(row("  [home]  [search]  [add]  [chat]  [me]", width))
     lines.append("└" + "─" * width + "┘")
     return "\n".join(lines)
 

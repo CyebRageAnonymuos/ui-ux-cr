@@ -1,8 +1,8 @@
 # Skill: ui-ux-cr
 
-# UI UX CR v2 - Cyber-Rage Design Intelligence Engine
+# UI UX CR v3 - Cyber-Rage Design Intelligence Engine
 
-Ultra-premium design intelligence system **v2.2** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **100+ font pairings**, **65 ready-made premium themes**, **155 SVG icons**, and **16+ tech stacks**.
+Ultra-premium design intelligence system **v3.0** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **100+ font pairings**, **65 ready-made premium themes**, **155 SVG icons**, and **16+ tech stacks**, plus **28 toolbox scripts** including gradient studio, SVG logo generation, accessible forms, responsive emails, W3C/Figma token export, dark-mode systems, SEO auditing, and SVG sprite sheets.
 
 ## Prerequisites
 
@@ -137,6 +137,14 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 | `theme_pack.py` | 65 ready-made premium themes (Dracula, Nord, Cyberpunk, Luxury Gold...) → CSS/Tailwind/JSON | `python3 scripts/theme_pack.py --name dracula --format css` |
 | `text_deco.py` | Fancy Unicode fonts (gothic, script, bubble...) + decorative shapes, dividers, frames, bars — emoji-free | `python3 scripts/text_deco.py --text "Sale" --style gothic` |
 | `accessibility_audit.py` | WCAG audit of HTML files (contrast, alt, labels, headings) | `python3 scripts/accessibility_audit.py index.html` |
+| `gradient_generator.py` | **v3** Linear/radial/conic gradients, 5 mesh presets, gradient buttons | `python3 scripts/gradient_generator.py --mesh aurora` |
+| `logo_generator.py` | **v3** SVG logos: monogram, badge, wordmark, shield (+dark variants) | `python3 scripts/logo_generator.py --text "Cyber Rage" --style shield` |
+| `form_generator.py` | **v3** Accessible forms: login, signup, contact, search, newsletter | `python3 scripts/form_generator.py --form login --primary #2563EB` |
+| `email_template.py` | **v3** Responsive table-based emails (welcome, reset, receipt, newsletter) | `python3 scripts/email_template.py --type reset --brand "Acme"` |
+| `tokens_exporter.py` | **v3** W3C Design Tokens + Figma Tokens + Style Dictionary export | `python3 scripts/tokens_exporter.py "#2563EB" --format figma` |
+| `darkmode_generator.py` | **v3** Light/dark theme pairs + persisted no-flash toggle | `python3 scripts/darkmode_generator.py "#2563EB" --strategy class --toggle` |
+| `seo_audit.py` | **v3** SEO/head audit: title, meta, OG, canonical, headings, images | `python3 scripts/seo_audit.py index.html` |
+| `icon_spriter.py` | **v3** SVG symbol sprite sheets + `<use>` markup | `python3 scripts/icon_spriter.py --icons search,check --out icons.svg` |
 
 **Theme Pack quick reference:**
 - List all: `python3 scripts/theme_pack.py --list`
@@ -159,7 +167,12 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 5. `palette_generator.py "#2563EB" --harmony triadic` → get harmony palette with WCAG report
 6. `animation_generator.py --kit` → get transitions, micro-interactions, loaders
 7. `favicon_generator.py --text CR` → get favicon + HTML head + manifest
-8. `accessibility_audit.py` → verify the final HTML passes WCAG checks
+8. `logo_generator.py --text "Brand" --style monogram` → get a matching SVG logo (v3)
+9. `darkmode_generator.py "#2563EB" --toggle` → get the dark-mode system + toggle (v3)
+10. `tokens_exporter.py "#2563EB" --format w3c` → export design tokens for handoff (v3)
+11. `icon_spriter.py --all --out icons.svg` → bundle all icons into one sprite (v3)
+12. `accessibility_audit.py` → verify the final HTML passes WCAG checks
+13. `seo_audit.py` → verify the final HTML passes on-page SEO checks (v3)
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
@@ -284,44 +297,37 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 
 ---
 
-## Data Coverage v2.2
+## Data Coverage v3.0
 
-| Category | v1.x | v2.0 | v2.2 |
-|----------|------|------|------|
-| Product Types | 51 | **70+** | **70+** |
-| UI Styles | 31 | **46+** | **46+** |
-| Color Palettes | 61 | **80+** | **80+** |
-| Font Pairings | 61 | **75+** | **103** |
-| Premium Themes (ready-made) | ✗ | ✗ | **65** |
-| SVG Icons | ✗ | **70+** | **155** |
-| Unicode Font Styles | ✗ | ✗ | **25+** |
-| Decorative Shapes/Dividers | ✗ | ✗ | **50+** |
-| Synonym Groups | 34 | **120+** | **120+** |
-| Animations | 31 | **31** | **31** |
-| Components | 31 | **31** | **31** |
-| Responsive Patterns | 21 | **21** | **21** |
-| Backgrounds | 46 | **46** | **46** |
-| Tech Stacks | 16 | **16** | **16** |
-| WCAG Checks | ✗ | **Built-in** | **Built-in** |
-| Code Generation | ✗ | **Auto-generated** | **Auto-generated** |
-| Color Blind Simulation | ✗ | **3 types** | **3 types** |
-| CSS/Tailwind Export | ✗ | **Supported** | **Supported** |
-| SVG Icon/Pattern Generator | ✗ | **New tool** | **155 icons** |
-| CSS Utility Generator | ✗ | **New tool** | **New tool** |
-| Palette Generator | ✗ | **New tool** | **New tool** |
-| Typography Generator | ✗ | **New tool** | **New tool** |
-| Component Code Generator | ✗ | **12 components** | **12 components** |
-| Page Builder | ✗ | **Full HTML pages** |
-| Layout/Grid Generator | ✗ | **5 templates** |
-| Animation Generator | ✗ | **12 animations + kit** |
-| Pattern Generator | ✗ | **12 CSS patterns** |
-| Favicon Generator | ✗ | **SVG + manifest** |
-| Copy Generator | ✗ | **UI microcopy** |
-| ASCII Mockup Generator | ✗ | **5 layouts** |
-| Chart Config Generator | ✗ | **Chart.js + Recharts** |
-| Social Media Specs | ✗ | **10 platforms** |
-| ASCII Banner Generator | ✗ | **2 fonts + rainbow** |
-| Accessibility Auditor | ✗ | **WCAG audit tool** |
+| Category | v1.x | v2.0 | v2.2 | v3.0 |
+|----------|------|------|------|------|
+| Product Types | 51 | **70+** | **70+** | **70+** |
+| UI Styles | 31 | **46+** | **46+** | **46+** |
+| Color Palettes | 61 | **80+** | **80+** | **80+** |
+| Font Pairings | 61 | **75+** | **103** | **103** |
+| Premium Themes (ready-made) | ✗ | ✗ | **65** | **65** |
+| SVG Icons | ✗ | **70+** | **155** | **155 + sprites** |
+| Unicode Font Styles | ✗ | ✗ | **25+** | **25+** |
+| Decorative Shapes/Dividers | ✗ | ✗ | **50+** | **50+** |
+| Synonym Groups | 34 | **120+** | **120+** | **120+** |
+| Animations | 31 | **31** | **31** | **31** |
+| Components | 31 | **31** | **31** | **31** |
+| Responsive Patterns | 21 | **21** | **21** | **21** |
+| Backgrounds | 46 | **46** | **46** | **46 + mesh presets** |
+| Tech Stacks | 16 | **16** | **16** | **16** |
+| Toolbox Scripts | ✗ | 9 | 19 | **28** |
+| Logo Styles | ✗ | ✗ | ✗ | **4** |
+| Email Templates | ✗ | ✗ | ✗ | **4 responsive** |
+| Form Types | ✗ | ✗ | ✗ | **5 accessible** |
+| Token Formats | ✗ | ✗ | ✗ | **W3C + Figma + Style Dictionary** |
+| SEO Audit | ✗ | ✗ | ✗ | **scored 0-100** |
+| Dark Mode System | ✗ | ✗ | ✗ | **full pair + toggle** |
+
+## New in v3.0
+
+- **8 new tools**: gradient studio (linear/radial/conic + 5 mesh presets + gradient buttons), SVG logo generator (monogram/badge/wordmark/shield), accessible form generator (login/signup/contact/search/newsletter), responsive email templates, W3C + Figma + Style Dictionary token exporter, dark-mode system with persisted no-flash toggle, SEO auditor, SVG icon sprite builder
+- **28 bug fixes** across the existing tools (crashes on valid inputs, invalid CSS/JS output, silently-ignored flags, misaligned outputs)
+- Quality gates: design-system box renders perfectly aligned; page_builder exits non-zero when sections fail instead of writing empty pages
 
 ## Key Features v2.0
 

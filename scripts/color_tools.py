@@ -597,6 +597,15 @@ if __name__ == "__main__":
     elif args.generate_theme:
         theme = generate_theme(args.color)
         print(format_theme_output(theme, args.format))
+    elif args.mix is not None:
+        # Must be checked BEFORE the plain --gradient branch: "elif
+        # args.gradient" used to swallow every --mix invocation first,
+        # making the mix mode unreachable dead code.
+        if not args.gradient:
+            print("Error: --mix requires --gradient END_COLOR")
+        else:
+            mixed = ColorTools.mix_colors(args.color, args.gradient, args.mix)
+            print(f"Mixed ({args.mix*100:.0f}%): {mixed}")
     elif args.gradient:
         g = generate_gradient(args.color, args.gradient)
         if args.format == "json":
@@ -606,12 +615,6 @@ if __name__ == "__main__":
             for i, c in enumerate(g['all_steps'], 1):
                 print(f"  Step {i}: {c}")
             print(f"  CSS: {g['css_linear']}")
-    elif args.mix is not None:
-        if not args.gradient:
-            print("Error: --mix requires --gradient END_COLOR")
-        else:
-            mixed = ColorTools.mix_colors(args.color, args.gradient, args.mix)
-            print(f"Mixed ({args.mix*100:.0f}%): {mixed}")
     elif args.simulate:
         simulator = {
             "protanopia": ColorTools.simulate_protanopia,

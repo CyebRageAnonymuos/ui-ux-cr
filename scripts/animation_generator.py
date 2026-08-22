@@ -137,9 +137,23 @@ def keyframes_wave(rotate=15):
 
 
 def build_animation(anim_type, duration, easing, delay, distance, color, other):
+    # Slide direction must be one of the four supported values; an empty
+    # or bogus --param previously fell through keyframes_slide() with no
+    # branch matching, crashing on an unassigned variable.
+    slide_direction = other if other in ("up", "down", "left", "right") else "up"
+
+    # The animation shorthand must reference the EXACT keyframes name the
+    # builders emit (fade-in, scale-in, slide-<dir>...), otherwise the
+    # browser silently runs nothing.
+    KEYFRAME_NAMES = {
+        "fade": "fade-in",
+        "slide": f"slide-{slide_direction}",
+        "scale": "scale-in",
+    }
+
     keyframes = {
         "fade": keyframes_fade,
-        "slide": lambda: keyframes_slide(other, distance),
+        "slide": lambda: keyframes_slide(slide_direction, distance),
         "scale": lambda: keyframes_scale(other if other else 0.8, 1.0),
         "rotate": lambda: keyframes_rotate(0, 360),
         "bounce": lambda: keyframes_bounce(distance),
@@ -155,10 +169,11 @@ def build_animation(anim_type, duration, easing, delay, distance, color, other):
     css_keyframes = keyframes[anim_type]()
     class_name = anim_type
     if anim_type == "slide":
-        class_name = f"slide-{other}"
+        class_name = f"slide-{slide_direction}"
+    animation_name = KEYFRAME_NAMES.get(anim_type, anim_type)
 
     css_class = f""".{class_name} {{
-  animation: {anim_type} {duration}s {easing_value} {delay}s both;
+  animation: {animation_name} {duration}s {easing_value} {delay}s both;
 }}"""
 
     return css_keyframes + "\n\n" + css_class
@@ -229,6 +244,17 @@ def generate_kit(primary="#2563EB"):
 @keyframes fade-slide-up {{
   from {{ opacity: 0; transform: translateY(24px); }}
   to   {{ opacity: 1; transform: translateY(0); }}
+}}
+
+/* Keyframes used by .loader and .skeleton below (previously referenced
+   but never defined in this kit, leaving both inert) */
+@keyframes spin {{
+  from {{ transform: rotate(0deg); }}
+  to   {{ transform: rotate(360deg); }}
+}}
+@keyframes shimmer {{
+  from {{ background-position: 200% 0; }}
+  to   {{ background-position: -200% 0; }}
 }}
 
 /* Loader */

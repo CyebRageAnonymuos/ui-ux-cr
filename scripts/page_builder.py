@@ -25,6 +25,7 @@ ALL_SECTIONS = ["navbar", "hero", "features", "pricing", "cta", "footer", "form"
 
 
 def load_component(name, product):
+    """Returns (html, css_block, error) - error is None on success."""
     import subprocess
     result = subprocess.run(
         [sys.executable, os.path.join(BASE_DIR, "component_generator.py"),
@@ -32,15 +33,14 @@ def load_component(name, product):
         capture_output=True, text=True, encoding="utf-8"
     )
     if result.returncode != 0:
-        return "", result.stderr.strip()
-    out = result.stdout
+        # component_generator prints its errors to stdout (stderr only
+        # carries tracebacks); stderr alone is almost always empty here,
+        # which used to turn every failure into a silent ("", "") and an
+        # empty page that still exited 0.
+        error = result.stderr.strip() or result.stdout.strip()
+        return "", "", error or f"component_generator exited {result.returncode} for --component {name}"
 
-    header = []
-    for line in out.splitlines():
-        if line.startswith("/*"):
-            header.append(line)
-        else:
-            break
+    out = result.stdout
 
     css_match = re.search(r'<!-- ===== Required CSS variables.*?-->.*?\n(.*)$', out, re.DOTALL)
     css_block = css_match.group(1) if css_match else ""
@@ -55,13 +55,49 @@ def load_component(name, product):
                 html_start = idx
                 break
     if html_start is None:
-        return "", "Could not extract HTML from component output"
+        return "", "", "Could not extract HTML from component output"
     html_end = out.find("<!-- ===== Required CSS")
     if html_end == -1:
         html_end = len(out)
     html = out[html_start:html_end].rstrip()
 
-    return html, css_block
+    return html, css_block, None
+
+
+def build_page(sections, product, title="Landing Page", with_css_vars=True):
+    """Compose the page and collect failures.
+
+    Returns (html, errors, ok_count): errors is a list of per-section
+    failure messages and ok_count is how many sections produced HTML,
+    so main() can refuse to write an empty page while claiming success.
+    """
+    parts = []
+    errors = []
+    for sec in sections:
+        html, _css, err = load_component(sec, product)
+        if err:
+            errors.append(f"[{sec}] {err}")
+        elif html:
+            parts.append(html)
+
+    css_block = get_css_variables(product) if with_css_vars else ""
+
+    page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | {product}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+{css_block}
+  </style>
+</head>
+<body class="min-h-screen">
+{chr(10).join(parts)}
+</body>
+</html>"""
+    return page, errors, len(parts)
 
 
 def get_css_variables(product):
@@ -78,35 +114,6 @@ def get_css_variables(product):
     if idx == -1:
         return ""
     return out[idx:].rstrip()
-
-
-def build_page(sections, product, title="Landing Page", with_css_vars=True):
-    parts = []
-    css_parts = []
-    for sec in sections:
-        html, css = load_component(sec, product)
-        if html:
-            parts.append(html)
-        if css:
-            css_parts.append(css)
-
-    css_block = get_css_variables(product) if with_css_vars else ""
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} | {product}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-{css_block}
-  </style>
-</head>
-<body class="min-h-screen">
-{chr(10).join(parts)}
-</body>
-</html>"""
 
 
 if __name__ == "__main__":
@@ -133,12 +140,26 @@ if __name__ == "__main__":
         print(f"Unknown sections: {', '.join(invalid)}. Available: {', '.join(ALL_SECTIONS)}")
         sys.exit(1)
 
-    html = build_page(sections, args.product, args.title, with_css_vars=not args.no_vars)
+    html, errors, ok_count = build_page(sections, args.product, args.title, with_css_vars=not args.no_vars)
+
+    if errors:
+        for err in errors:
+            print(f"[!] Section failed: {err}", file=sys.stderr)
+
+    # A page with zero rendered sections is not a success, regardless of
+    # whether a file was requested - exit non-zero so pipelines notice.
+    if ok_count == 0:
+        print("[!] No section produced any HTML - nothing to write.", file=sys.stderr)
+        sys.exit(1)
 
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             f.write(html)
         print(f"Page written to {args.out} ({len(html)} bytes)")
+        if errors:
+            print(f"[!] ({len(errors)} section(s) failed - see stderr)")
         print(f"Open it: xdg-open {args.out}  (or open {args.out})")
     else:
         print(html)
+        if errors:
+            sys.exit(1)

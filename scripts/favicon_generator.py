@@ -46,7 +46,7 @@ def generate_favicon(text="CR", bg="#2563EB", fg="#FFFFFF", shape="rounded", bor
 </svg>"""
 
 
-def generate_icon(icon_name, bg="#2563EB"):
+def generate_icon(icon_name, bg="#2563EB", fg="#FFFFFF"):
     icons = {
         "rocket": 'M64 8L78 40L110 54L78 68L64 100L50 68L18 54L50 40L64 8Z',
         "bolt": 'M72 8L32 72H56L48 120L96 52H70L72 8Z',
@@ -70,8 +70,8 @@ def generate_icon(icon_name, bg="#2563EB"):
     </linearGradient>
   </defs>
   <rect width="128" height="128" rx="24" fill="url(#g)" />
-  <g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="{path}" fill="rgba(255,255,255,0.25)" stroke="#fff"/>
+  <g fill="none" stroke="{fg}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="{path}" fill="{fg}40" stroke="{fg}"/>
   </g>
 </svg>"""
 
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     if args.text:
         print(generate_favicon(args.text, args.bg, args.fg, args.shape))
     elif args.icon:
-        print(generate_icon(args.icon, args.bg))
+        print(generate_icon(args.icon, args.bg, args.fg))
     else:
         print("Specify one of: --text, --icon, --html, --manifest, --sizes")
         print("Example: python favicon_generator.py --text CR --bg #2563EB")

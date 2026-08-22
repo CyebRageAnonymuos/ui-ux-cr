@@ -85,7 +85,7 @@ def generate_grid(columns=12, gap=16, max_width="1280px"):
 }}
 
 /* ===== Tailwind ===== */
-<div class="grid grid-cols-{columns} gap-{gap}">
+<div class="grid grid-cols-{columns} gap-[{gap}px]">
   <!-- span helpers: {span_helpers} -->
 </div>"""
 

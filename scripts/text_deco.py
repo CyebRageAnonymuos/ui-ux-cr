@@ -102,7 +102,7 @@ STYLES = {
         "ɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎz",
         "0ƖᄅƐㄣϛ9ㄥ86"),
     "mirrored": _map_style(
-        "AↃƎꟻHІJK⅃MNOꟼQЯSTUVWXYZ",
+        "ABↃDƎꟻGHІJK⅃MNOꟼQЯSTUVWXYZ",
         "ɒdɔbɘʇϱʜiꞁʞlmnoqpɿƨƚuvwxyz"),
     "currency": _map_style(
         "₳฿₵ĐɆ₣₲ⱧłJ₭Ⱡ₥₦Ø₱QⱤ₴₮ɄV₩XɎⱫ",
