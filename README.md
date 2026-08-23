@@ -2,11 +2,11 @@
 
 # 🔥 UI UX CR — Cyber-Rage Design Intelligence Engine
 
-**Ultra-premium design intelligence for AI assistants — 27 tools in one skill.**
+**Ultra-premium design intelligence for AI assistants — 29 tools in one skill.**
 
-<a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/releases"><img src="https://img.shields.io/badge/version-3.0.0-FF006E?style=for-the-badge" alt="Version"></a>
+<a href="https://github.com/CyebRageAnonymuos/ui-ux-cr/releases"><img src="https://img.shields.io/badge/version-3.1.0-FF006E?style=for-the-badge" alt="Version"></a>
 <img src="https://img.shields.io/badge/python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-<img src="https://img.shields.io/badge/tools-27-22D3EE?style=for-the-badge" alt="Tools">
+<img src="https://img.shields.io/badge/tools-29-22D3EE?style=for-the-badge" alt="Tools">
 <img src="https://img.shields.io/badge/themes-65-A855F7?style=for-the-badge" alt="Themes">
 <img src="https://img.shields.io/badge/icons-155-F97316?style=for-the-badge" alt="Icons">
 <img src="https://img.shields.io/badge/products-70+-10B981?style=for-the-badge" alt="Products">
@@ -24,7 +24,7 @@
 
 ---
 
-## 🧩 27 Tools at Your Fingertips
+## 🧩 29 Tools at Your Fingertips
 
 | # | Script | What it does | Quick example |
 |---|--------|--------------|---------------|
@@ -47,14 +47,16 @@
 | 17 | `theme_pack.py` | **65 ready-made premium themes** (Dracula, Nord, Cyberpunk, Luxury Gold...) | `python3 scripts/theme_pack.py --name dracula --format css` |
 | 18 | `text_deco.py` | **Fancy Unicode fonts + decorative shapes** — emoji-free | `python3 scripts/text_deco.py --text "Sale" --style gothic` |
 | 19 | `accessibility_audit.py` | WCAG audit of HTML (contrast, alt, labels) | `python3 scripts/accessibility_audit.py index.html` |
-| 20 | `gradient_generator.py` | **NEW v3** Linear/radial/conic/mesh gradients + gradient buttons | `python3 scripts/gradient_generator.py --mesh aurora` |
+| 20 | `banner_generator.py` | ASCII art banners for the terminal (2 fonts + rainbow) | `python3 scripts/banner_generator.py --text "UI UX CR" --style block` |
+| 22 | `gradient_generator.py` | **NEW v3** Linear/radial/conic/mesh gradients + gradient buttons | `python3 scripts/gradient_generator.py --mesh aurora` |
 | 21 | `logo_generator.py` | **NEW v3** SVG logos: monogram, badge, wordmark, shield | `python3 scripts/logo_generator.py --text "Cyber Rage" --style shield` |
-| 22 | `form_generator.py` | **NEW v3** Accessible forms: login, signup, contact, search | `python3 scripts/form_generator.py --form login --primary #2563EB` |
-| 23 | `email_template.py` | **NEW v3** Responsive table-based emails (welcome, reset, receipt...) | `python3 scripts/email_template.py --type reset --brand "Acme"` |
-| 24 | `tokens_exporter.py` | **NEW v3** W3C + Figma Tokens + Style Dictionary export | `python3 scripts/tokens_exporter.py "#2563EB" --format figma` |
-| 25 | `darkmode_generator.py` | **NEW v3** Light/dark theme pairs + persisted toggle | `python3 scripts/darkmode_generator.py "#2563EB" --toggle` |
-| 26 | `seo_audit.py` | **NEW v3** SEO/head audit: title, meta, OG, headings, images | `python3 scripts/seo_audit.py index.html` |
-| 27 | `icon_spriter.py` | **NEW v3** SVG symbol sprite sheets + `<use>` markup | `python3 scripts/icon_spriter.py --icons search,check --out icons.svg` |
+| 23 | `form_generator.py` | **NEW v3** Accessible forms: login, signup, contact, search | `python3 scripts/form_generator.py --form login --primary #2563EB` |
+| 24 | `email_template.py` | **NEW v3** Responsive table-based emails (welcome, reset, receipt...) | `python3 scripts/email_template.py --type reset --brand "Acme"` |
+| 25 | `tokens_exporter.py` | **NEW v3** W3C + Figma Tokens + Style Dictionary export | `python3 scripts/tokens_exporter.py "#2563EB" --format figma` |
+| 26 | `darkmode_generator.py` | **NEW v3** Light/dark theme pairs + persisted toggle | `python3 scripts/darkmode_generator.py "#2563EB" --toggle` |
+| 27 | `seo_audit.py` | **NEW v3** SEO/head audit: title, meta, OG, headings, images | `python3 scripts/seo_audit.py index.html` |
+| 28 | `icon_spriter.py` | **NEW v3** SVG symbol sprite sheets + `<use>` markup | `python3 scripts/icon_spriter.py --icons search,check --out icons.svg` |
+| 29 | `design_linter.py` | **NEW v3.1** Contracts for the recommendation half: WCAG on DB palettes, harmony math, shade monotonicity, CVD collisions, font-import checks | `python3 scripts/design_linter.py --audit-db` |
 
 **Try the fancy fonts & shapes:**
 
@@ -103,7 +105,7 @@ python3 scripts/accessibility_audit.py landing.html
 | Font Pairings | 61 | 75+ | **103** | **103** |
 | Premium Themes | — | — | **65** | **65** |
 | Synonym Groups | 34 | 120+ | **120+** | **120+** |
-| Toolbox Scripts | ✗ | 9 | 19 | **27** |
+| Toolbox Scripts | ✗ | 9 | 19 | **29** |
 | Components | — | — | **12 generated** | **12 generated** |
 | Layout Templates | — | — | **5** | **5** |
 | Chart Types | — | — | **8 + 2 frameworks** | **8 + 2 frameworks** |
@@ -114,6 +116,11 @@ python3 scripts/accessibility_audit.py landing.html
 | Email Templates | — | — | — | **4 responsive** |
 | Form Types | — | — | — | **5 accessible** |
 | Token Formats | — | — | — | **W3C + Figma + Style Dictionary** |
+
+### What's new in v3.1
+
+- **Design Linter** (`design_linter.py`): contracts for the "no-format" half of the pipeline - the recommendation database itself is now audited. Every palette checked for WCAG AA text contrast and readable CTA labels, hue geometry verified against the claimed harmony type, shade scales checked for monotonicity, color pairs checked for color-blind collisions (protanopia/deuteranopia/tritanopia), and font-pairing rows checked to actually import both recommended fonts (Google Fonts and Fontshare URL styles). `--audit-db` audits all 81 palettes + 103 pairings; `--colors`/`--claimed-harmony`/`--shades`/`--pairing` lint arbitrary input
+- First full-database audit found 2 real errors (pairings whose import snippet can't load the recommended font - Proxima Nova isn't on Google Fonts) and 27 advisory warnings
 
 ### What's new in v3.0
 
@@ -130,7 +137,7 @@ python3 scripts/accessibility_audit.py landing.html
 | **Enhanced BM25 Search** | Fuzzy matching, n-gram detection, 120+ synonym groups |
 | **Design System Generator** | 10 domains searched in parallel with reasoning engine |
 | **Color Theory Engine** | Extended palettes, 6 harmony types, WCAG contrast, color-blind simulation |
-| **27 Toolbox Scripts** | SVG icons, CSS kits, components, animations, charts, pages, mockups, logos, emails, tokens |
+| **29 Toolbox Scripts** | SVG icons, CSS kits, components, animations, charts, pages, mockups, logos, emails, tokens |
 | **65 Premium Themes** | Dracula, Nord, Tokyo Night, Cyberpunk, Luxury Gold — export to CSS/Tailwind/JSON |
 | **Fancy Unicode Fonts** | 25+ text styles (gothic, script, bubble...) + decorative shapes, emoji-free |
 | **Component Generator** | 12 ready components (navbar, hero, pricing, modal, table, sidebar...) |

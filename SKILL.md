@@ -2,7 +2,7 @@
 
 # UI UX CR v3 - Cyber-Rage Design Intelligence Engine
 
-Ultra-premium design intelligence system **v3.0** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **100+ font pairings**, **65 ready-made premium themes**, **155 SVG icons**, and **16+ tech stacks**, plus **28 toolbox scripts** including gradient studio, SVG logo generation, accessible forms, responsive emails, W3C/Figma token export, dark-mode systems, SEO auditing, and SVG sprite sheets.
+Ultra-premium design intelligence system **v3.1** with advanced BM25 search engine, n-gram matching, Levenshtein fuzzy matching, 120+ synonym groups, color theory engine with WCAG contrast checking, component library with code generation, animation database, responsive patterns, design tokens, RTL support, CSS/Tailwind export, and color blindness simulation. Supports **70+ product types**, **46+ styles**, **80+ color palettes**, **100+ font pairings**, **65 ready-made premium themes**, **155 SVG icons**, and **16+ tech stacks**, plus **29 toolbox scripts** including gradient studio, SVG logo generation, accessible forms, responsive emails, W3C/Figma token export, dark-mode systems, SEO auditing, and SVG sprite sheets.
 
 ## Prerequisites
 
@@ -145,6 +145,7 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 | `darkmode_generator.py` | **v3** Light/dark theme pairs + persisted no-flash toggle | `python3 scripts/darkmode_generator.py "#2563EB" --strategy class --toggle` |
 | `seo_audit.py` | **v3** SEO/head audit: title, meta, OG, canonical, headings, images | `python3 scripts/seo_audit.py index.html` |
 | `icon_spriter.py` | **v3** SVG symbol sprite sheets + `<use>` markup | `python3 scripts/icon_spriter.py --icons search,check --out icons.svg` |
+| `design_linter.py` | **v3.1** Contracts for the recommendation half: audits all DB palettes/pairings (WCAG, harmony math, CVD collisions, font imports) | `python3 scripts/design_linter.py --audit-db` |
 
 **Theme Pack quick reference:**
 - List all: `python3 scripts/theme_pack.py --list`
@@ -173,6 +174,7 @@ After getting the design system, generate ready-to-use assets with the toolbox:
 11. `icon_spriter.py --all --out icons.svg` → bundle all icons into one sprite (v3)
 12. `accessibility_audit.py` → verify the final HTML passes WCAG checks
 13. `seo_audit.py` → verify the final HTML passes on-page SEO checks (v3)
+14. `design_linter.py --audit-db` → verify the recommendation database itself holds its contracts (v3.1)
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
@@ -315,13 +317,17 @@ Using the design system output, implement the UI with proper colors, fonts, spac
 | Responsive Patterns | 21 | **21** | **21** | **21** |
 | Backgrounds | 46 | **46** | **46** | **46 + mesh presets** |
 | Tech Stacks | 16 | **16** | **16** | **16** |
-| Toolbox Scripts | ✗ | 9 | 19 | **28** |
+| Toolbox Scripts | ✗ | 9 | 19 | **29** |
 | Logo Styles | ✗ | ✗ | ✗ | **4** |
 | Email Templates | ✗ | ✗ | ✗ | **4 responsive** |
 | Form Types | ✗ | ✗ | ✗ | **5 accessible** |
 | Token Formats | ✗ | ✗ | ✗ | **W3C + Figma + Style Dictionary** |
 | SEO Audit | ✗ | ✗ | ✗ | **scored 0-100** |
 | Dark Mode System | ✗ | ✗ | ✗ | **full pair + toggle** |
+
+## New in v3.1
+
+- **Design Linter**: the recommendation half finally has contracts to violate - WCAG contrast on every recommended palette, harmony geometry vs claimed harmony, shade-scale monotonicity, color-blind collision checks, and font-import verification (Google + Fontshare URL styles). Audits the whole database (`--audit-db`) or arbitrary input (`--colors`, `--pairing`, `--shades`)
 
 ## New in v3.0
 
