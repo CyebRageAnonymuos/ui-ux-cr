@@ -1,0 +1,41 @@
+name: Design Linter
+
+# Every change to the recommendation database (or the linter itself)
+# must pass its own contracts before it can land. A palette that fails
+# WCAG contrast, harmony geometry, shade monotonicity, color-blind
+# distinguishability, or font-import checks blocks the build.
+
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'scripts/design_linter.py'
+      - '.github/workflows/lint.yml'
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/design_linter.py'
+      - '.github/workflows/lint.yml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Lint the recommendation database
+        run: python3 scripts/design_linter.py --audit-db
+
+      - name: Linter self-check (sample inputs)
+        run: |
+          # The linter must correctly REJECT a bad palette (exit 1).
+          # If this ever passes, the contracts stopped working.
+          if python3 scripts/design_linter.py --colors "#FF0000,#00FF00" --claimed-harmony complementary; then
+            echo "::error::linter failed to flag a known-bad palette"
+            exit 1
+          fi
+          echo "Correctly rejected the known-bad palette."
